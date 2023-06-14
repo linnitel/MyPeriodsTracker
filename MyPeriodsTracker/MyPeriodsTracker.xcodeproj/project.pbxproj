@@ -18,6 +18,9 @@
 		4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC82A338B12004880A9 /* SFPro-Regular.otf */; };
 		4AFECFCB2A338B12004880A9 /* SFPro-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC92A338B12004880A9 /* SFPro-Ultralight.otf */; };
 		4AFECFCE2A33935A004880A9 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFCD2A33935A004880A9 /* String+Extention.swift */; };
+		4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFD32A346881004880A9 /* MainPeriodModel.swift */; };
+		4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFD52A347754004880A9 /* MainPeriodsViewModel.swift */; };
+		4AFECFD92A348671004880A9 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFDB2A348671004880A9 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,11 @@
 		4AFECFC92A338B12004880A9 /* SFPro-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFPro-Ultralight.otf"; sourceTree = "<group>"; };
 		4AFECFCC2A338B90004880A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4AFECFCD2A33935A004880A9 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
+		4AFECFD32A346881004880A9 /* MainPeriodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodModel.swift; sourceTree = "<group>"; };
+		4AFECFD52A347754004880A9 /* MainPeriodsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodsViewModel.swift; sourceTree = "<group>"; };
+		4AFECFDA2A348671004880A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		4AFECFDC2A348677004880A9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		4AFECFDD2A348678004880A9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,12 +76,12 @@
 		4AFECFA62A3365D7004880A9 /* MyPeriodsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				4AFECFD22A346859004880A9 /* Services */,
+				4AFECFD12A34684B004880A9 /* Main */,
+				4AFECFCF2A346819004880A9 /* Screens */,
 				4AFECFCC2A338B90004880A9 /* Info.plist */,
 				4AFECFBC2A338049004880A9 /* Resaurces */,
 				4AFECFB92A3371E7004880A9 /* Extentions */,
-				4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */,
-				4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */,
-				4AFECFB72A336B9B004880A9 /* DateCalculationService.swift */,
 				4AFECFAD2A3365D8004880A9 /* Preview Content */,
 			);
 			path = MyPeriodsTracker;
@@ -111,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFECFC42A33846C004880A9 /* Localizable.strings */,
+				4AFECFDB2A348671004880A9 /* Localizable.stringsdict */,
 			);
 			path = Localizations;
 			sourceTree = "<group>";
@@ -122,6 +131,40 @@
 				4AFECFC92A338B12004880A9 /* SFPro-Ultralight.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4AFECFCF2A346819004880A9 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4AFECFD02A34682E004880A9 /* MainPeriod */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		4AFECFD02A34682E004880A9 /* MainPeriod */ = {
+			isa = PBXGroup;
+			children = (
+				4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */,
+				4AFECFD32A346881004880A9 /* MainPeriodModel.swift */,
+				4AFECFD52A347754004880A9 /* MainPeriodsViewModel.swift */,
+			);
+			path = MainPeriod;
+			sourceTree = "<group>";
+		};
+		4AFECFD12A34684B004880A9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4AFECFD22A346859004880A9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4AFECFB72A336B9B004880A9 /* DateCalculationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +232,7 @@
 				4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */,
 				4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */,
 				4AFECFCB2A338B12004880A9 /* SFPro-Ultralight.otf in Resources */,
+				4AFECFD92A348671004880A9 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +246,8 @@
 				4AFECFCE2A33935A004880A9 /* String+Extention.swift in Sources */,
 				4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */,
 				4AFECFB82A336B9B004880A9 /* DateCalculationService.swift in Sources */,
+				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
+				4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */,
 				4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */,
 				4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */,
 				4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */,
@@ -219,6 +265,17 @@
 				4AFECFC62A3384E0004880A9 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
+		4AFECFDB2A348671004880A9 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AFECFDA2A348671004880A9 /* en */,
+				4AFECFDC2A348677004880A9 /* fr */,
+				4AFECFDD2A348678004880A9 /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

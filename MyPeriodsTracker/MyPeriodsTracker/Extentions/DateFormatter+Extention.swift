@@ -12,7 +12,5 @@ extension DateFormatter {
 		self.init()
 		self.dateFormat = dateFormat
 		self.calendar = calendar
-//		self.locale = Locale(identifier: locale)
-//		self.calendar.locale = Locale(identifier: locale)
 	}
 }
