@@ -1,5 +1,4 @@
-"MainPeriodsView.DaysView.daysUntilPeriod" = "days untill period";
-"MainPeriodVeiw.NextPeriod" = "Next period";
+"days until period" = "days until period";
 "Next period" = "Next period";
 "Ovulation" = "Ovulation";
 "Fertility" = "Fertility";
@@ -7,3 +6,6 @@
 "High" = "High";
 "Very high" = "Very high";
 "Period continues" = "Period continues";
+"Change of cycle" = "Change of cycle";
+"Don't recount" = "Don't recount";
+

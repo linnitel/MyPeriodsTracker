@@ -13,3 +13,10 @@ struct MainInfoTextModifier: ViewModifier {
 			.font(.custom("SFProText-Ultralight", size: 160))
 	}
 }
+
+struct BaseTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Regular", size: 15))
+	}
+}

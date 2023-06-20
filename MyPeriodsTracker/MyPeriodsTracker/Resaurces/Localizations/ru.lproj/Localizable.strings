@@ -1,5 +1,4 @@
-"MainPeriodsView.DaysView.daysUntilPeriod" = "дней до месячных";
-"MainPeriodVeiw.NextPeriod" = "Следующие месячные";
+"days until period" = "дней до месячных";
 "Next period" = "Следующие месячные";
 "Ovulation" = "Овуляция";
 "Fertility" = "Фертильность";
@@ -7,3 +6,6 @@
 "High" = "Высокая";
 "Very high" = "Очень высокая";
 "Period continues" = "Месячные продолжаются";
+"Change of cycle" = "Сдвиг цикла";
+"Don't recount" = "Не пересчитывать";
+"Recount cycle" =  "Пересчитать цикл";

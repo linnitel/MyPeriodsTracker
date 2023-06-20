@@ -22,21 +22,30 @@ struct MainPeriodsView: View {
 			)
 			.ignoresSafeArea()
 			VStack {
-				HeaderView(todayDate: viewModel.todayDate, action: {})
-				DaysView(daysLeft: viewModel.daysLeft())
+				HeaderView(todayDate: self.viewModel.todayDate, action: {})
+				DaysView(daysLeft: self.viewModel.daysLeft())
 					.padding(.bottom, 40)
 				Group {
-					DateItemView(value: DateCalculatiorService.shared.getNextDate(viewModel.model.lastPeriodStartDate))
-					OvulationView(value: viewModel.ovulation())
-					FertilityView(value: viewModel.fertility())
+					switch self.viewModel.model.partOfCycle {
+						case .period, .delay, .early:
+							DateDelayView(value: self.viewModel.delay(), isDelay: self.viewModel.isDelay())
+						case .offPeriod, .notSet:
+							DateItemView(value: self.viewModel.nextPeriodDate())
+					}
+					OvulationView(value: self.viewModel.ovulation())
+					FertilityView(value: self.viewModel.fertility())
 				}
 				.padding([.leading, .trailing], 4)
 				Spacer()
 				UpperButton(text: "Period continues", action: {print("upper button")})
-				LowerButton(text: "Mark periods", action: { print("lower button")})
+				if self.viewModel.model.partOfCycle == .early, self.viewModel.model.partOfCycle == .delay {
+					LowerButton(text: "Don't recount", action: { print("lower button")})
+				}
+				Spacer()
 			}
 			.padding([.leading, .trailing], 20)
 		}
+		.modifier(BaseTextModifier())
     }
 }
 
@@ -72,7 +81,9 @@ struct DaysView: View {
 			Text(String(daysLeft))
 				.foregroundColor(Color.accentColor)
 				.modifier(MainInfoTextModifier())
-			Text("MainPeriodsView.DaysView.daysUntilPeriod".localized())
+				.padding([.bottom], -30)
+			Text("days until period")
+
 		}
 	}
 
@@ -88,6 +99,35 @@ struct DateItemView: View {
 				Text("Next period")
 				Spacer()
 				Text(LocalizedStringKey(value))
+			}
+			Rectangle()
+				.fill(
+					Color(UIColor(named: "line") ?? .white)
+						.shadow(.inner(color: Color(UIColor(named: "line") ?? .white), radius: 0.5))
+				)
+				.frame(height: 2, alignment: .center)
+				.cornerRadius(1)
+		}
+	}
+
+}
+
+struct DateDelayView: View {
+	let value: Int
+	let isDelay: Bool
+
+	var body: some View {
+		VStack {
+			HStack {
+				Text("Change of cycle")
+				Spacer()
+				if isDelay {
+					Text("-\(value) days")
+						.foregroundColor(.accentColor)
+				} else {
+					Text("+\(value) days")
+						.foregroundColor(.accentColor)
+				}
 			}
 			Rectangle()
 				.fill(
@@ -123,14 +163,16 @@ struct OvulationView: View {
 }
 
 struct FertilityView: View {
-	let value: String
+	let value: MainPeriodModel.FertilityLevel
 
 	var body: some View {
 		VStack {
 			HStack {
 				Text("Fertility")
 				Spacer()
-				Text(value)
+				Text(LocalizedStringKey(value.level))
+					.foregroundColor(value.color)
+
 			}
 		}
 	}
@@ -161,7 +203,7 @@ struct UpperButton: View {
 						)
 					)
 					.frame(height: 56)
-				Text(self.text)
+				Text(LocalizedStringKey(self.text))
 			}
 		}
 	}
@@ -174,7 +216,7 @@ struct LowerButton: View {
 	var body: some View {
 		Button(action: self.action) {
 			ZStack {
-				Text(self.text)
+				Text(LocalizedStringKey(self.text))
 					.foregroundColor(Color(UIColor(named: "secondButtonText") ?? .black))
 				RoundedRectangle(cornerRadius: 16)
 					.fill(Color.clear)

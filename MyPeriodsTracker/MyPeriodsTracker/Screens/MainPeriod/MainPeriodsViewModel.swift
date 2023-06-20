@@ -6,36 +6,41 @@
 //
 
 import Foundation
+import SwiftUI
 
 class MainPeriodViewModel: ObservableObject {
+
 	@Published var model: MainPeriodModel
-	@Published var todayDate = Date()
-//	var columns: [Column] {
-//		set {
-//			switch model.partOfCycle {
-//				case .notSet:
-//					self.columns = []
-//				case .period, .delay, .offPeriod:
-//					self = [Column(name: "", data: <#T##String#>)]
-//			}
-//		}
-//	}
+
+	var todayDate: Date {
+		Date()
+	}
 
 	init() {
-		self.model = MainPeriodModel(lastPeriodStartDate: Date().addingTimeInterval(-24 * 2 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .period)
-
+		self.model = MainPeriodModel(lastPeriodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .offPeriod)
 	}
 
 	func daysLeft() -> Int {
-		self.model.daysToPeriod
+		self.model.daysToPeriod(from: todayDate)
 	}
 
 	func ovulation() -> Int {
-		DateCalculatiorService.shared.getOvulation(self.model.lastPeriodStartDate)
-
+		self.model.getOvulation(self.model.lastPeriodStartDate)
 	}
 
-	func fertility() -> String {
-		"Low"
+	func fertility() -> MainPeriodModel.FertilityLevel {
+		self.model.getFertility(self.model.lastPeriodStartDate)
+	}
+
+	func nextPeriodDate() -> String {
+		DateCalculatiorService.shared.getNextDate(self.model.nextPeriodStartDate)
+	}
+
+	func delay() -> Int {
+		1
+	}
+
+	func isDelay() -> Bool {
+		true
 	}
 }

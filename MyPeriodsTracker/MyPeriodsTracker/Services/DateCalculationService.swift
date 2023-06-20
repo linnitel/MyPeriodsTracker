@@ -23,11 +23,5 @@ class DateCalculatiorService {
 		return formatter.string(from: date)
 	}
 
-	func getOvulation(_ date: Date) -> Int {
-//		let ovulationDate = Calendar.current.date(byAdding: .day, value: 14, to: date)
-//		let now = Date()
-//
-//		let days = ovulationDate - now
-		0
-	}
+
 }
