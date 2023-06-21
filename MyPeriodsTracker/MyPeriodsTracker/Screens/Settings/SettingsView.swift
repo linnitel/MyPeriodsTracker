@@ -18,6 +18,10 @@ struct SettingsView: View {
 	@Binding var cycle: Int
 	@Binding var period: Int
 
+	@State private var cycleIsShown = false
+	@State private var periodIsShown = false
+	@State private var startDateIsShown = false
+
     var body: some View {
 		NavigationView {
 			ZStack(alignment: .top) {
@@ -38,9 +42,21 @@ struct SettingsView: View {
 					}
 					.padding(.bottom, 16)
 					Group {
-						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, value: $cycle)
-						SettingsItemView(text: "Period length", selectionArray: periodArray, value: $period)
-						LastDateItemView(date: self.$startDate)
+						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: $cycle) {
+							self.cycleIsShown.toggle()
+							self.periodIsShown = false
+							self.startDateIsShown = false
+						}
+						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: $period) {
+							self.periodIsShown.toggle()
+							self.cycleIsShown = false
+							self.startDateIsShown = false
+						}
+						LastDateItemView(date: self.$startDate) {
+							self.startDateIsShown.toggle()
+							self.periodIsShown = false
+							self.cycleIsShown = false
+						}
 						NotificationsItem()
 					}
 					.padding([.leading, .trailing], 24)
@@ -63,15 +79,13 @@ struct SettingsView_Previews: PreviewProvider {
 struct SettingsItemView: View {
 	let text: String
 	let selectionArray: [Int]
-	@State var isShown = false
+	@Binding var isShown: Bool
 	@Binding var value: Int
-
+	let action: () -> Void
 
 	var body: some View {
 		VStack {
-			Button {
-				self.isShown.toggle()
-			} label: {
+			Button(action: action) {
 				HStack {
 					Text(LocalizedStringKey(self.text))
 						.foregroundColor(.black)
@@ -97,12 +111,11 @@ struct SettingsItemView: View {
 struct LastDateItemView: View {
 	@Binding var date: Date
 	@State var isShown = false
+	let action: () -> Void
 
 	var body: some View {
 		VStack {
-			Button {
-				self.isShown.toggle()
-			} label: {
+			Button(action: action) {
 				HStack {
 					Text("Previous period start")
 						.foregroundColor(.black)
