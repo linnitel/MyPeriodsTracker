@@ -12,7 +12,7 @@ struct MyPeriodsTrackerApp: App {
     var body: some Scene {
         WindowGroup {
 			let mainPeriodViewModel = MainPeriodViewModel()
-            MainPeriodsView(viewModel: mainPeriodViewModel)
+			MainPeriodsView(viewModel: mainPeriodViewModel)
         }
     }
 }

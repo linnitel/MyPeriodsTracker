@@ -12,9 +12,9 @@ struct MainPeriodModel {
 	let ovulationDays: Int = 14
 	let ovulationPeriod: Int = 3
 
-	let lastPeriodStartDate: Date
-	let periodLength: Int
-	let cycleLength: Int
+	var lastPeriodStartDate: Date
+	var periodLength: Int
+	var cycleLength: Int
 
 	var partOfCycle: PartOfCycle = .notSet
 

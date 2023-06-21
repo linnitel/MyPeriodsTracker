@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39B2A41C10D00C51F82 /* SettingsView.swift */; };
+		4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */; };
+		4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */; };
+		4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */; };
+		4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */; };
 		4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */; };
 		4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */; };
 		4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAB2A3365D8004880A9 /* Assets.xcassets */; };
@@ -24,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A59F39B2A41C10D00C51F82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
+		4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLineView.swift; sourceTree = "<group>"; };
+		4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPeriodsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerApp.swift; sourceTree = "<group>"; };
 		4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodsView.swift; sourceTree = "<group>"; };
@@ -57,6 +67,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A59F39A2A41C0FA00C51F82 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4A59F39B2A41C10D00C51F82 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4A59F39D2A41EF6E00C51F82 /* NotificationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */,
+				4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */,
+			);
+			path = NotificationSettings;
+			sourceTree = "<group>";
+		};
+		4A59F3A22A431C8C00C51F82 /* GeneralViews */ = {
+			isa = PBXGroup;
+			children = (
+				4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */,
+				4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */,
+			);
+			path = GeneralViews;
+			sourceTree = "<group>";
+		};
 		4AFECF9B2A3365D7004880A9 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +172,8 @@
 		4AFECFCF2A346819004880A9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4A59F39D2A41EF6E00C51F82 /* NotificationSettings */,
+				4A59F39A2A41C0FA00C51F82 /* Settings */,
 				4AFECFD02A34682E004880A9 /* MainPeriod */,
 			);
 			path = Screens;
@@ -154,6 +192,7 @@
 		4AFECFD12A34684B004880A9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4A59F3A22A431C8C00C51F82 /* GeneralViews */,
 				4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */,
 			);
 			path = Main;
@@ -245,12 +284,17 @@
 			files = (
 				4AFECFCE2A33935A004880A9 /* String+Extention.swift in Sources */,
 				4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */,
+				4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */,
+				4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */,
 				4AFECFB82A336B9B004880A9 /* DateCalculationService.swift in Sources */,
+				4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */,
 				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
 				4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */,
 				4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */,
 				4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */,
 				4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */,
+				4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */,
+				4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,5 +23,8 @@ class DateCalculatiorService {
 		return formatter.string(from: date)
 	}
 
-
+	func getLastDate(_ date: Date) -> String {
+		let formatter = DateFormatter(dateFormat: "d MMMM YYYY", calendar: Calendar.current)
+		return formatter.string(from: date)
+	}
 }

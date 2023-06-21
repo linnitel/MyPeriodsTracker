@@ -11,41 +11,35 @@ struct MainPeriodsView: View {
 	@StateObject var viewModel: MainPeriodViewModel
 
 	var body: some View {
-		ZStack(alignment: .top) {
-			LinearGradient(gradient: Gradient(
-				colors: [
-					Color(UIColor(named: "backgroundTop") ?? .white),
-					Color(UIColor(named: "backgroundBottom") ?? .gray)
-				]),
-				startPoint: .center,
-				endPoint: .bottom
-			)
-			.ignoresSafeArea()
-			VStack {
-				HeaderView(todayDate: self.viewModel.todayDate, action: {})
-				DaysView(daysLeft: self.viewModel.daysLeft())
-					.padding(.bottom, 40)
-				Group {
-					switch self.viewModel.model.partOfCycle {
-						case .period, .delay, .early:
-							DateDelayView(value: self.viewModel.delay(), isDelay: self.viewModel.isDelay())
-						case .offPeriod, .notSet:
-							DateItemView(value: self.viewModel.nextPeriodDate())
+		NavigationView {
+			ZStack(alignment: .top) {
+				BackgroundView()
+				VStack {
+					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.lastPeriodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
+					DaysView(daysLeft: self.viewModel.daysLeft())
+						.padding(.bottom, 40)
+					Group {
+						switch self.viewModel.model.partOfCycle {
+							case .period, .delay, .early:
+								DateDelayView(value: self.viewModel.delay(), isDelay: self.viewModel.isDelay())
+							case .offPeriod, .notSet:
+								DateItemView(value: self.viewModel.nextPeriodDate())
+						}
+						OvulationView(value: self.viewModel.ovulation())
+						FertilityView(value: self.viewModel.fertility())
 					}
-					OvulationView(value: self.viewModel.ovulation())
-					FertilityView(value: self.viewModel.fertility())
+					.padding([.leading, .trailing], 4)
+					Spacer()
+					UpperButton(text: "Period continues", action: {print("upper button")})
+					if self.viewModel.model.partOfCycle == .early, self.viewModel.model.partOfCycle == .delay {
+						LowerButton(text: "Don't recount", action: { print("lower button")})
+					}
+					Spacer()
 				}
-				.padding([.leading, .trailing], 4)
-				Spacer()
-				UpperButton(text: "Period continues", action: {print("upper button")})
-				if self.viewModel.model.partOfCycle == .early, self.viewModel.model.partOfCycle == .delay {
-					LowerButton(text: "Don't recount", action: { print("lower button")})
-				}
-				Spacer()
+				.padding([.leading, .trailing], 20)
 			}
-			.padding([.leading, .trailing], 20)
+			.modifier(BaseTextModifier())
 		}
-		.modifier(BaseTextModifier())
     }
 }
 
@@ -57,14 +51,16 @@ struct MainPeriodsView_Previews: PreviewProvider {
 
 struct HeaderView: View {
 	let todayDate: Date
-	let action: () -> Void
+	@Binding var startDate: Date
+	@Binding var cycle: Int
+	@Binding var period: Int
 
 	var body: some View {
 		ZStack {
 			Text(DateCalculatiorService.shared.getDateMonthAndWeek(todayDate))
 			HStack {
 				Spacer()
-				Button(action: action) {
+				NavigationLink(destination: SettingsView(startDate: $startDate, cycle: $cycle, period: $period)) {
 					Image("settings")
 						.frame(width: 40, height: 40)
 				}
@@ -100,14 +96,9 @@ struct DateItemView: View {
 				Spacer()
 				Text(LocalizedStringKey(value))
 			}
-			Rectangle()
-				.fill(
-					Color(UIColor(named: "line") ?? .white)
-						.shadow(.inner(color: Color(UIColor(named: "line") ?? .white), radius: 0.5))
-				)
-				.frame(height: 2, alignment: .center)
-				.cornerRadius(1)
+			DividerLineView()
 		}
+		.frame(height: 38)
 	}
 
 }
@@ -129,14 +120,9 @@ struct DateDelayView: View {
 						.foregroundColor(.accentColor)
 				}
 			}
-			Rectangle()
-				.fill(
-					Color(UIColor(named: "line") ?? .white)
-						.shadow(.inner(color: Color(UIColor(named: "line") ?? .white), radius: 0.5))
-				)
-				.frame(height: 2, alignment: .center)
-				.cornerRadius(1)
+			DividerLineView()
 		}
+		.frame(height: 38)
 	}
 
 }
@@ -151,14 +137,9 @@ struct OvulationView: View {
 				Spacer()
 				Text("in \(value) days")
 			}
-			Rectangle()
-				.fill(
-					Color(UIColor(named: "line") ?? .white)
-						.shadow(.inner(color: Color(UIColor(named: "line") ?? .white), radius: 0.5))
-				)
-				.frame(height: 2, alignment: .center)
-				.cornerRadius(1)
+			DividerLineView()
 		}
+		.frame(height: 38)
 	}
 }
 
@@ -175,6 +156,7 @@ struct FertilityView: View {
 
 			}
 		}
+		.frame(height: 38)
 	}
 }
 
