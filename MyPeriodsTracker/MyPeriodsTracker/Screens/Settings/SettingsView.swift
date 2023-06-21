@@ -52,7 +52,7 @@ struct SettingsView: View {
 							self.cycleIsShown = false
 							self.startDateIsShown = false
 						}
-						LastDateItemView(date: self.$startDate) {
+						LastDateItemView(date: self.$startDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
 							self.periodIsShown = false
 							self.cycleIsShown = false
@@ -110,7 +110,7 @@ struct SettingsItemView: View {
 
 struct LastDateItemView: View {
 	@Binding var date: Date
-	@State var isShown = false
+	@Binding var isShown: Bool
 	let action: () -> Void
 
 	var body: some View {
