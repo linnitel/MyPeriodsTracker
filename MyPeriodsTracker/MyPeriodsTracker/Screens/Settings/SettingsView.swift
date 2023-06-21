@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+	let cycleArray = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+					  31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+	let periodArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
 	@Binding var startDate: Date
@@ -34,9 +38,9 @@ struct SettingsView: View {
 					}
 					.padding(.bottom, 16)
 					Group {
-						SettingsItemView(text: "Cycle length", value: cycle)
-						SettingsItemView(text: "Period length", value: period)
-						LastDateItemView(value: DateCalculatiorService.shared.getLastDate(self.startDate))
+						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, value: $cycle)
+						SettingsItemView(text: "Period length", selectionArray: periodArray, value: $period)
+						LastDateItemView(date: self.$startDate)
 						NotificationsItem()
 					}
 					.padding([.leading, .trailing], 24)
@@ -44,50 +48,76 @@ struct SettingsView: View {
 					LowerButton(text: "Rate the app in AppStore", action: {})
 				}
 			}
-			.navigationBarHidden(true)
 			.modifier(BaseTextModifier())
 		}
+		.navigationBarHidden(true)
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-		SettingsView(startDate: .constant(Date()), cycle: .constant(5), period: .constant(30))
+		SettingsView(startDate: .constant(Date()), cycle: .constant(30), period: .constant(5))
     }
 }
 
 struct SettingsItemView: View {
 	let text: String
-	let value: Int
+	let selectionArray: [Int]
+	@State var isShown = false
+	@Binding var value: Int
+
 
 	var body: some View {
 		VStack {
-			HStack {
-				Text(LocalizedStringKey(self.text))
-				Spacer()
-				Text("\(value) days")
-					.foregroundColor(.accentColor)
+			Button {
+				self.isShown.toggle()
+			} label: {
+				HStack {
+					Text(LocalizedStringKey(self.text))
+						.foregroundColor(.black)
+					Spacer()
+					Text("\(value) days")
+						.foregroundColor(.accentColor)
+				}
+			}
+			.padding([.top, .bottom], 16)
+			if isShown {
+				Picker("", selection: $value) {
+						ForEach(selectionArray, id: \.self) { value in
+							Text("\(value)")
+						}
+				}
+				.pickerStyle(.wheel)
 			}
 			DividerLineView()
 		}
-		.frame(height: 56)
 	}
 }
 
 struct LastDateItemView: View {
-	let value: String
+	@Binding var date: Date
+	@State var isShown = false
 
 	var body: some View {
 		VStack {
-			HStack {
-				Text("Next period")
-				Spacer()
-				Text(LocalizedStringKey(value))
-					.foregroundColor(.accentColor)
+			Button {
+				self.isShown.toggle()
+			} label: {
+				HStack {
+					Text("Previous period start")
+						.foregroundColor(.black)
+					Spacer()
+					Text(date, style: .date)
+				}
+				.padding([.top, .bottom], 16)
+			}
+			if isShown {
+				DatePicker("", selection: $date, displayedComponents: .date)
+					.datePickerStyle(WheelDatePickerStyle())
 			}
 			DividerLineView()
 		}
-		.frame(height: 56)
+
 	}
 }
 

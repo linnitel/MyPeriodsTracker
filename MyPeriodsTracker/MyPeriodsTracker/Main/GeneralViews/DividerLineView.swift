@@ -12,11 +12,11 @@ struct DividerLineView: View {
 		ZStack(alignment: .top) {
 			RoundedRectangle(cornerRadius: 2)
 				.fill(Color(UIColor(named: "line") ?? .white))
-				.frame(height: 4)
+				.frame(height: 2)
 			RoundedRectangle(cornerRadius: 1)
 				.fill(Color(UIColor(named: "lineShadow") ?? .gray))
-				.frame(height: 2)
-				.padding([.leading, .trailing], 2)
+				.frame(height: 1)
+				.padding([.leading, .trailing], 1)
 		}
     }
 }

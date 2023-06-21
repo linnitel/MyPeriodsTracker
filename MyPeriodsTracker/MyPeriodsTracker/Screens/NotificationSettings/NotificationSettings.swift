@@ -74,24 +74,32 @@ struct NotificationsToggleItem: View {
 
 struct NotificationsTimeItem: View {
 	let text: String
+	@State var isShown: Bool = false
 
 	@Binding var time: Date
+	
 	var body: some View {
-		HStack {
-			Text(LocalizedStringKey(text))
-			Spacer()
-			Button {
-
-			} label: {
-				ZStack {
-					RoundedRectangle(cornerRadius: 10)
-						.frame(width: 80, height: 40)
-						.foregroundColor(.black.opacity(0.08))
-					Text(time, style: .time)
+		VStack {
+			HStack {
+				Text(LocalizedStringKey(text))
+				Spacer()
+				Button {
+					self.isShown.toggle()
+				} label: {
+					ZStack {
+						RoundedRectangle(cornerRadius: 10)
+							.frame(width: 80, height: 40)
+							.foregroundColor(.black.opacity(0.08))
+						Text(time, style: .time)
+					}
 				}
 			}
+			.frame(height: 54)
+			if isShown {
+				DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
+					.datePickerStyle(WheelDatePickerStyle())
+			}
 		}
-		.frame(height: 54)
 	}
 
 }
