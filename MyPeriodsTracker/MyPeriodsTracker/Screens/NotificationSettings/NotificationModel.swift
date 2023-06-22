@@ -9,5 +9,6 @@ import Foundation
 
 struct NotificationsList: Identifiable {
 	var id: String
+	var key: String
 	var subscribe: Bool
 }

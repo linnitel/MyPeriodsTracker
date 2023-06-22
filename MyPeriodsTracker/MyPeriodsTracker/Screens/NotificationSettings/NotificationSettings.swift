@@ -10,13 +10,7 @@ import SwiftUI
 struct NotificationSettings: View {
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-	@State var notificationsActive: Bool = true
-	@State var notificationsList: [NotificationsList] = [
-		NotificationsList(id: "One day before period", subscribe: true),
-		NotificationsList(id: "Start of the period", subscribe: true),
-		NotificationsList(id: "Ovulation", subscribe: true)
-	]
-	@State var notificationTime: Date = Date()
+	@ObservedObject var viewModel: NotificationSettingsViewModel
 
     var body: some View {
 		ZStack(alignment: .top) {
@@ -36,11 +30,11 @@ struct NotificationSettings: View {
 					Text("Notifications")
 				}
 				Group {
-					NotificationsToggleItem(text: "Notifications", value: $notificationsActive)
-					NotificationsTimeItem(text: "Send at", time: $notificationTime)
+					NotificationsToggleItem(text: "Notifications", key: "NotificationsActive", value: $viewModel.notificationsActive)
+					NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
 						.padding(.bottom, 40)
-					ForEach($notificationsList) { $list in
-						NotificationsToggleItem(text: list.id, value: $list.subscribe)
+					ForEach($viewModel.notificationsList) { $list in
+						NotificationsToggleItem(text: list.id, key: list.key, value: $list.subscribe)
 					}
 				}
 				.padding([.leading, .trailing], 24)
@@ -53,12 +47,13 @@ struct NotificationSettings: View {
 
 struct NotificationSettings_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationSettings()
+		NotificationSettings(viewModel: NotificationSettingsViewModel())
     }
 }
 
 struct NotificationsToggleItem: View {
 	let text: String
+	let key: String
 
 	@Binding var value: Bool
 
@@ -67,6 +62,9 @@ struct NotificationsToggleItem: View {
 			Toggle(LocalizedStringKey(text), isOn: $value)
 				.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 				.padding([.bottom, .top], 16)
+				.onChange(of: value) { value in
+					UserDefaults.standard.set(value, forKey: key)
+				}
 			DividerLineView()
 		}
 	}
@@ -77,7 +75,7 @@ struct NotificationsTimeItem: View {
 	@State var isShown: Bool = false
 
 	@Binding var time: Date
-	
+
 	var body: some View {
 		VStack {
 			HStack {

@@ -139,7 +139,7 @@ struct NotificationsItem: View {
 		HStack {
 			Text("Notifications")
 			Spacer()
-			NavigationLink(destination: NotificationSettings()) {
+			NavigationLink(destination: NotificationSettings(viewModel: NotificationSettingsViewModel())) {
 				Image(systemName: "chevron.right")
 					.foregroundColor(Color(UIColor(named: "secondButtonText") ?? .gray))
 			}
