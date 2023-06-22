@@ -29,6 +29,7 @@ struct MainPeriodsView: View {
 						FertilityView(value: self.viewModel.fertility())
 					}
 					.padding([.leading, .trailing], 4)
+					.padding([.top], 16)
 					Spacer()
 					UpperButton(text: "Period continues", action: {print("upper button")})
 					if self.viewModel.model.partOfCycle == .early, self.viewModel.model.partOfCycle == .delay {
@@ -96,6 +97,7 @@ struct DateItemView: View {
 				Spacer()
 				Text(LocalizedStringKey(value))
 			}
+			.padding([.top, .bottom], 16)
 			DividerLineView()
 		}
 		.frame(height: 38)
@@ -120,6 +122,7 @@ struct DateDelayView: View {
 						.foregroundColor(.accentColor)
 				}
 			}
+			.padding([.top, .bottom], 16)
 			DividerLineView()
 		}
 		.frame(height: 38)
@@ -137,6 +140,7 @@ struct OvulationView: View {
 				Spacer()
 				Text("in \(value) days")
 			}
+			.padding([.top, .bottom], 16)
 			DividerLineView()
 		}
 		.frame(height: 38)
@@ -155,6 +159,7 @@ struct FertilityView: View {
 					.foregroundColor(value.color)
 
 			}
+			.padding([.top, .bottom], 16)
 		}
 		.frame(height: 38)
 	}

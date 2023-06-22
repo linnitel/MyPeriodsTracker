@@ -125,7 +125,7 @@ struct LastDateItemView: View {
 				.padding([.top, .bottom], 16)
 			}
 			if isShown {
-				DatePicker("", selection: $date, displayedComponents: .date)
+				DatePicker("", selection: $date, in: ...Date(), displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 			}
 			DividerLineView()
