@@ -17,19 +17,19 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	init() {
-		self.model = MainPeriodModel(lastPeriodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .offPeriod)
+		self.model = MainPeriodModel(periodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .offPeriod)
 	}
 
 	func daysLeft() -> Int {
-		self.model.daysToPeriod(from: todayDate)
+		self.model.daysToPeriod(from: self.todayDate)
 	}
 
 	func ovulation() -> Int {
-		self.model.getOvulation(self.model.lastPeriodStartDate)
+		self.model.getOvulation()
 	}
 
 	func fertility() -> MainPeriodModel.FertilityLevel {
-		self.model.getFertility(self.model.lastPeriodStartDate)
+		self.model.getFertility()
 	}
 
 	func nextPeriodDate() -> String {
@@ -42,5 +42,18 @@ class MainPeriodViewModel: ObservableObject {
 
 	func isDelay() -> Bool {
 		true
+	}
+
+	func upperButtonAction() -> Void {
+		switch self.model.partOfCycle {
+			case .delay:
+				print("recalculate")
+			case .early:
+				print("recalculate")
+			case .period:
+				print("")
+			case .notSet, .offPeriod:
+				break
+		}
 	}
 }

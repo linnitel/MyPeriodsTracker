@@ -10,43 +10,60 @@ import SwiftUI
 
 struct MainPeriodModel {
 	let ovulationDays: Int = 14
-	let ovulationPeriod: Int = 3
+	let ovulationPeriod: Int = 4
+	let calendar = Calendar.current
+	let now = Date()
 
-	var lastPeriodStartDate: Date
+	var periodStartDate: Date
 	var periodLength: Int
 	var cycleLength: Int
 
 	var partOfCycle: PartOfCycle = .notSet
 
+	var lastPeriodStartDate: Date {
+		let now = Date()
+		var nextDate = periodStartDate
+		if nextDate > now {
+			return nextDate
+		}
+
+		while nextDate < now, !Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
+			nextDate = Calendar.current.date(byAdding: .day, value: cycleLength, to: nextDate)!
+		}
+
+		nextDate = Calendar.current.date(byAdding: .day, value: -cycleLength, to: nextDate)!
+		return nextDate
+	}
+
 	var nextPeriodStartDate: Date {
-		Calendar.current.date(byAdding: .day, value: self.cycleLength, to: self.lastPeriodStartDate)!
+		calendar.date(byAdding: .day, value: self.cycleLength, to: self.lastPeriodStartDate)!
 	}
 
 	func daysToPeriod(from startDate: Date) -> Int {
-		Calendar.current.dateComponents([.day], from: startDate, to: self.nextPeriodStartDate).day ?? 0
+		calendar.dateComponents([.day], from: startDate, to: self.nextPeriodStartDate).day ?? 0
 	}
 
-	func getOvulation(_ startDate: Date) -> Int {
-		var ovulationDate = Calendar.current.date(byAdding: .day, value: self.ovulationDays, to: startDate)!
+	func getOvulation() -> Int {
+		var ovulationDate = calendar.date(byAdding: .day, value: self.ovulationDays, to: self.lastPeriodStartDate)!
 		let now = Date()
 
-		var days = Calendar.current.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
+		var days = calendar.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
 		if days < 0 {
-			let lastPeriodStartDate = Calendar.current.date(byAdding: .day, value: cycleLength, to: startDate)!
-			ovulationDate = Calendar.current.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
-			days = Calendar.current.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
+			let lastPeriodStartDate = calendar.date(byAdding: .day, value: cycleLength, to: self.lastPeriodStartDate)!
+			ovulationDate = calendar.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
+			days = calendar.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
 		}
 		return days
 	}
 
-	func getFertility(_ startDate: Date) -> FertilityLevel {
-		let ovulation = Calendar.current.date(byAdding: .day, value: self.ovulationDays, to: startDate)!
-		let fertilityStart = Calendar.current.date(byAdding: .day, value: -self.ovulationPeriod, to: ovulation)!
-		let fertilityEnd = Calendar.current.date(byAdding: .day, value: self.ovulationPeriod, to: ovulation)!
+	func getFertility() -> FertilityLevel {
+		let ovulation = calendar.date(byAdding: .day, value: self.ovulationDays, to: self.lastPeriodStartDate)!
+		let fertilityStart = calendar.date(byAdding: .day, value: -self.ovulationPeriod, to: ovulation)!
+		let fertilityEnd = calendar.date(byAdding: .day, value: self.ovulationPeriod, to: ovulation)!
 		let now = Date()
-		if Calendar.current.isDate(now, equalTo: ovulation, toGranularity: .day) {
+		if calendar.isDate(now, equalTo: ovulation, toGranularity: .day) {
 			return .veryHigh
-		} else if now >= fertilityStart, now <= fertilityEnd || Calendar.current.isDate(now, equalTo: fertilityEnd, toGranularity: .day) {
+		} else if now >= fertilityStart, now <= fertilityEnd || calendar.isDate(now, equalTo: fertilityEnd, toGranularity: .day) {
 			return .high
 		} else {
 			return .low
