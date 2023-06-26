@@ -16,26 +16,18 @@ struct MainPeriodsView: View {
 				BackgroundView()
 				VStack {
 					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.periodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
-					DaysView(daysLeft: self.viewModel.daysLeft())
-						.padding(.bottom, 40)
-					Group {
-						switch self.viewModel.model.partOfCycle {
-							case .period, .delay, .early:
-								DateDelayView(value: self.viewModel.delay(), isDelay: self.viewModel.isDelay())
-							case .offPeriod, .notSet:
-								DateItemView(value: self.viewModel.nextPeriodDate())
-						}
-						OvulationView(value: self.viewModel.ovulation())
-						FertilityView(value: self.viewModel.fertility())
+					switch self.viewModel.model.partOfCycle {
+						case .offPeriod:
+							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.model.partOfCycle)
+						case .period:
+							PeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.model.partOfCycle)
+						case .delay:
+							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.model.partOfCycle)
+						case .early:
+							EarlyView(viewModel: self.viewModel, partOfCycle: self.$viewModel.model.partOfCycle)
+						case .notSet:
+							NotSetView(viewModel: self.viewModel, partOfCycle: self.$viewModel.model.partOfCycle, startDate: self.$viewModel.model.periodStartDate, cycle: self.$viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
 					}
-					.padding([.leading, .trailing], 4)
-					.padding([.top], 16)
-					Spacer()
-					UpperButton(text: "Period continues", action:{ self.viewModel.upperButtonAction()})
-					if self.viewModel.model.partOfCycle == .early || self.viewModel.model.partOfCycle == .delay {
-						LowerButton(text: "Don't recount", action: { print("lower button")})
-					}
-					Spacer()
 				}
 				.padding([.leading, .trailing], 20)
 			}
@@ -70,8 +62,126 @@ struct HeaderView: View {
 	}
 }
 
+struct OffPeriodView: View {
+	@ObservedObject var viewModel: MainPeriodViewModel
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+
+	var body: some View {
+		VStack {
+			DaysView(daysLeft: self.viewModel.daysLeft(), text: "days until period")
+				.padding(.bottom, 40)
+			Group {
+				DateItemView(value: self.viewModel.nextPeriodDate(), text: "Next period")
+				OvulationView(value: self.viewModel.ovulation())
+				FertilityView(value: self.viewModel.fertility())
+			}
+			.padding([.leading, .trailing], 4)
+			.padding([.top], 16)
+			Spacer()
+		}
+	}
+}
+
+struct PeriodView: View {
+	@ObservedObject var viewModel: MainPeriodViewModel
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+
+	var body: some View {
+		VStack {
+			DaysView(daysLeft: self.viewModel.dayOfPeriod(), text: "day of period")
+				.padding(.bottom, 40)
+			Group {
+				DateItemView(value: self.viewModel.endOfPeriodDate(), text: "End of period")
+				OvulationView(value: self.viewModel.ovulation())
+				FertilityView(value: self.viewModel.fertility())
+			}
+			.padding([.leading, .trailing], 4)
+			.padding([.top], 16)
+			Spacer()
+			UpperButton(text: "Period didn't start", action: { self.partOfCycle = .delay })
+			Spacer()
+		}
+	}
+}
+
+struct DelayView: View {
+	@ObservedObject var viewModel: MainPeriodViewModel
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+
+	var body: some View {
+		VStack {
+			DaysView(daysLeft: self.viewModel.delay(), text: "day of delay")
+				.padding(.bottom, 40)
+			Group {
+				DateDelayView(value: self.viewModel.delay(), isDelay: true)
+				OvulationView(value: self.viewModel.ovulation())
+				FertilityView(value: self.viewModel.fertility())
+			}
+			.padding([.leading, .trailing], 4)
+			.padding([.top], 16)
+			Spacer()
+			UpperButton(text: "Period started", action:{
+
+			})
+			Spacer()
+		}
+	}
+}
+
+struct EarlyView: View {
+	@ObservedObject var viewModel: MainPeriodViewModel
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+
+	var body: some View {
+		VStack {
+			DaysView(daysLeft: self.viewModel.dayOfPeriod(), text: "day of period")
+				.padding(.bottom, 40)
+			Group {
+				DateDelayView(value: self.viewModel.early(), isDelay: false)
+				OvulationView(value: self.viewModel.ovulation())
+				FertilityView(value: self.viewModel.fertility())
+			}
+			.padding([.leading, .trailing], 4)
+			.padding([.top], 16)
+			Spacer()
+			UpperButton(text: "Recount period", action:{
+
+			})
+			LowerButton(text: "Don't recount", action: {
+
+			})
+			Spacer()
+		}
+	}
+}
+
+struct NotSetView: View {
+	@ObservedObject var viewModel: MainPeriodViewModel
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+	@Binding var startDate: Date
+	@Binding var cycle: Int
+	@Binding var period: Int
+
+	var body: some View {
+		VStack {
+			DaysView(daysLeft: 0, text: "day of period")
+				.padding(.bottom, 40)
+			Text("To see your next period date setup information about your cycle in settings")
+				.multilineTextAlignment(.center)
+			.padding([.leading, .trailing], 40)
+			.padding([.top], 16)
+			Spacer()
+			NavigationLink(destination: SettingsView(startDate: $startDate, cycle: $cycle, period: $period)) {
+				ButtonBackgroundView(text: "Open settings")
+			}
+			Spacer()
+		}
+	}
+}
+
 struct DaysView: View {
 	let daysLeft: Int
+	let text: String
 
 	var body: some View {
 		VStack {
@@ -79,7 +189,7 @@ struct DaysView: View {
 				.foregroundColor(Color.accentColor)
 				.modifier(MainInfoTextModifier())
 				.padding([.bottom], -30)
-			Text("days until period")
+			Text(LocalizedStringKey(text))
 
 		}
 	}
@@ -89,11 +199,12 @@ struct DaysView: View {
 
 struct DateItemView: View {
 	let value: String
+	let text: String
 
 	var body: some View {
 		VStack {
 			HStack {
-				Text("Next period")
+				Text(LocalizedStringKey(text))
 				Spacer()
 				Text(LocalizedStringKey(value))
 			}
@@ -115,10 +226,10 @@ struct DateDelayView: View {
 				Text("Change of cycle")
 				Spacer()
 				if isDelay {
-					Text("-\(value) days")
+					Text("+\(value) days")
 						.foregroundColor(.accentColor)
 				} else {
-					Text("+\(value) days")
+					Text("\(value) days")
 						.foregroundColor(.accentColor)
 				}
 			}
@@ -165,33 +276,41 @@ struct FertilityView: View {
 	}
 }
 
+struct ButtonBackgroundView: View {
+	let text: String
+
+	var body: some View {
+		ZStack {
+			RoundedRectangle(cornerRadius: 16)
+				.foregroundColor(.white)
+				.frame(height: 56)
+				.padding([.top, .leading], -2)
+				.shadow(color: Color(UIColor(named: "buttonShadow") ?? .gray),radius: 16, x: 8, y: 16)
+				.shadow(color: .white,radius: 16, x: -8, y: -16)
+			RoundedRectangle(cornerRadius: 16)
+				.fill(
+					LinearGradient(gradient: Gradient(
+						colors: [
+							Color(UIColor(named: "buttonBottom") ?? .white),
+							Color(UIColor(named: "buttonTop") ?? .gray)
+						]),
+								   startPoint: .top,
+								   endPoint: .bottom
+					)
+				)
+				.frame(height: 56)
+			Text(LocalizedStringKey(self.text))
+		}
+	}
+}
+
 struct UpperButton: View {
 	let text: String
 	let action: () -> Void
 
 	var body: some View {
 		Button(action: self.action) {
-			ZStack {
-				RoundedRectangle(cornerRadius: 16)
-					.foregroundColor(.white)
-					.frame(height: 56)
-					.padding([.top, .leading], -2)
-					.shadow(color: Color(UIColor(named: "buttonShadow") ?? .gray),radius: 16, x: 8, y: 16)
-					.shadow(color: .white,radius: 16, x: -8, y: -16)
-				RoundedRectangle(cornerRadius: 16)
-					.fill(
-						LinearGradient(gradient: Gradient(
-							colors: [
-								Color(UIColor(named: "buttonBottom") ?? .white),
-								Color(UIColor(named: "buttonTop") ?? .gray)
-							]),
-									   startPoint: .top,
-									   endPoint: .bottom
-						)
-					)
-					.frame(height: 56)
-				Text(LocalizedStringKey(self.text))
-			}
+			ButtonBackgroundView(text: text)
 		}
 	}
 }

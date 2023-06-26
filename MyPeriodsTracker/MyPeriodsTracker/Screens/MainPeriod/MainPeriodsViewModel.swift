@@ -17,7 +17,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	init() {
-		self.model = MainPeriodModel(periodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .offPeriod)
+		self.model = MainPeriodModel(periodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .notSet)
 	}
 
 	func daysLeft() -> Int {
@@ -36,12 +36,20 @@ class MainPeriodViewModel: ObservableObject {
 		DateCalculatiorService.shared.getNextDate(self.model.nextPeriodStartDate)
 	}
 
-	func delay() -> Int {
-		1
+	func endOfPeriodDate() -> String {
+		DateCalculatiorService.shared.getNextDate(self.model.endOfPeriodDate)
 	}
 
-	func isDelay() -> Bool {
-		true
+	func dayOfPeriod() -> Int {
+		self.model.dayOfPeriod
+	}
+
+	func delay() -> Int {
+		self.model.delay
+	}
+
+	func early() -> Int {
+		self.model.early
 	}
 
 	func upperButtonAction() -> Void {

@@ -39,6 +39,22 @@ struct MainPeriodModel {
 		calendar.date(byAdding: .day, value: self.cycleLength, to: self.lastPeriodStartDate)!
 	}
 
+	var endOfPeriodDate: Date {
+		calendar.date(byAdding: .day, value: self.periodLength, to: self.lastPeriodStartDate)!
+	}
+
+	var dayOfPeriod: Int {
+		calendar.dateComponents([.day], from: self.lastPeriodStartDate, to: Date()).day ?? 0
+	}
+
+	var delay: Int {
+		calendar.dateComponents([.day], from: self.lastPeriodStartDate, to: Date()).day ?? 0
+	}
+
+	var early: Int {
+		calendar.dateComponents([.day], from: self.nextPeriodStartDate, to: Date()).day ?? 0
+	}
+
 	func daysToPeriod(from startDate: Date) -> Int {
 		calendar.dateComponents([.day], from: startDate, to: self.nextPeriodStartDate).day ?? 0
 	}
