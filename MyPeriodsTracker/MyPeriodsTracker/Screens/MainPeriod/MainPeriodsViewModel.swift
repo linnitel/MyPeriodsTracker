@@ -11,7 +11,8 @@ import SwiftUI
 class MainPeriodViewModel: ObservableObject {
 
 	@Published var model: MainPeriodModel
-	
+
+	@AppStorage("PartOfCycle") var partOfCycle: Int = MainPeriodModel.PartOfCycle.notSet.rawValue
 //	@AppStorage("cycleLength") var cycle: Int = 0
 //	@AppStorage("periodLength") var period: Int = 0
 //	@AppStorage("periodStartDate") var periodStartDat: Date = Date()

@@ -9,25 +9,24 @@ import SwiftUI
 
 struct MainPeriodsView: View {
 	@StateObject var viewModel: MainPeriodViewModel
-	@AppStorage("PartOfCycle") var partOfCycle: Int = MainPeriodModel.PartOfCycle.notSet.rawValue
 
 	var body: some View {
 		NavigationView {
 			ZStack(alignment: .top) {
 				BackgroundView()
 				VStack {
-					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.periodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength, partOfCycle: self.$partOfCycle)
-					switch self.partOfCycle {
+					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.periodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength, partOfCycle: self.$viewModel.partOfCycle)
+					switch self.viewModel.partOfCycle {
 						case 1:
-							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$partOfCycle)
+							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						case 2:
-							PeriodView(viewModel: self.viewModel, partOfCycle: self.$partOfCycle)
+							PeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						case 3:
-							DelayView(viewModel: self.viewModel, partOfCycle: self.$partOfCycle)
+							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						case 4:
-							EarlyView(viewModel: self.viewModel, partOfCycle: self.$partOfCycle)
+							EarlyView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						default:
-							NotSetView(viewModel: self.viewModel, partOfCycle: self.$partOfCycle, startDate: self.$viewModel.model.periodStartDate, cycle: self.$viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
+							NotSetView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle, startDate: self.$viewModel.model.periodStartDate, cycle: self.$viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
 					}
 				}
 				.padding([.leading, .trailing], 20)

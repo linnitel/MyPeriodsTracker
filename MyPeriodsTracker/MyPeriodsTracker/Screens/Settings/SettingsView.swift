@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-	let cycleArray = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-					  31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
-	let periodArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	let cycleArray = [21, 22, 23, 24, 25,
+					  26, 27, 28, 29, 30,
+					  31, 32, 33, 34, 35]
+	let periodArray = [2, 3, 4, 5, 6, 7]
 
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -134,7 +135,7 @@ struct LastDateItemView: View {
 				.padding([.top, .bottom], 16)
 			}
 			if isShown {
-				DatePicker("", selection: $date, in: ...Date(), displayedComponents: .date)
+				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7889229)...Date(), displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 			}
 			DividerLineView()
