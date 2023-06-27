@@ -23,7 +23,10 @@ class MainPeriodViewModel: ObservableObject {
 	init() {
 		let periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
 		let cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
-		let periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
+		var periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
+		if periodStartDate.timeIntervalSince1970 == 0 {
+			periodStartDate = Date()
+		}
 //		let partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
 		self.model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength, partOfCycle: .notSet)
 //		self.partOfCycle = partOfCycle
