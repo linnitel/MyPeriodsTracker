@@ -17,6 +17,7 @@ struct SettingsView: View {
 	@Binding var startDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
+	@Binding var partOfCycle: Int
 
 	@State private var cycleIsShown = false
 	@State private var periodIsShown = false
@@ -30,6 +31,11 @@ struct SettingsView: View {
 					ZStack(alignment: .center) {
 						HStack(alignment: .center) {
 							Button(action: {
+								if cycle != 0, period != 0, startDate.timeIntervalSince1970 != 0 {
+									if self.partOfCycle != MainPeriodModel.PartOfCycle.delay.rawValue, self.partOfCycle != MainPeriodModel.PartOfCycle.early.rawValue {
+										partOfCycle = MainPeriodModel.PartOfCycle.offPeriod.rawValue
+									}
+								}
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
 								Image(systemName: "arrow.left")
@@ -46,16 +52,19 @@ struct SettingsView: View {
 							self.cycleIsShown.toggle()
 							self.periodIsShown = false
 							self.startDateIsShown = false
+							UserDefaults.standard.set(self.cycle, forKey: "CycleLength")
 						}
 						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: $period) {
 							self.periodIsShown.toggle()
 							self.cycleIsShown = false
 							self.startDateIsShown = false
+							UserDefaults.standard.set(self.period, forKey: "PeriodLength")
 						}
 						LastDateItemView(date: self.$startDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
 							self.periodIsShown = false
 							self.cycleIsShown = false
+							UserDefaults.standard.set(self.startDate.timeIntervalSince1970, forKey: "PeriodStartDate")
 						}
 						NotificationsItem()
 					}
@@ -72,7 +81,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-		SettingsView(startDate: .constant(Date()), cycle: .constant(30), period: .constant(5))
+		SettingsView(startDate: .constant(Date()), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(1))
     }
 }
 

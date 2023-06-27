@@ -11,13 +11,22 @@ import SwiftUI
 class MainPeriodViewModel: ObservableObject {
 
 	@Published var model: MainPeriodModel
+	
+//	@AppStorage("cycleLength") var cycle: Int = 0
+//	@AppStorage("periodLength") var period: Int = 0
+//	@AppStorage("periodStartDate") var periodStartDat: Date = Date()
 
 	var todayDate: Date {
 		Date()
 	}
 
 	init() {
-		self.model = MainPeriodModel(periodStartDate: Date().addingTimeInterval(-24 * 10 * 60 * 60), periodLength: 5, cycleLength: 30, partOfCycle: .notSet)
+		let periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
+		let cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
+		let periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
+//		let partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
+		self.model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength, partOfCycle: .notSet)
+//		self.partOfCycle = partOfCycle
 	}
 
 	func daysLeft() -> Int {
