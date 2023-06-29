@@ -83,7 +83,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-		SettingsView(periodStartDate: .constant(Date()), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(.delay))
+		SettingsView(periodStartDate: .constant(Date().midnight), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(.delay))
     }
 }
 
@@ -142,7 +142,7 @@ struct LastDateItemView: View {
 				.padding([.top, .bottom], 16)
 			}
 			if isShown {
-				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7889229)...Date(), displayedComponents: .date)
+				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().midnight.timeIntervalSince1970 - 7889229)...Date().midnight, displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 					.onReceive([self.date].publisher.first()) { (value) in
 						UserDefaults.standard.set(self.date.timeIntervalSince1970, forKey: "PeriodStartDate")

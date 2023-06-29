@@ -82,8 +82,8 @@ struct OffPeriodView: View {
 			Spacer()
 			if viewModel.showOffPeriodButton() {
 				UpperButton(text: "Period start early", action: {
-					// TODO: show alert that you are sure and that the cycle will be recalculated.
-					UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "PeriodStartDate")
+					UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
+					self.viewModel.model.periodStartDate = Date().midnight
 					self.partOfCycle = .period
 				})
 				Spacer()
@@ -108,7 +108,9 @@ struct PeriodView: View {
 			.padding([.leading, .trailing], 4)
 			.padding([.top], 16)
 			Spacer()
-			UpperButton(text: "Period didn't start", action: { self.partOfCycle = .delay })
+			UpperButton(text: "Period didn't start", action: {
+				self.partOfCycle = .delay
+			})
 			Spacer()
 		}
 	}
@@ -131,6 +133,8 @@ struct DelayView: View {
 			.padding([.top], 16)
 			Spacer()
 			UpperButton(text: "Period started", action:{
+				UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
+				self.viewModel.model.periodStartDate = Date().midnight
 				self.partOfCycle = .period
 			})
 			Spacer()
@@ -151,10 +155,15 @@ struct NotSetView: View {
 				.padding(.bottom, 40)
 			Text("To see your next period date setup information about your cycle in settings")
 				.multilineTextAlignment(.center)
-			.padding([.leading, .trailing], 40)
-			.padding([.top], 16)
+				.padding([.leading, .trailing], 40)
+				.padding([.top], 16)
 			Spacer()
-			NavigationLink(destination: SettingsView(periodStartDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
+			NavigationLink(destination: SettingsView(
+				periodStartDate: $startDate,
+				cycle: $cycle,
+				period: $period,
+				partOfCycle: $partOfCycle
+			)) {
 				ButtonBackgroundView(text: "Open settings")
 			}
 			Spacer()
@@ -168,12 +177,13 @@ struct DaysView: View {
 
 	var body: some View {
 		VStack {
-			Text(String(daysLeft))
+			let localizedText = String(format: NSLocalizedString("%lld \(text)", comment: ""), daysLeft)
+			let splittedStringsArray = localizedText.split(separator: " ", maxSplits: 1)
+			Text(splittedStringsArray[0])
 				.foregroundColor(Color.accentColor)
 				.modifier(MainInfoTextModifier())
 				.padding([.bottom], -30)
-			Text(LocalizedStringKey(text))
-
+			Text(splittedStringsArray[1])
 		}
 	}
 

@@ -34,11 +34,6 @@ struct MainPeriodModel {
 		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: Date()).day ?? 0) + 1
 	}
 
-	var delay: Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: Date()).day ?? 0) + 1
-	}
-
 	func daysToPeriod(from startDate: Date) -> Int {
 		calendar.dateComponents([.day], from: startDate, to: self.nextPeriodStartDate).day ?? 0
 	}

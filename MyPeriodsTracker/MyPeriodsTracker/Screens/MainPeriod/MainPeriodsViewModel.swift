@@ -25,12 +25,9 @@ class MainPeriodViewModel: ObservableObject {
 		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
 		
 		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength, partOfCycle: partOfCycle)
-//			periodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength)
 		partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle)
 		self.partOfCycle = partOfCycle
-//		let partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
 		self.model = model
-//		self.partOfCycle = partOfCycle
 	}
 
 	func daysLeft() -> Int {
@@ -58,7 +55,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func delay() -> Int {
-		self.model.delay
+		DateCalculatorService.shared.delay(periodStartDate: self.model.periodStartDate, cycleLength: self.model.cycleLength)
 	}
 
 	func showOffPeriodButton() -> Bool {
