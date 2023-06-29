@@ -1,5 +1,5 @@
 //
-//  DateCalculationService.swift
+//  DateToStringService.swift
 //  MyPeriodsTracker
 //
 //  Created by Julia Martcenko on 09/06/2023.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class DateCalculatiorService {
+class DateToStringService {
 
-	static let shared = DateCalculatiorService()
+	static let shared = DateToStringService()
 
 	private init() {}
 

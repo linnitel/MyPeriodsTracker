@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct MyPeriodsTrackerApp: App {
+
     var body: some Scene {
         WindowGroup {
 			let mainPeriodViewModel = MainPeriodViewModel()

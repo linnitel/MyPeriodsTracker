@@ -17,21 +17,22 @@ struct MainPeriodsView: View {
 				VStack {
 					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.periodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength, partOfCycle: self.$viewModel.partOfCycle)
 					switch self.viewModel.partOfCycle {
-						case 1:
+						case .offPeriod:
 							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
-						case 2:
+						case .period:
 							PeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
-						case 3:
+						case .delay:
 							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
-						case 4:
-							EarlyView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
-						default:
+						case .notSet:
 							NotSetView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle, startDate: self.$viewModel.model.periodStartDate, cycle: self.$viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
 					}
 				}
 				.padding([.leading, .trailing], 20)
 			}
 			.modifier(BaseTextModifier())
+		}
+		.onAppear {
+			self.viewModel.startTimer()
 		}
     }
 }
@@ -47,14 +48,14 @@ struct HeaderView: View {
 	@Binding var startDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
-	@Binding var partOfCycle: Int
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		ZStack {
-			Text(DateCalculatiorService.shared.getDateMonthAndWeek(todayDate))
+			Text(DateToStringService.shared.getDateMonthAndWeek(todayDate))
 			HStack {
 				Spacer()
-				NavigationLink(destination: SettingsView(startDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
+				NavigationLink(destination: SettingsView(periodStartDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
 					Image("settings")
 						.frame(width: 40, height: 40)
 				}
@@ -65,7 +66,7 @@ struct HeaderView: View {
 
 struct OffPeriodView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: Int
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -79,14 +80,21 @@ struct OffPeriodView: View {
 			.padding([.leading, .trailing], 4)
 			.padding([.top], 16)
 			Spacer()
+			if viewModel.showOffPeriodButton() {
+				UpperButton(text: "Period start early", action: {
+					// TODO: show alert that you are sure and that the cycle will be recalculated.
+					UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "PeriodStartDate")
+					self.partOfCycle = .period
+				})
+				Spacer()
+			}
 		}
 	}
 }
 
 struct PeriodView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: Int
-
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -100,7 +108,7 @@ struct PeriodView: View {
 			.padding([.leading, .trailing], 4)
 			.padding([.top], 16)
 			Spacer()
-			UpperButton(text: "Period didn't start", action: { self.partOfCycle = MainPeriodModel.PartOfCycle.delay.rawValue })
+			UpperButton(text: "Period didn't start", action: { self.partOfCycle = .delay })
 			Spacer()
 		}
 	}
@@ -108,7 +116,7 @@ struct PeriodView: View {
 
 struct DelayView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: Int
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -123,34 +131,7 @@ struct DelayView: View {
 			.padding([.top], 16)
 			Spacer()
 			UpperButton(text: "Period started", action:{
-
-			})
-			Spacer()
-		}
-	}
-}
-
-struct EarlyView: View {
-	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: Int
-
-	var body: some View {
-		VStack {
-			DaysView(daysLeft: self.viewModel.dayOfPeriod(), text: "day of period")
-				.padding(.bottom, 40)
-			Group {
-				DateDelayView(value: self.viewModel.early(), isDelay: false)
-				OvulationView(value: self.viewModel.ovulation())
-				FertilityView(value: self.viewModel.fertility())
-			}
-			.padding([.leading, .trailing], 4)
-			.padding([.top], 16)
-			Spacer()
-			UpperButton(text: "Recount period", action:{
-
-			})
-			LowerButton(text: "Don't recount", action: {
-
+				self.partOfCycle = .period
 			})
 			Spacer()
 		}
@@ -159,7 +140,7 @@ struct EarlyView: View {
 
 struct NotSetView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: Int
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 	@Binding var startDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
@@ -173,7 +154,7 @@ struct NotSetView: View {
 			.padding([.leading, .trailing], 40)
 			.padding([.top], 16)
 			Spacer()
-			NavigationLink(destination: SettingsView(startDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
+			NavigationLink(destination: SettingsView(periodStartDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
 				ButtonBackgroundView(text: "Open settings")
 			}
 			Spacer()

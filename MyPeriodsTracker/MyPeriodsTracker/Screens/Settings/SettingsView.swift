@@ -15,10 +15,10 @@ struct SettingsView: View {
 
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-	@Binding var startDate: Date
+	@Binding var periodStartDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
-	@Binding var partOfCycle: Int
+	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	@State private var cycleIsShown = false
 	@State private var periodIsShown = false
@@ -32,11 +32,12 @@ struct SettingsView: View {
 					ZStack(alignment: .center) {
 						HStack(alignment: .center) {
 							Button(action: {
-								if cycle != 0, period != 0, startDate.timeIntervalSince1970 != 0 {
-									if self.partOfCycle != MainPeriodModel.PartOfCycle.delay.rawValue, self.partOfCycle != MainPeriodModel.PartOfCycle.early.rawValue {
-										partOfCycle = MainPeriodModel.PartOfCycle.offPeriod.rawValue
-									}
-								}
+								self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+									periodStartDate: self.periodStartDate,
+									periods: self.period,
+									cycle: self.cycle,
+									partOfCycle: self.partOfCycle
+								)
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
 								Image(systemName: "arrow.left")
@@ -49,29 +50,29 @@ struct SettingsView: View {
 					}
 					.padding(.bottom, 16)
 					Group {
-						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: $cycle) {
+						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: $cycle, key: "CycleLength") {
 							self.cycleIsShown.toggle()
 							self.periodIsShown = false
 							self.startDateIsShown = false
-							UserDefaults.standard.set(self.cycle, forKey: "CycleLength")
 						}
-						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: $period) {
+						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: $period, key: "PeriodLength") {
 							self.periodIsShown.toggle()
 							self.cycleIsShown = false
 							self.startDateIsShown = false
-							UserDefaults.standard.set(self.period, forKey: "PeriodLength")
 						}
-						LastDateItemView(date: self.$startDate, isShown: $startDateIsShown) {
+						LastDateItemView(date: self.$periodStartDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
 							self.periodIsShown = false
 							self.cycleIsShown = false
-							UserDefaults.standard.set(self.startDate.timeIntervalSince1970, forKey: "PeriodStartDate")
 						}
 						NotificationsItem()
 					}
 					.padding([.leading, .trailing], 24)
 					Spacer()
-					LowerButton(text: "Rate the app in AppStore", action: {})
+					// TODO: add storekit items for donation
+					LowerButton(text: "Rate the app in AppStore", action: {
+						// TODO: add link to the appstore to rate the app
+					})
 				}
 			}
 			.modifier(BaseTextModifier())
@@ -82,7 +83,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-		SettingsView(startDate: .constant(Date()), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(1))
+		SettingsView(periodStartDate: .constant(Date()), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(.delay))
     }
 }
 
@@ -91,6 +92,7 @@ struct SettingsItemView: View {
 	let selectionArray: [Int]
 	@Binding var isShown: Bool
 	@Binding var value: Int
+	let key: String
 	let action: () -> Void
 
 	var body: some View {
@@ -112,6 +114,10 @@ struct SettingsItemView: View {
 						}
 				}
 				.pickerStyle(.wheel)
+				.onReceive([self.value].publisher.first()) { (value) in
+					UserDefaults.standard.set(self.value, forKey: self.key)
+					print(value)
+				}
 			}
 			DividerLineView()
 		}
@@ -121,6 +127,7 @@ struct SettingsItemView: View {
 struct LastDateItemView: View {
 	@Binding var date: Date
 	@Binding var isShown: Bool
+
 	let action: () -> Void
 
 	var body: some View {
@@ -137,6 +144,9 @@ struct LastDateItemView: View {
 			if isShown {
 				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().timeIntervalSince1970 - 7889229)...Date(), displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
+					.onReceive([self.date].publisher.first()) { (value) in
+						UserDefaults.standard.set(self.date.timeIntervalSince1970, forKey: "PeriodStartDate")
+					}
 			}
 			DividerLineView()
 		}

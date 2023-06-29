@@ -11,15 +11,9 @@ import SwiftUI
 class MainPeriodViewModel: ObservableObject {
 
 	@Published var model: MainPeriodModel
+	@AppStorage("PartOfCycle") var partOfCycle: MainPeriodModel.PartOfCycle = .notSet
 
-	@AppStorage("PartOfCycle") var partOfCycle: Int = MainPeriodModel.PartOfCycle.notSet.rawValue
-//	@AppStorage("cycleLength") var cycle: Int = 0
-//	@AppStorage("periodLength") var period: Int = 0
-//	@AppStorage("periodStartDate") var periodStartDat: Date = Date()
-
-	var todayDate: Date {
-		Date()
-	}
+	@Published var todayDate: Date = Date().midnight
 
 	init() {
 		let periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
@@ -28,8 +22,14 @@ class MainPeriodViewModel: ObservableObject {
 		if periodStartDate.timeIntervalSince1970 == 0 {
 			periodStartDate = Date()
 		}
+		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
+		
+		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength, partOfCycle: partOfCycle)
+//			periodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength)
+		partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle)
+		self.partOfCycle = partOfCycle
 //		let partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
-		self.model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength, partOfCycle: .notSet)
+		self.model = model
 //		self.partOfCycle = partOfCycle
 	}
 
@@ -38,19 +38,19 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func ovulation() -> Int {
-		self.model.getOvulation()
+		self.model.getOvulation(self.todayDate)
 	}
 
 	func fertility() -> MainPeriodModel.FertilityLevel {
-		self.model.getFertility()
+		self.model.getFertility(self.todayDate)
 	}
 
 	func nextPeriodDate() -> String {
-		DateCalculatiorService.shared.getNextDate(self.model.nextPeriodStartDate)
+		DateToStringService.shared.getNextDate(self.model.nextPeriodStartDate)
 	}
 
 	func endOfPeriodDate() -> String {
-		DateCalculatiorService.shared.getNextDate(self.model.endOfPeriodDate)
+		DateToStringService.shared.getNextDate(self.model.endOfPeriodDate)
 	}
 
 	func dayOfPeriod() -> Int {
@@ -61,20 +61,23 @@ class MainPeriodViewModel: ObservableObject {
 		self.model.delay
 	}
 
-	func early() -> Int {
-		self.model.early
+	func showOffPeriodButton() -> Bool {
+		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: self.model.nextPeriodStartDate)!
+		if todayDate < showEarlyStartButtonDay {
+			return false
+		}
+		return true
 	}
 
-	func upperButtonAction() -> Void {
-		switch self.model.partOfCycle {
-			case .delay:
-				print("recalculate")
-			case .early:
-				print("recalculate")
-			case .period:
-				print("")
-			case .notSet, .offPeriod:
-				break
+	func startTimer() {
+		let midnight = Date().midnight.addingTimeInterval(24 * 60 * 60) // Next midnight
+		let timer = Timer(fire: midnight, interval: 24 * 60 * 60, repeats: true) { _ in
+			self.updateDate()
 		}
+		RunLoop.main.add(timer, forMode: .common)
+	}
+
+	func updateDate() {
+		self.todayDate = Date().midnight
 	}
 }

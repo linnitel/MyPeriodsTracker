@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A294E192A4B2886006CF524 /* DateCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E182A4B2886006CF524 /* DateCalculatorService.swift */; };
+		4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */; };
 		4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39B2A41C10D00C51F82 /* SettingsView.swift */; };
 		4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */; };
 		4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */; };
@@ -18,7 +20,7 @@
 		4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAB2A3365D8004880A9 /* Assets.xcassets */; };
 		4AFECFAF2A3365D8004880A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAE2A3365D8004880A9 /* Preview Assets.xcassets */; };
 		4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */; };
-		4AFECFB82A336B9B004880A9 /* DateCalculationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB72A336B9B004880A9 /* DateCalculationService.swift */; };
+		4AFECFB82A336B9B004880A9 /* DateToStringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB72A336B9B004880A9 /* DateToStringService.swift */; };
 		4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */; };
 		4AFECFC22A33846C004880A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC42A33846C004880A9 /* Localizable.strings */; };
 		4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC82A338B12004880A9 /* SFPro-Regular.otf */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A294E182A4B2886006CF524 /* DateCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatorService.swift; sourceTree = "<group>"; };
+		4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extention.swift"; sourceTree = "<group>"; };
 		4A59F39B2A41C10D00C51F82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
 		4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
@@ -42,7 +46,7 @@
 		4AFECFAB2A3365D8004880A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AFECFAE2A3365D8004880A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extention.swift"; sourceTree = "<group>"; };
-		4AFECFB72A336B9B004880A9 /* DateCalculationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculationService.swift; sourceTree = "<group>"; };
+		4AFECFB72A336B9B004880A9 /* DateToStringService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateToStringService.swift; sourceTree = "<group>"; };
 		4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extention.swift"; sourceTree = "<group>"; };
 		4AFECFC32A33846C004880A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AFECFC52A338486004880A9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */,
 				4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */,
 				4AFECFCD2A33935A004880A9 /* String+Extention.swift */,
+				4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -204,7 +209,8 @@
 		4AFECFD22A346859004880A9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4AFECFB72A336B9B004880A9 /* DateCalculationService.swift */,
+				4AFECFB72A336B9B004880A9 /* DateToStringService.swift */,
+				4A294E182A4B2886006CF524 /* DateCalculatorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -285,11 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A294E192A4B2886006CF524 /* DateCalculatorService.swift in Sources */,
 				4AFECFCE2A33935A004880A9 /* String+Extention.swift in Sources */,
 				4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */,
 				4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */,
 				4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */,
-				4AFECFB82A336B9B004880A9 /* DateCalculationService.swift in Sources */,
+				4AFECFB82A336B9B004880A9 /* DateToStringService.swift in Sources */,
+				4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */,
 				4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */,
 				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
 				4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */,
