@@ -30,18 +30,42 @@ struct NotificationSettings: View {
 					Text("Notifications")
 				}
 				Group {
-					NotificationsToggleItem(text: "Notifications", key: "NotificationsActive", value: $viewModel.notificationsActive)
+					NotificationsToggleItem(text: "Notifications", key: "NotificationsActive", value: $viewModel.notificationsActive) {
+//						if self.viewModel.isNotFirstTime {
+//							if let settingsURL = URL(string: UIApplication.openSettingsURLString){
+//								UIApplication.shared.open(settingsURL)
+//							}
+//						} else {
+//							self.viewModel.isNotFirstTime = true
+//							UserDefaults.standard.set(true, forKey: "IsNotFirstTimeNotification")
+						self.viewModel.notifications.notificationRequest()
+//						}
+					}
 					NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
 						.padding(.bottom, 40)
-					ForEach($viewModel.notificationsList) { $list in
-						NotificationsToggleItem(text: list.id, key: list.key, value: $list.subscribe)
-					}
+//					ForEach($viewModel.notificationsList) { $list in
+//						NotificationsToggleItem(text: list.id, key: list.key, value: $list.subscribe)
+//					}
 				}
 				.padding([.leading, .trailing], 24)
 			}
 		}
 		.navigationBarHidden(true)
 		.modifier(BaseTextModifier())
+		.onAppear() {
+			UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+				DispatchQueue.main.async {
+					switch settings.authorizationStatus {
+						case .notDetermined, .denied, .provisional, .ephemeral:
+							self.viewModel.notificationsActive = false
+						case .authorized:
+							self.viewModel.notificationsActive = true
+						@unknown default:
+							self.viewModel.notificationsActive = false
+					}
+				}
+			}
+		}
     }
 }
 
@@ -57,6 +81,8 @@ struct NotificationsToggleItem: View {
 
 	@Binding var value: Bool
 
+	var action: (() -> Void)?
+
 	var body: some View {
 		VStack {
 			Toggle(LocalizedStringKey(text), isOn: $value)
@@ -64,6 +90,9 @@ struct NotificationsToggleItem: View {
 				.padding([.bottom, .top], 16)
 				.onChange(of: value) { value in
 					UserDefaults.standard.set(value, forKey: key)
+					if let action = action {
+						action()
+					}
 				}
 			DividerLineView()
 		}

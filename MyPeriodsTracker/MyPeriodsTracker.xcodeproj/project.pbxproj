@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A2533D12A53043C00CDDE72 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2533D02A53043C00CDDE72 /* Notifications.swift */; };
 		4A294E192A4B2886006CF524 /* DateCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E182A4B2886006CF524 /* DateCalculatorService.swift */; };
 		4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */; };
 		4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39B2A41C10D00C51F82 /* SettingsView.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A2533D02A53043C00CDDE72 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4A294E182A4B2886006CF524 /* DateCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatorService.swift; sourceTree = "<group>"; };
 		4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extention.swift"; sourceTree = "<group>"; };
 		4A59F39B2A41C10D00C51F82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -85,8 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				4A59F39E2A41EF8700C51F82 /* NotificationSettings.swift */,
-				4A59F3A82A444BC000C51F82 /* NotificationSettingsViewModel.swift */,
 				4A59F3A02A42EBE000C51F82 /* NotificationModel.swift */,
+				4A59F3A82A444BC000C51F82 /* NotificationSettingsViewModel.swift */,
 			);
 			path = NotificationSettings;
 			sourceTree = "<group>";
@@ -190,8 +192,8 @@
 		4AFECFD02A34682E004880A9 /* MainPeriod */ = {
 			isa = PBXGroup;
 			children = (
-				4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */,
 				4AFECFD32A346881004880A9 /* MainPeriodModel.swift */,
+				4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */,
 				4AFECFD52A347754004880A9 /* MainPeriodsViewModel.swift */,
 			);
 			path = MainPeriod;
@@ -211,6 +213,7 @@
 			children = (
 				4AFECFB72A336B9B004880A9 /* DateToStringService.swift */,
 				4A294E182A4B2886006CF524 /* DateCalculatorService.swift */,
+				4A2533D02A53043C00CDDE72 /* Notifications.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */,
 				4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */,
 				4A59F3A92A444BC000C51F82 /* NotificationSettingsViewModel.swift in Sources */,
+				4A2533D12A53043C00CDDE72 /* Notifications.swift in Sources */,
 				4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */,
 				4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */,
 				4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */,

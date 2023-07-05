@@ -36,8 +36,10 @@ struct SettingsView: View {
 									periodStartDate: self.periodStartDate,
 									periods: self.period,
 									cycle: self.cycle,
-									partOfCycle: self.partOfCycle
+									partOfCycle: self.partOfCycle,
+									now: Date().midnight
 								)
+								// TODO: One source of truth for today date?
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
 								Image(systemName: "arrow.left")

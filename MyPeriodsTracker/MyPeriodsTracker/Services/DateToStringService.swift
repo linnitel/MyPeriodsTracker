@@ -13,17 +13,17 @@ class DateToStringService {
 
 	private init() {}
 
-	func getDateMonthAndWeek(_ date: Date) -> String {
+	func dateMonthAndWeekString(from date: Date) -> String {
 		let formatter = DateFormatter(dateFormat: "d MMMM, E", calendar: Calendar.current)
 		return formatter.string(from: date)
 	}
 
-	func getNextDate(_ date: Date) -> String {
+	func dateAndWeekString(from date: Date) -> String {
 		let formatter = DateFormatter(dateFormat: "d MMM, E", calendar: Calendar.current)
 		return formatter.string(from: date)
 	}
 
-	func getLastDate(_ date: Date) -> String {
+	func dateAndYearString(from date: Date) -> String {
 		let formatter = DateFormatter(dateFormat: "d MMMM YYYY", calendar: Calendar.current)
 		return formatter.string(from: date)
 	}

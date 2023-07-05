@@ -15,23 +15,21 @@ class DateCalculatorService {
 
 	private init() {}
 
-	func partOfCycleUpdate(periodStartDate: Date, periods: Int, cycle: Int, partOfCycle: MainPeriodModel.PartOfCycle) -> MainPeriodModel.PartOfCycle {
-		let now = Date().midnight
-		let lastPeriodStartDate = updateLastPeriodStartDate(periodStartDate, cycleLength: cycle)
+	func partOfCycleUpdate(periodStartDate: Date, periods: Int, cycle: Int, partOfCycle: MainPeriodModel.PartOfCycle, now: Date) -> MainPeriodModel.PartOfCycle {
+		let lastPeriodStartDate = updateLastPeriodStartDate(periodStartDate, cycleLength: cycle, now: now)
 
 		if partOfCycle == .delay,
-		   delay(periodStartDate: periodStartDate, cycleLength: cycle) < 14 {
+		   delay(periodStartDate: periodStartDate, cycleLength: cycle, now: now) < 14 {
 			return .delay
 		} else if periods == 0 || cycle == 0 {
 			return .notSet
-		} else if isPeriod(startDate: lastPeriodStartDate, periodLength: periods) {
+		} else if isPeriod(startDate: lastPeriodStartDate, periodLength: periods, now: now) {
 			return .period
 		}
 		return .offPeriod
 	}
 
-	func updateLastPeriodStartDate(_ startDate: Date, cycleLength: Int) -> Date {
-		let now = Date().midnight
+	func updateLastPeriodStartDate(_ startDate: Date, cycleLength: Int, now: Date) -> Date {
 		var nextDate = startDate
 		if nextDate > now {
 			return nextDate
@@ -45,9 +43,8 @@ class DateCalculatorService {
 		return nextDate
 	}
 
-	func isPeriod(startDate: Date, periodLength: Int) -> Bool {
+	func isPeriod(startDate: Date, periodLength: Int, now: Date) -> Bool {
 		let endDate = Calendar.current.date(byAdding: .day, value: periodLength, to: startDate)!
-		let now = Date().midnight
 
 		if now >= startDate, now <= endDate {
 			return true
@@ -57,8 +54,8 @@ class DateCalculatorService {
 		return false
 	}
 
-	func delay(periodStartDate: Date, cycleLength: Int) -> Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: Date()).day ?? 0) + 1
+	func delay(periodStartDate: Date, cycleLength: Int, now: Date) -> Int {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength, now: now)
+		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
 	}
 }

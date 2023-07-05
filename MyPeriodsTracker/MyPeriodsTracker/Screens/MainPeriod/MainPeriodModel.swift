@@ -17,29 +17,27 @@ struct MainPeriodModel {
 	var periodLength: Int
 	var cycleLength: Int
 
-	var partOfCycle: PartOfCycle = .notSet
-
-	var nextPeriodStartDate: Date {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
+	func nextPeriodStartDate(now: Date) -> Date {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
 		return calendar.date(byAdding: .day, value: self.cycleLength, to: lastPeriodStartDate)!
 	}
 
-	var endOfPeriodDate: Date {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
+	func endOfPeriodDate(now: Date) -> Date {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
 		return calendar.date(byAdding: .day, value: self.periodLength, to: lastPeriodStartDate)!
 	}
 
-	var dayOfPeriod: Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: Date()).day ?? 0) + 1
+	func dayOfPeriod(from startDate: Date, now: Date) -> Int {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
+		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: startDate).day ?? 0) + 1
 	}
 
-	func daysToPeriod(from startDate: Date) -> Int {
-		calendar.dateComponents([.day], from: startDate, to: self.nextPeriodStartDate).day ?? 0
+	func daysToPeriod(from now: Date) -> Int {
+		calendar.dateComponents([.day], from: now, to: self.nextPeriodStartDate(now: now)).day ?? 0
 	}
 
 	func getOvulation(_ now: Date) -> Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
 		var ovulationDate = calendar.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
 
 		var days = calendar.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
@@ -52,7 +50,7 @@ struct MainPeriodModel {
 	}
 
 	func getFertility(_ now: Date) -> FertilityLevel {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
 		let ovulation = calendar.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
 		let fertilityStart = calendar.date(byAdding: .day, value: -self.ovulationPeriod, to: ovulation)!
 		let fertilityEnd = calendar.date(byAdding: .day, value: self.ovulationPeriod, to: ovulation)!

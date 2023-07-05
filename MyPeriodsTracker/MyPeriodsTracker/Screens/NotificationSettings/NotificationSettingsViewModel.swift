@@ -6,20 +6,25 @@
 //
 
 import Foundation
+import UIKit
 
 class NotificationSettingsViewModel: ObservableObject {
 
-	@Published var notificationsActive: Bool
+	let notifications = Notifications()
+
+	@Published var notificationsActive: Bool = false
+	@Published var notificationTime: Date
+
 //	@Published var oneDayBefore: Bool
 //	@Published var startOfPeriod: Bool
 //	@Published var ovulation: Bool
 
 	@Published var notificationsList: [NotificationsList]
 
-	@Published var notificationTime: Date
+	@Published var isNotFirstTime: Bool
 
 	init() {
-		self.notificationsActive = UserDefaults.standard.bool(forKey: "NotificationsActive")
+		self.isNotFirstTime = UserDefaults.standard.bool(forKey: "IsNotFirstTimeNotification")
 
 		let oneDayBefore = UserDefaults.standard.bool(forKey: "OneDayBeforePeriod")
 //		self.oneDayBefore = oneDayBefore
@@ -35,14 +40,5 @@ class NotificationSettingsViewModel: ObservableObject {
 			NotificationsList(id: "Start of the period", key: "StartOfPeriod", subscribe: startOfPeriod),
 			NotificationsList(id: "Ovulation", key: "Ovulation", subscribe: ovulation)
 		]
-	}
-
-	func notificationsActivate(_ isActive: Bool) -> Void {
-		UserDefaults.standard.set(isActive, forKey: "NotificationsActive")
-		if isActive {
-			print(isActive)
-		} else {
-			print(isActive)
-		}
 	}
 }

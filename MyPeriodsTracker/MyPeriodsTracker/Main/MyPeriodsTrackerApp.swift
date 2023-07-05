@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import BackgroundTasks
 
 @main
 struct MyPeriodsTrackerApp: App {
+	@ObservedObject var mainPeriodViewModel = MainPeriodViewModel()
 
     var body: some Scene {
         WindowGroup {
-			let mainPeriodViewModel = MainPeriodViewModel()
 			MainPeriodsView(viewModel: mainPeriodViewModel)
         }
     }

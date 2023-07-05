@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BackgroundTasks
 
 struct MainPeriodsView: View {
 	@StateObject var viewModel: MainPeriodViewModel
@@ -15,7 +16,13 @@ struct MainPeriodsView: View {
 			ZStack(alignment: .top) {
 				BackgroundView()
 				VStack {
-					HeaderView(todayDate: self.viewModel.todayDate, startDate: $viewModel.model.periodStartDate, cycle: $viewModel.model.cycleLength, period: self.$viewModel.model.periodLength, partOfCycle: self.$viewModel.partOfCycle)
+					HeaderView(
+						todayDate: self.viewModel.todayDate,
+						startDate: $viewModel.model.periodStartDate,
+						cycle: $viewModel.model.cycleLength,
+						period: self.$viewModel.model.periodLength,
+						partOfCycle: self.$viewModel.partOfCycle
+					)
 					switch self.viewModel.partOfCycle {
 						case .offPeriod:
 							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
@@ -24,16 +31,22 @@ struct MainPeriodsView: View {
 						case .delay:
 							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						case .notSet:
-							NotSetView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle, startDate: self.$viewModel.model.periodStartDate, cycle: self.$viewModel.model.cycleLength, period: self.$viewModel.model.periodLength)
+							NotSetView(
+								viewModel: self.viewModel,
+								partOfCycle: self.$viewModel.partOfCycle,
+								startDate: self.$viewModel.model.periodStartDate,
+								cycle: self.$viewModel.model.cycleLength,
+								period: self.$viewModel.model.periodLength
+							)
 					}
 				}
 				.padding([.leading, .trailing], 20)
 			}
 			.modifier(BaseTextModifier())
 		}
-		.onAppear {
-			self.viewModel.startTimer()
-		}
+//		.onAppear {
+//			self.viewModel.startTimer()
+//		}
     }
 }
 
@@ -52,7 +65,7 @@ struct HeaderView: View {
 
 	var body: some View {
 		ZStack {
-			Text(DateToStringService.shared.getDateMonthAndWeek(todayDate))
+			Text(DateToStringService.shared.dateMonthAndWeekString(from: todayDate))
 			HStack {
 				Spacer()
 				NavigationLink(destination: SettingsView(periodStartDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
