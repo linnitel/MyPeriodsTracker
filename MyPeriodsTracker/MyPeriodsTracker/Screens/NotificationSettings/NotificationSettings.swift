@@ -31,15 +31,21 @@ struct NotificationSettings: View {
 				}
 				Group {
 					NotificationsToggleItem(text: "Notifications", key: "NotificationsActive", value: $viewModel.notificationsActive) {
-//						if self.viewModel.isNotFirstTime {
-//							if let settingsURL = URL(string: UIApplication.openSettingsURLString){
-//								UIApplication.shared.open(settingsURL)
-//							}
-//						} else {
-//							self.viewModel.isNotFirstTime = true
-//							UserDefaults.standard.set(true, forKey: "IsNotFirstTimeNotification")
-						self.viewModel.notifications.notificationRequest()
-//						}
+						guard self.viewModel.isNotFirstTime else {
+							self.viewModel.notifications.notificationRequest()
+							self.viewModel.isNotFirstTime = true
+							UserDefaults.standard.set(true, forKey: "IsNotFirstTimeNotification")
+							return
+						}
+
+						guard self.viewModel.notificationsActive else { return }
+
+						self.viewModel.getGlobalNotification() {
+							guard !self.viewModel.globalNotificationsActive,
+								  let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+							UIApplication.shared.open(settingsURL)
+							// TODO: add alert whether to open settings or not
+						}
 					}
 					NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
 						.padding(.bottom, 40)
@@ -53,18 +59,7 @@ struct NotificationSettings: View {
 		.navigationBarHidden(true)
 		.modifier(BaseTextModifier())
 		.onAppear() {
-			UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-				DispatchQueue.main.async {
-					switch settings.authorizationStatus {
-						case .notDetermined, .denied, .provisional, .ephemeral:
-							self.viewModel.notificationsActive = false
-						case .authorized:
-							self.viewModel.notificationsActive = true
-						@unknown default:
-							self.viewModel.notificationsActive = false
-					}
-				}
-			}
+			self.viewModel.getGlobalNotification(completion: nil)
 		}
     }
 }
