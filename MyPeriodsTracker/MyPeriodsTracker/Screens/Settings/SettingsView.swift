@@ -67,7 +67,7 @@ struct SettingsView: View {
 							self.periodIsShown = false
 							self.cycleIsShown = false
 						}
-						NotificationsItem()
+						NotificationsItem(periodStartDate: self.periodStartDate, cycle: self.cycle, period: self.period)
 					}
 					.padding([.leading, .trailing], 24)
 					Spacer()
@@ -157,11 +157,19 @@ struct LastDateItemView: View {
 }
 
 struct NotificationsItem: View {
+	let periodStartDate: Date
+	let cycle: Int
+	let period: Int
+
 	var body: some View {
 		HStack {
 			Text("Notifications")
 			Spacer()
-			NavigationLink(destination: NotificationSettings(viewModel: NotificationSettingsViewModel())) {
+			NavigationLink(destination: NotificationSettings(viewModel: NotificationSettingsViewModel(
+				periodStartDate: self.periodStartDate,
+				cycle: self.cycle,
+				period: self.period
+			))) {
 				Image(systemName: "chevron.right")
 					.foregroundColor(Color(UIColor(named: "secondButtonText") ?? .gray))
 			}

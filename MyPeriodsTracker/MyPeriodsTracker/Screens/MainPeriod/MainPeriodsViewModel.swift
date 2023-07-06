@@ -47,7 +47,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func nextPeriodDate() -> String {
-		DateToStringService.shared.dateAndWeekString(from: self.model.nextPeriodStartDate(now: self.todayDate))
+		DateToStringService.shared.dateAndWeekString(from: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.periodStartDate, cycle: self.model.cycleLength))
 	}
 
 	func endOfPeriodDate() -> String {
@@ -63,7 +63,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func showOffPeriodButton() -> Bool {
-		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: self.model.nextPeriodStartDate(now: self.todayDate))!
+		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.periodStartDate, cycle: self.model.cycleLength))!
 		if todayDate < showEarlyStartButtonDay {
 			return false
 		}

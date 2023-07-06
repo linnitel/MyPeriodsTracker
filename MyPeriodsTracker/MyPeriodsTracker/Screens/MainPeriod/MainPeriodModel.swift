@@ -17,11 +17,6 @@ struct MainPeriodModel {
 	var periodLength: Int
 	var cycleLength: Int
 
-	func nextPeriodStartDate(now: Date) -> Date {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
-		return calendar.date(byAdding: .day, value: self.cycleLength, to: lastPeriodStartDate)!
-	}
-
 	func endOfPeriodDate(now: Date) -> Date {
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
 		return calendar.date(byAdding: .day, value: self.periodLength, to: lastPeriodStartDate)!
@@ -33,7 +28,7 @@ struct MainPeriodModel {
 	}
 
 	func daysToPeriod(from now: Date) -> Int {
-		calendar.dateComponents([.day], from: now, to: self.nextPeriodStartDate(now: now)).day ?? 0
+		calendar.dateComponents([.day], from: now, to: DateCalculatorService.shared.nextPeriodStartDate(now: now, date: self.periodStartDate, cycle: self.cycleLength)).day ?? 0
 	}
 
 	func getOvulation(_ now: Date) -> Int {

@@ -43,6 +43,16 @@ class DateCalculatorService {
 		return nextDate
 	}
 
+	func nextPeriodStartDate(now: Date, date: Date, cycle: Int) -> Date {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(date, cycleLength: cycle, now: now)
+		return calendar.date(byAdding: .day, value: cycle, to: lastPeriodStartDate)!
+	}
+
+	func calculateOneDayBeforePeriod(now: Date, date: Date, cycle: Int) -> Date {
+		let nextDate = nextPeriodStartDate(now: now, date: date, cycle: cycle)
+		return calendar.date(byAdding: .day, value: -1, to: nextDate)!
+	}
+
 	func isPeriod(startDate: Date, periodLength: Int, now: Date) -> Bool {
 		let endDate = Calendar.current.date(byAdding: .day, value: periodLength, to: startDate)!
 
@@ -57,5 +67,10 @@ class DateCalculatorService {
 	func delay(periodStartDate: Date, cycleLength: Int, now: Date) -> Int {
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength, now: now)
 		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
+	}
+
+	func getOvulationDate(now: Date, startDate: Date, cycle: Int) -> Date {
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(startDate, cycleLength: cycle, now: now)
+		return calendar.date(byAdding: .day, value: 14, to: lastPeriodStartDate)!
 	}
 }
