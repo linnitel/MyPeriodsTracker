@@ -56,11 +56,14 @@ struct NotificationSettings: View {
 							self.viewModel.schaduleNotifications()
 						}
 					}
-					NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
-						.padding(.bottom, 40)
-					NotificationsToggleItem(text: "One day before period", key: "OneDayBeforePeriod", value: self.$viewModel.oneDayBefore, action: self.viewModel.schaduleOneDayBeforeNotification)
-					NotificationsToggleItem(text: "Start of the period", key: "StartOfPeriod", value: self.$viewModel.startOfPeriod, action: self.viewModel.schadulePeriodFirstDayNotification)
-					NotificationsToggleItem(text: "Ovulation", key: "Ovulation", value: self.$viewModel.ovulation, action: self.viewModel.schaduleOvulationNotification)
+					Group {
+						NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
+							.padding(.bottom, 40)
+						NotificationsToggleItem(text: "One day before period", key: "OneDayBeforePeriod", value: self.$viewModel.oneDayBefore, action: self.viewModel.schaduleOneDayBeforeNotification)
+						NotificationsToggleItem(text: "Start of the period", key: "StartOfPeriod", value: self.$viewModel.startOfPeriod, action: self.viewModel.schadulePeriodFirstDayNotification)
+						NotificationsToggleItem(text: "Ovulation", key: "Ovulation", value: self.$viewModel.ovulation, action: self.viewModel.schaduleOvulationNotification)
+					}
+					.disabled(self.viewModel.notificationsActive == false)
 				}
 				.padding([.leading, .trailing], 24)
 			}
