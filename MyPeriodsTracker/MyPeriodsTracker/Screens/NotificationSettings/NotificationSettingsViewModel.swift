@@ -17,34 +17,20 @@ class NotificationSettingsViewModel: ObservableObject {
 	let period: Int
 
 	@Published var globalNotificationsActive: Bool = false
-
-	@Published var notificationsActive: Bool
-
+	@AppStorage("NotificationsActive") var notificationsActive: Bool = false
 	@Published var notificationTime: Date
 
-	@Published var oneDayBefore: Bool
-	@Published var startOfPeriod: Bool
-	@Published var ovulation: Bool
+	@AppStorage("OneDayBeforePeriod") var oneDayBefore: Bool = false
+	@AppStorage("StartOfPeriod") var startOfPeriod: Bool = false
+	@AppStorage("Ovulation") var ovulation: Bool = false
 
-//	@Published var notificationsList: [NotificationsList]
-
-	@Published var isNotFirstTime: Bool
+	@AppStorage("IsNotFirstTimeNotification") var isNotFirstTime: Bool = false
 
 	init(periodStartDate: Date, cycle: Int, period: Int) {
 		self.periodStartDate = periodStartDate
 		self.cycle = cycle
 		self.period = period
 
-		self.isNotFirstTime = UserDefaults.standard.bool(forKey: "IsNotFirstTimeNotification")
-
-		let oneDayBefore = UserDefaults.standard.bool(forKey: "OneDayBeforePeriod")
-		self.oneDayBefore = oneDayBefore
-		let startOfPeriod = UserDefaults.standard.bool(forKey: "StartOfPeriod")
-		self.startOfPeriod = startOfPeriod
-		let ovulation = UserDefaults.standard.bool(forKey: "Ovulation")
-		self.ovulation = ovulation
-
-		self.notificationsActive = UserDefaults.standard.bool(forKey: "NotificationsActive")
 		self.notificationTime = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "NotificationsTime"))
 
 		let timeDidSet = UserDefaults.standard.bool(forKey: "NotificationTimeDidSet")
@@ -57,11 +43,7 @@ class NotificationSettingsViewModel: ObservableObject {
 			UserDefaults.standard.set(true, forKey: "NotificationTimeDidSet")
 		}
 
-//		self.notificationsList = [
-//			NotificationsList(id: "One day before period", key: "OneDayBeforePeriod", subscribe: oneDayBefore),
-//			NotificationsList(id: "Start of the period", key: "StartOfPeriod", subscribe: startOfPeriod),
-//			NotificationsList(id: "Ovulation", key: "Ovulation", subscribe: ovulation)
-//		]
+		NotificationCenter.default.addObserver(self, selector: #selector(dayDidChange), name: .NSCalendarDayChanged, object: nil)
 	}
 
 	func getGlobalNotification(completion: (() -> Void)?) {
@@ -113,4 +95,10 @@ class NotificationSettingsViewModel: ObservableObject {
 		}
 	}
 
+	@objc
+	func dayDidChange() {
+		DispatchQueue.main.async {
+			self.schaduleNotifications()
+		}
+	}
 }

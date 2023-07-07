@@ -30,12 +30,11 @@ struct NotificationSettings: View {
 					Text("Notifications")
 				}
 				Group {
-					NotificationsToggleItem(text: "Notifications", key: "NotificationsActive", value: $viewModel.notificationsActive) {
+					NotificationsToggleItem(text: "Notifications", value: $viewModel.notificationsActive) {
 						guard self.viewModel.isNotFirstTime else {
 							self.viewModel.notifications.notificationRequest()
 							// TODO: make some actions based on whether user allows notifications or not
 							self.viewModel.isNotFirstTime = true
-							UserDefaults.standard.set(true, forKey: "IsNotFirstTimeNotification")
 							return
 						}
 
@@ -50,6 +49,7 @@ struct NotificationSettings: View {
 									UIApplication.shared.open(settingsURL)
 									// TODO: add alert whether to open settings or not
 								}
+								self.viewModel.notificationsActive = false
 								return
 							}
 
@@ -59,9 +59,9 @@ struct NotificationSettings: View {
 					Group {
 						NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
 							.padding(.bottom, 40)
-						NotificationsToggleItem(text: "One day before period", key: "OneDayBeforePeriod", value: self.$viewModel.oneDayBefore, action: self.viewModel.schaduleOneDayBeforeNotification)
-						NotificationsToggleItem(text: "Start of the period", key: "StartOfPeriod", value: self.$viewModel.startOfPeriod, action: self.viewModel.schadulePeriodFirstDayNotification)
-						NotificationsToggleItem(text: "Ovulation", key: "Ovulation", value: self.$viewModel.ovulation, action: self.viewModel.schaduleOvulationNotification)
+						NotificationsToggleItem(text: "One day before period", value: self.$viewModel.oneDayBefore, action: self.viewModel.schaduleOneDayBeforeNotification)
+						NotificationsToggleItem(text: "Start of the period", value: self.$viewModel.startOfPeriod, action: self.viewModel.schadulePeriodFirstDayNotification)
+						NotificationsToggleItem(text: "Ovulation", value: self.$viewModel.ovulation, action: self.viewModel.schaduleOvulationNotification)
 					}
 					.disabled(self.viewModel.notificationsActive == false)
 				}
@@ -74,20 +74,6 @@ struct NotificationSettings: View {
 			self.viewModel.getGlobalNotification(completion: nil)
 		}
     }
-
-	@ViewBuilder
-	func buildNotification(list: Binding<NotificationsList>) -> some View {
-		switch list.id {
-			case "One day before period":
-				NotificationsToggleItem(text: list.id, key: list.key.wrappedValue, value: list.subscribe, action: self.viewModel.schaduleOneDayBeforeNotification)
-			case "Start of the period":
-				NotificationsToggleItem(text: list.id, key: list.key.wrappedValue, value: list.subscribe, action: self.viewModel.schadulePeriodFirstDayNotification)
-			case "Ovulation":
-				NotificationsToggleItem(text: list.id, key: list.key.wrappedValue, value: list.subscribe, action: self.viewModel.schaduleOvulationNotification)
-			default:
-				NotificationsToggleItem(text: list.id, key: list.key.wrappedValue, value: list.subscribe, action: self.viewModel.schaduleOvulationNotification)
-		}
-	}
 }
 
 struct NotificationSettings_Previews: PreviewProvider {
@@ -98,7 +84,6 @@ struct NotificationSettings_Previews: PreviewProvider {
 
 struct NotificationsToggleItem: View {
 	let text: String
-	let key: String
 
 	@Binding var value: Bool
 
@@ -110,7 +95,6 @@ struct NotificationsToggleItem: View {
 				.toggleStyle(SwitchToggleStyle(tint: .accentColor))
 				.padding([.bottom, .top], 16)
 				.onChange(of: value) { value in
-					UserDefaults.standard.set(value, forKey: key)
 					if let action = action {
 						action()
 					}

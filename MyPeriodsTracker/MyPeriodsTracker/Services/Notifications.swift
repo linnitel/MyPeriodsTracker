@@ -99,6 +99,7 @@ class Notifications: NSObject {
 		let center = UNUserNotificationCenter.current()
 		center.removePendingNotificationRequests(withIdentifiers: [identifier])
 	}
+	
 }
 
 extension Notifications: UNUserNotificationCenterDelegate {
