@@ -17,17 +17,25 @@ class MainPeriodViewModel: ObservableObject {
 
 	init() {
 
-		let periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
-		let cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
+		var periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
+		var cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
 		var periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
 
-		if periodStartDate.timeIntervalSince1970 == 0 {
-			periodStartDate = Date()
+		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .offPeriod
+
+
+		let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
+
+		if notFirstLaunch {
+			partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle, now: Date().midnight)
+		} else {
+			periodLength = 5
+			cycleLength = 28
+			periodStartDate = Date().midnight
 		}
-		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
-		
+
 		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength)
-		partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle, now: Date().midnight)
+
 		self.partOfCycle = partOfCycle
 		self.model = model
 

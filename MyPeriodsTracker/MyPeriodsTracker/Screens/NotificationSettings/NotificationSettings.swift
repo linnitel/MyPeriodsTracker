@@ -75,8 +75,8 @@ struct NotificationSettings: View {
 					Button("Go to settings") {
 						if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
 							UIApplication.shared.open(settingsURL)
-
 						}
+						
 					}
 					Button("Cancel") {
 						self.showingAlert = false

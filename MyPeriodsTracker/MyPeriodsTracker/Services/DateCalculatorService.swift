@@ -21,8 +21,6 @@ class DateCalculatorService {
 		if partOfCycle == .delay,
 		   delay(periodStartDate: periodStartDate, cycleLength: cycle, now: now) < 14 {
 			return .delay
-		} else if periods == 0 || cycle == 0 {
-			return .notSet
 		} else if isPeriod(startDate: lastPeriodStartDate, periodLength: periods, now: now) {
 			return .period
 		}

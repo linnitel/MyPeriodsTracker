@@ -72,14 +72,17 @@ struct SettingsView: View {
 					.padding([.leading, .trailing], 24)
 					Spacer()
 					// TODO: add storekit items for donation
-					LowerButton(text: "Rate the app in AppStore", action: {
-						// TODO: add link to the appstore to rate the app
-					})
+//					LowerButton(text: "Rate the app in AppStore", action: {
+//						// TODO: add link to the appstore to rate the app
+//					})
 				}
 			}
 			.modifier(BaseTextModifier())
 		}
 		.navigationBarHidden(true)
+		.onAppear() {
+			UserDefaults.standard.set(true, forKey: "NotFirstLaunch")
+		}
     }
 }
 
