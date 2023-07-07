@@ -12,6 +12,13 @@ struct NotificationSettings: View {
 
 	@ObservedObject var viewModel: NotificationSettingsViewModel
 
+	@State private var showingAlert = false
+
+	init(viewModel: NotificationSettingsViewModel) {
+		self.viewModel = viewModel
+		UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "AccentColor")
+	}
+
     var body: some View {
 		ZStack(alignment: .top) {
 			BackgroundView()
@@ -45,10 +52,8 @@ struct NotificationSettings: View {
 
 						self.viewModel.getGlobalNotification() {
 							guard self.viewModel.globalNotificationsActive else {
-								if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-									UIApplication.shared.open(settingsURL)
-									// TODO: add alert whether to open settings or not
-								}
+								self.showingAlert = true
+
 								self.viewModel.notificationsActive = false
 								return
 							}
@@ -66,6 +71,19 @@ struct NotificationSettings: View {
 					.disabled(self.viewModel.notificationsActive == false)
 				}
 				.padding([.leading, .trailing], 24)
+				.alert("Allow notifications", isPresented: $showingAlert) {
+					Button("Go to settings") {
+						if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+							UIApplication.shared.open(settingsURL)
+
+						}
+					}
+					Button("Cancel") {
+						self.showingAlert = false
+					}
+				} message: {
+					Text("To recieve notificatons please allow it in the iPhone settings")
+				}
 			}
 		}
 		.navigationBarHidden(true)
