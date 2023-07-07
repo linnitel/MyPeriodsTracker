@@ -192,8 +192,8 @@
 		4AFECFD02A34682E004880A9 /* MainPeriod */ = {
 			isa = PBXGroup;
 			children = (
-				4AFECFD32A346881004880A9 /* MainPeriodModel.swift */,
 				4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */,
+				4AFECFD32A346881004880A9 /* MainPeriodModel.swift */,
 				4AFECFD52A347754004880A9 /* MainPeriodsViewModel.swift */,
 			);
 			path = MainPeriod;

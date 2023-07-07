@@ -141,6 +141,7 @@ struct LastDateItemView: View {
 				HStack {
 					Text("Previous period start")
 						.foregroundColor(.black)
+						.multilineTextAlignment(.leading)
 					Spacer()
 					Text(date, style: .date)
 				}
