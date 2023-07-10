@@ -10,7 +10,29 @@ import SwiftUI
 
 class MainPeriodViewModel: ObservableObject {
 
-	@Published var model: MainPeriodModel
+	@AppStorage("NotificationsActive") var notificationsActive: Bool = false
+	@AppStorage("NotificationsTime") var notificationTime: Double = 0.0
+	@AppStorage("OneDayBeforePeriod") var oneDayBefore: Bool = false
+	@AppStorage("StartOfPeriod") var startOfPeriod: Bool = false
+	@AppStorage("Ovulation") var ovulationNotif: Bool = false
+
+	let notifications = Notifications()
+
+	@Published var model: MainPeriodModel {
+		didSet {
+			
+			if self.notificationsActive {
+				self.notifications.schaduleNotifications(
+					now: Date().midnight,
+					startDate: self.model.periodStartDate,
+					cycle: self.model.cycleLength,
+					time: Date(timeIntervalSince1970: self.notificationTime),
+					ovulation: self.ovulationNotif,
+					oneDayBefore: self.oneDayBefore,
+					startOfPeriod: self.startOfPeriod)
+			}
+		}
+	}
 	@AppStorage("PartOfCycle") var partOfCycle: MainPeriodModel.PartOfCycle = .notSet
 
 	@Published var todayDate: Date = Date().midnight
@@ -63,7 +85,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func dayOfPeriod() -> Int {
-		self.model.daysToPeriod(from: self.todayDate)
+		self.model.dayOfPeriod(from: self.model.periodStartDate, now: self.todayDate)
 	}
 
 	func delay() -> Int {

@@ -9,7 +9,7 @@ import SwiftUI
 
 class NotificationSettingsViewModel: ObservableObject {
 
-	let notifications = Notifications()
+	var notifications = Notifications()
 	let dateCalculator = DateCalculatorService.shared
 
 	let periodStartDate: Date
@@ -17,12 +17,14 @@ class NotificationSettingsViewModel: ObservableObject {
 	let period: Int
 
 	@Published var globalNotificationsActive: Bool = false
+
 	@AppStorage("NotificationsActive") var notificationsActive: Bool = false
-	@Published var notificationTime: Date
 
 	@AppStorage("OneDayBeforePeriod") var oneDayBefore: Bool = false
 	@AppStorage("StartOfPeriod") var startOfPeriod: Bool = false
 	@AppStorage("Ovulation") var ovulation: Bool = false
+
+	@Published var notificationTime: Date
 
 	@AppStorage("IsNotFirstTimeNotification") var isNotFirstTime: Bool = false
 
@@ -69,36 +71,22 @@ class NotificationSettingsViewModel: ObservableObject {
 	}
 
 	func schaduleOvulationNotification() {
-		if self.ovulation {
-			let date = self.dateCalculator.getOvulationDate(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle)
-			self.notifications.scheduleOvulationDayNotification(for: date, at: self.notificationTime)
-		} else {
-			self.notifications.cancelNotification(with: "LocalOneDayBeforePeriodNotification")
-		}
+		self.notifications.schaduleOvulationNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, ovulation: self.ovulation)
 	}
 
 	func schaduleOneDayBeforeNotification() {
-		if self.oneDayBefore {
-			let date = self.dateCalculator.calculateOneDayBeforePeriod(now: Date().midnight, date: self.periodStartDate, cycle: self.cycle)
-			self.notifications.scheduleOneDayBeforePeriodNotification(for: date, at: self.notificationTime)
-		} else {
-			self.notifications.cancelNotification(with: "LocalFirstPeriodDayNotification")
-		}
+		self.notifications.schaduleOneDayBeforeNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, oneDayBefore: self.oneDayBefore)
 	}
 
 	func schadulePeriodFirstDayNotification() {
-		if self.startOfPeriod {
-			let date = self.dateCalculator.nextPeriodStartDate(now: Date().midnight, date: self.periodStartDate, cycle: self.cycle)
-			self.notifications.scheduleFirstPeriodDayNotification(for: date, at: self.notificationTime)
-		} else {
-			self.notifications.cancelNotification(with: "LocalOvulationNotification")
-		}
+		self.notifications.schadulePeriodFirstDayNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, startOfPeriod: self.startOfPeriod)
 	}
 
 	@objc
 	func dayDidChange() {
 		DispatchQueue.main.async {
 			self.schaduleNotifications()
+			// TODO: Add checking of whether the date of the pervious notification have hassed
 		}
 	}
 }

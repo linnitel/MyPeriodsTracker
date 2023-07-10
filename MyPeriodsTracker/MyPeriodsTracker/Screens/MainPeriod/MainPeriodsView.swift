@@ -44,9 +44,6 @@ struct MainPeriodsView: View {
 			}
 			.modifier(BaseTextModifier())
 		}
-//		.onAppear {
-//			self.viewModel.startTimer()
-//		}
     }
 }
 

@@ -7,10 +7,12 @@
 
 import Foundation
 import UserNotifications
+import SwiftUI
 
 class Notifications: NSObject {
 	let notificationCenter = UNUserNotificationCenter.current()
 	let calendar = Calendar.current
+	let dateCalculator = DateCalculatorService.shared
 
 	func notificationRequest() {
 
@@ -55,6 +57,40 @@ class Notifications: NSObject {
 			body: "It is important day for you",
 			identifier: "LocalOvulationNotification"
 		)
+	}
+
+	func schaduleOvulationNotification(now: Date, startDate: Date, cycle: Int, time: Date, ovulation: Bool) {
+		if ovulation {
+			let date = self.dateCalculator.getOvulationDate(now: Date().midnight, startDate: startDate, cycle: cycle)
+			self.scheduleOvulationDayNotification(for: date, at: time)
+		} else {
+			self.cancelNotification(with: "LocalOneDayBeforePeriodNotification")
+		}
+	}
+
+	func schaduleOneDayBeforeNotification(now: Date, startDate: Date, cycle: Int, time: Date, oneDayBefore: Bool) {
+		if oneDayBefore {
+			let date = self.dateCalculator.calculateOneDayBeforePeriod(now: now, date: startDate, cycle: cycle)
+			self.scheduleOneDayBeforePeriodNotification(for: date, at: time)
+		} else {
+			self.cancelNotification(with: "LocalFirstPeriodDayNotification")
+		}
+	}
+
+	func schadulePeriodFirstDayNotification(now: Date, startDate: Date, cycle: Int, time: Date, startOfPeriod: Bool) {
+		if startOfPeriod {
+			let date = self.dateCalculator.nextPeriodStartDate(now: now, date: startDate, cycle: cycle)
+			self.scheduleFirstPeriodDayNotification(for: date, at: time)
+		} else {
+			self.cancelNotification(with: "LocalOvulationNotification")
+		}
+	}
+
+	func schaduleNotifications(now: Date, startDate: Date, cycle: Int, time: Date, ovulation: Bool, oneDayBefore: Bool, startOfPeriod: Bool) {
+		print("\(ovulation),  \(oneDayBefore), \(startOfPeriod)")
+		self.schaduleOneDayBeforeNotification(now: now, startDate: startDate, cycle: cycle, time: time, oneDayBefore: oneDayBefore)
+		self.schadulePeriodFirstDayNotification(now: now, startDate: startDate, cycle: cycle, time: time, startOfPeriod: startOfPeriod)
+		self.schaduleOvulationNotification(now: now, startDate: startDate, cycle: cycle, time: time, ovulation: ovulation)
 	}
 
 	private func schaduleNotification(for date: Date, at time: Date, with title: String, body: String, identifier: String) {

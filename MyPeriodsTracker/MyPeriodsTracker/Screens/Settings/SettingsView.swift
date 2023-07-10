@@ -15,6 +15,8 @@ struct SettingsView: View {
 
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
+	let notifications = Notifications()
+
 	@Binding var periodStartDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
@@ -121,7 +123,6 @@ struct SettingsItemView: View {
 				.pickerStyle(.wheel)
 				.onReceive([self.value].publisher.first()) { (value) in
 					UserDefaults.standard.set(self.value, forKey: self.key)
-					print(value)
 				}
 			}
 			DividerLineView()
