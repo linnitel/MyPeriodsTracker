@@ -2,28 +2,81 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>StringKey</key>
+	<key>in %lld days</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@VARIABLE@</string>
-		<key>VARIABLE</key>
+		<string>%#@days@</string>
+		<key>days</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
-			<string></string>
+			<string>lld</string>
 			<key>zero</key>
-			<string></string>
+			<string>Aujourd&apos;hui</string>
 			<key>one</key>
-			<string></string>
-			<key>two</key>
-			<string></string>
-			<key>few</key>
-			<string></string>
-			<key>many</key>
-			<string></string>
+			<string>en 1 jour</string>
 			<key>other</key>
-			<string></string>
+			<string>en %d jours</string>
+		</dict>
+	</dict>
+	<key>-%lld days</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>-%lld jour</string>
+			<key>other</key>
+			<string>-%lld jours</string>
+		</dict>
+	</dict>
+	<key>+%lld days</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>+%lld jour</string>
+			<key>other</key>
+			<string>+%lld jours</string>
+		</dict>
+	</dict>
+	<key>days</key>
+	<dict>
+		<key>NSStringFormatSpecTypeKey</key>
+		<string>NSStringPluralRuleType</string>
+		<key>NSStringFormatValueTypeKey</key>
+		<string>lld</string>
+		<key>one</key>
+		<string>1 jour</string>
+		<key>other</key>
+		<string>%d jours</string>
+	</dict>
+	<key>%lld days until period</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days@</string>
+		<key>days</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>1 jour avant des règles</string>
+			<key>other</key>
+			<string>%d jours avant des règles</string>
 		</dict>
 	</dict>
 </dict>
