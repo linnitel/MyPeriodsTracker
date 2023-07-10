@@ -84,9 +84,32 @@ class NotificationSettingsViewModel: ObservableObject {
 
 	@objc
 	func dayDidChange() {
-		DispatchQueue.main.async {
-			self.schaduleNotifications()
-			// TODO: Add checking of whether the date of the pervious notification have hassed
+		let center = UNUserNotificationCenter.current()
+		var oneDayBefore = true
+		var ovulation = true
+		var	firstDay = true
+
+		center.getPendingNotificationRequests { (notifications) in
+			print("Count: \(notifications.count)")
+			for item in notifications {
+				if item.identifier == "LocalOneDayBeforePeriodNotification" {
+					oneDayBefore = false
+				} else if item.identifier == "LocalFirstPeriodDayNotification" {
+					firstDay = false
+				} else if item.identifier == "LocalOvulationNotification" {
+					ovulation = false
+				}
+			}
+			self.notifications.schaduleNotifications(
+				now: Date().midnight,
+				startDate: self.periodStartDate,
+				cycle: self.cycle,
+				time: self.notificationTime,
+				ovulation: ovulation && self.ovulation,
+				oneDayBefore: oneDayBefore && self.oneDayBefore,
+				startOfPeriod: firstDay && self.startOfPeriod
+			)
 		}
+
 	}
 }

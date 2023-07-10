@@ -15,8 +15,6 @@ struct SettingsView: View {
 
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-	let notifications = Notifications()
-
 	@Binding var periodStartDate: Date
 	@Binding var cycle: Int
 	@Binding var period: Int
