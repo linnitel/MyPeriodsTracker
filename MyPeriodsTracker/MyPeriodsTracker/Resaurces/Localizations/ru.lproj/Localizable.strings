@@ -18,3 +18,15 @@
 "Send at" = "Отправлять в";
 "One day before period" = "За день до месячных";
 "Start of the period" = "Начало месячных";
+"Period start early" = "Месячные начались раньше";
+"%dll day of period" = "%dll день месячных";
+"End of period" = "Месячные закончатся";
+"Period didn't start" = "Месячные не начались";
+"%dll day of delay" = "%dll день задержки";
+"Period started" = "Месячные начались";
+"To see your next period date setup information about your cycle in settings" = "Что бы рассчитать дату ваших следующих месячных пожалуйста заполните данные о вашем цикле в настройках";
+"Open settings" = "Открыть настройки";
+"Allow notifications" = "Разрешить уведомления";
+"Go to settings" = "Перейти в настройки";
+"Cancel" = "Отменить";
+"To recieve notificatons please allow it in the iPhone settings" = "Что бы получать уведомления, пожалуйста разрешите приложению отправлять вам уведомления в настройках телефона";

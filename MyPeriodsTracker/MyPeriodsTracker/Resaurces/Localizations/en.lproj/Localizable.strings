@@ -8,6 +8,7 @@
 "Change of cycle" = "Change of cycle";
 "Don't recount" = "Don't recount";
 "Settings" = "Settings";
+"Recount cycle" = "Recount cycle";
 "Rate the app in AppStore" = "Rate the app in AppStore";
 "Notifications" = "Notifications";
 "One day before periods" = "One day before periods";
@@ -17,3 +18,15 @@
 "Send at" = "Send at";
 "One day before period" = "One day before period";
 "Start of the period" = "Start of the period";
+"Period start early" = "Period start early";
+"%dll day of period" = "%dll day of period";
+"End of period" = "End of period";
+"Period didn't start" = "Period didn't start";
+"%dll day of delay" = "%dll day of delay";
+"Period started" = "Period started";
+"To see your next period date setup information about your cycle in settings" = "To see your next period date setup information about your cycle in settings";
+"Open settings" = "Open settings";
+"Allow notifications" = "Allow notifications";
+"Go to settings" = "Go to settings";
+"Cancel" = "Cancel";
+"To recieve notificatons please allow it in the iPhone settings" = "To recieve notificatons please allow it in the iPhone settings";

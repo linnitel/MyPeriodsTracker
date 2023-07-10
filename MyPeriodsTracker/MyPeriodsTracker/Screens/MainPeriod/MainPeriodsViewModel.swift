@@ -20,7 +20,6 @@ class MainPeriodViewModel: ObservableObject {
 
 	@Published var model: MainPeriodModel {
 		didSet {
-			
 			if self.notificationsActive {
 				self.notifications.schaduleNotifications(
 					now: Date().midnight,
