@@ -71,15 +71,21 @@ class NotificationSettingsViewModel: ObservableObject {
 	}
 
 	func schaduleOvulationNotification() {
-		self.notifications.schaduleOvulationNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, ovulation: self.ovulation)
+		if self.notificationsActive {
+			self.notifications.schaduleOvulationNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, ovulation: self.ovulation)
+		}
 	}
 
 	func schaduleOneDayBeforeNotification() {
-		self.notifications.schaduleOneDayBeforeNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, oneDayBefore: self.oneDayBefore)
+		if self.notificationsActive {
+			self.notifications.schaduleOneDayBeforeNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, oneDayBefore: self.oneDayBefore)
+		}
 	}
 
 	func schadulePeriodFirstDayNotification() {
-		self.notifications.schadulePeriodFirstDayNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, startOfPeriod: self.startOfPeriod)
+		if self.notificationsActive {
+			self.notifications.schadulePeriodFirstDayNotification(now: Date().midnight, startDate: self.periodStartDate, cycle: self.cycle, time: self.notificationTime, startOfPeriod: self.startOfPeriod)
+		}
 	}
 
 	@objc
