@@ -12,16 +12,14 @@
 "Rate the app in AppStore" = "Donne-nous ton avis en AppStore";
 "Notifications" = "Notifications";
 "Cycle length" = "La durée du cycle";
-"Period length" = "la durée des règles";
+"Period length" = "La durée des règles";
 "Previous period start" = "Début du dernier règles";
 "Send at" = "Envoyer à";
 "One day before period" = "Un jour avant des règles";
 "Start of the period" = "Premier jour de la menstruation";
 "Period start early" = "Règles ont commencé plus tôt";
-"%dll day of period" = "%dll jour du règles";
 "End of period" = "Les règles seront terminées";
 "Period didn't start" = "Les règles n'ont pas commencé";
-"%dll day of delay" = "%dll jours de retard";
 "Period started" = "Règles ont commencé";
 "To see your next period date setup information about your cycle in settings" = "Pour voir les informations de configuration de la date de vos prochaines règles concernant votre cycle dans les réglages";
 "Open settings" = "Ouvrir les réglages";

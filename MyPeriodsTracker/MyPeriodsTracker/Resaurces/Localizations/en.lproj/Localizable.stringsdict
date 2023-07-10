@@ -2,6 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>%lld day of delay</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%lld day of delay</string>
+		</dict>
+	</dict>
+	<key>%lld day of period</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%lld day of period</string>
+		</dict>
+	</dict>
 	<key>%lld days until period</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -15,7 +43,7 @@
 			<key>one</key>
 			<string>1 day until period</string>
 			<key>other</key>
-			<string>%d days until period</string>
+			<string>%lld days until period</string>
 		</dict>
 	</dict>
 	<key>%lld days</key>
@@ -31,7 +59,7 @@
 			<key>one</key>
 			<string>1 day</string>
 			<key>other</key>
-			<string>%d days</string>
+			<string>%lld days</string>
 		</dict>
 	</dict>
 	<key>+%lld days</key>
@@ -70,7 +98,7 @@
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@days@</string>
-		<key>days</key>
+		<key>%lld days</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
@@ -81,7 +109,7 @@
 			<key>one</key>
 			<string>in 1 day</string>
 			<key>other</key>
-			<string>in %d days</string>
+			<string>in %lld days</string>
 		</dict>
 	</dict>
 </dict>

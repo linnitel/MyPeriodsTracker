@@ -2,6 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>%lld day of delay</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%lld день задержки</string>
+		</dict>
+	</dict>
+	<key>%lld day of period</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%lld день месячных</string>
+		</dict>
+	</dict>
 	<key>%lld days until period</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

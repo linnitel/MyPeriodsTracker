@@ -62,7 +62,7 @@ struct NotificationSettings: View {
 						}
 					}
 					Group {
-						NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime)
+						NotificationsTimeItem(text: "Send at", time: $viewModel.notificationTime, action: self.viewModel.schaduleNotifications)
 							.padding(.bottom, 40)
 						NotificationsToggleItem(text: "One day before period", value: self.$viewModel.oneDayBefore, action: self.viewModel.schaduleOneDayBeforeNotification)
 						NotificationsToggleItem(text: "Start of the period", value: self.$viewModel.startOfPeriod, action: self.viewModel.schadulePeriodFirstDayNotification)
@@ -127,6 +127,7 @@ struct NotificationsTimeItem: View {
 	@State var isShown: Bool = false
 
 	@Binding var time: Date
+	var action: (() -> Void)?
 
 	var body: some View {
 		VStack {
@@ -148,6 +149,9 @@ struct NotificationsTimeItem: View {
 			if isShown {
 				DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
 					.datePickerStyle(WheelDatePickerStyle())
+					.onReceive([self.time].publisher.first()) { (value) in
+						self.action?()
+					}
 			}
 		}
 	}
