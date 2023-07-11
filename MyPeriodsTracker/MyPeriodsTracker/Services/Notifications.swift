@@ -14,19 +14,20 @@ class Notifications: NSObject {
 	let calendar = Calendar.current
 	let dateCalculator = DateCalculatorService.shared
 
-	func notificationRequest() {
+	func notificationRequest(completion: @escaping (Bool, Error?) -> Void) {
 
 		let options: UNAuthorizationOptions = [.alert, .sound, .badge]
 
-		self.notificationCenter.requestAuthorization(options: options) { success, error in
-			if success {
-				print("All set!")
-			} else if let error = error {
-				print(error.localizedDescription)
-			} else {
-				print("User didn't allow notifications")
-			}
-		}
+		self.notificationCenter.requestAuthorization(options: options, completionHandler: completion)
+//		{ success, error in
+//			if success {
+//				print("All set!")
+//			} else if let error = error {
+//				print(error.localizedDescription)
+//			} else {
+//				print("User didn't allow notifications")
+//			}
+//		}
 	}
 
 	func scheduleOneDayBeforePeriodNotification(for date: Date, at time: Date) {

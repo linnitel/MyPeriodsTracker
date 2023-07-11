@@ -12,7 +12,9 @@ struct NotificationSettings: View {
 
 	@ObservedObject var viewModel: NotificationSettingsViewModel
 
-	@State private var showingAlert = false
+	@State private var showingAllowAlert = false
+	@State private var showingErrorAlert = false
+	@State private var showingNotAllowAlert = false
 
 	init(viewModel: NotificationSettingsViewModel) {
 		self.viewModel = viewModel
@@ -39,8 +41,17 @@ struct NotificationSettings: View {
 				Group {
 					NotificationsToggleItem(text: "Notifications", value: $viewModel.notificationsActive) {
 						guard self.viewModel.isNotFirstTime else {
-							self.viewModel.notifications.notificationRequest()
-							// TODO: make some actions based on whether user allows notifications or not
+							self.viewModel.notifications.notificationRequest() { (success, error) in
+								if success {
+									print("All set!")
+									self.viewModel.schaduleNotifications()
+								} else if let error = error {
+									print(error.localizedDescription)
+									self.showingErrorAlert = true
+								} else {
+									print("User didn't allow notifications")
+								}
+							}
 							self.viewModel.isNotFirstTime = true
 							return
 						}
@@ -52,7 +63,7 @@ struct NotificationSettings: View {
 
 						self.viewModel.getGlobalNotification() {
 							guard self.viewModel.globalNotificationsActive else {
-								self.showingAlert = true
+								self.showingAllowAlert = true
 
 								self.viewModel.notificationsActive = false
 								return
@@ -71,18 +82,36 @@ struct NotificationSettings: View {
 					.disabled(self.viewModel.notificationsActive == false)
 				}
 				.padding([.leading, .trailing], 24)
-				.alert("Allow notifications", isPresented: $showingAlert) {
+				.alert("Allow notifications", isPresented: $showingAllowAlert) {
 					Button("Go to settings") {
 						if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
 							UIApplication.shared.open(settingsURL)
 						}
-						
 					}
 					Button("Cancel") {
-						self.showingAlert = false
+						self.showingAllowAlert = false
 					}
 				} message: {
 					Text("To recieve notificatons please allow it in the iPhone settings")
+				}
+				.alert("Something went wrong", isPresented: $showingErrorAlert) {
+					Button("Ok") {
+						self.showingErrorAlert = false
+					}
+				} message: {
+					Text("Some error accured while processing this action please try again later")
+				}
+				.alert("Are you sure?", isPresented: $showingErrorAlert) {
+					Button("Go to settings") {
+						if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+							UIApplication.shared.open(settingsURL)
+						}
+					}
+					Button("Cancel") {
+						self.showingNotAllowAlert = false
+					}
+				} message: {
+					Text("You will not be able to recieve notifications about your next period")
 				}
 			}
 		}

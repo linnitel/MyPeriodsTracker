@@ -27,3 +27,9 @@
 "Go to settings" = "Aller aux réglages";
 "Cancel" = "Annuler";
 "To recieve notificatons please allow it in the iPhone settings" = "Pour recevoir des notifications, veuillez l'autoriser dans les réglages de l'iPhone";
+"Something went wrong" = "Quelque chose s'est mal";
+"Ok" = "D'accord";
+"Some error accured while processing this action please try again later"
+= "Une erreur s'est produite lors de l'exécution de votre demande, veuillez réessayer plus tard";
+"Are you sure?" = "Êtes-vous sûr?";
+"You will not be able to recieve notifications about your next period" = "Vous ne pourrez pas recevoir de notifications concernant vos prochaines règles";
