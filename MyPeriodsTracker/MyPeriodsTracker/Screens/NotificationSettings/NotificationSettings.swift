@@ -42,14 +42,21 @@ struct NotificationSettings: View {
 					NotificationsToggleItem(text: "Notifications", value: $viewModel.notificationsActive) {
 						guard self.viewModel.isNotFirstTime else {
 							self.viewModel.notifications.notificationRequest() { (success, error) in
-								if success {
-									print("All set!")
-									self.viewModel.schaduleNotifications()
-								} else if let error = error {
-									print(error.localizedDescription)
-									self.showingErrorAlert = true
-								} else {
-									print("User didn't allow notifications")
+								DispatchQueue.main.async {
+									if success {
+										print("All set!")
+										self.viewModel.oneDayBefore = true
+										self.viewModel.ovulation = true
+										self.viewModel.startOfPeriod = true
+										self.viewModel.schaduleNotifications()
+									} else if let error = error {
+										print(error.localizedDescription)
+										self.showingErrorAlert = true
+									} else {
+										print("User didn't allow notifications")
+										self.showingNotAllowAlert = true
+										self.viewModel.notificationsActive = false
+									}
 								}
 							}
 							self.viewModel.isNotFirstTime = true
@@ -101,7 +108,7 @@ struct NotificationSettings: View {
 				} message: {
 					Text("Some error accured while processing this action please try again later")
 				}
-				.alert("Are you sure?", isPresented: $showingErrorAlert) {
+				.alert("Are you sure?", isPresented: $showingNotAllowAlert) {
 					Button("Go to settings") {
 						if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
 							UIApplication.shared.open(settingsURL)
