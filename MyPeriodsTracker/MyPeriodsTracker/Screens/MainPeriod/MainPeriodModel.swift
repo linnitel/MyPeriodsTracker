@@ -24,7 +24,7 @@ struct MainPeriodModel {
 
 	func dayOfPeriod(from startDate: Date, now: Date) -> Int {
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: startDate).day ?? 0) + 1
+		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0)
 	}
 
 	func daysToPeriod(from now: Date) -> Int {
