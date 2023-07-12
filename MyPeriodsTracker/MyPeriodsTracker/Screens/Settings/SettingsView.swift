@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
 	let cycleArray = [21, 22, 23, 24, 25,
@@ -72,9 +73,13 @@ struct SettingsView: View {
 					.padding([.leading, .trailing], 24)
 					Spacer()
 					// TODO: add storekit items for donation
-//					LowerButton(text: "Rate the app in AppStore", action: {
+					LowerButton(text: "Rate the app in AppStore", action: {
 //						// TODO: add link to the appstore to rate the app
-//					})
+//						if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+//							SKStoreReviewController.requestReview(in: scene)
+//						}
+						self.requestReviewManually()
+					})
 				}
 			}
 			.modifier(BaseTextModifier())
@@ -84,6 +89,13 @@ struct SettingsView: View {
 			UserDefaults.standard.set(true, forKey: "NotFirstLaunch")
 		}
     }
+
+	func requestReviewManually() {
+		let url = "https://apps.apple.com/app/id6451150560?action=write-review"
+		guard let writeReviewURL = URL(string: url)
+		else { fatalError("Expected a valid URL") }
+		UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+	}
 }
 
 struct SettingsView_Previews: PreviewProvider {
@@ -165,14 +177,15 @@ struct NotificationsItem: View {
 	let period: Int
 
 	var body: some View {
-		HStack {
-			Text("Notifications")
-			Spacer()
-			NavigationLink(destination: NotificationSettings(viewModel: NotificationSettingsViewModel(
-				periodStartDate: self.periodStartDate,
-				cycle: self.cycle,
-				period: self.period
-			))) {
+		NavigationLink(destination: NotificationSettings(viewModel: NotificationSettingsViewModel(
+			periodStartDate: self.periodStartDate,
+			cycle: self.cycle,
+			period: self.period
+		))) {
+			HStack {
+				Text("Notifications")
+					.foregroundColor(.black)
+				Spacer()
 				Image(systemName: "chevron.right")
 					.foregroundColor(Color(UIColor(named: "secondButtonText") ?? .gray))
 			}

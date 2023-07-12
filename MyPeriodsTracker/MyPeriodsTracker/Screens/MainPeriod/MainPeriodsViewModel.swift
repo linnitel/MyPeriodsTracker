@@ -42,7 +42,7 @@ class MainPeriodViewModel: ObservableObject {
 		var cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
 		var periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
 
-		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .offPeriod
+		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
 
 
 		let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
@@ -103,6 +103,13 @@ class MainPeriodViewModel: ObservableObject {
 	func dayDidChange() {
 		DispatchQueue.main.async {
 			self.todayDate = Date().midnight
+			self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+				periodStartDate: self.model.periodStartDate,
+				periods: self.model.periodLength,
+				cycle: self.model.cycleLength,
+				partOfCycle: self.partOfCycle,
+				now: self.todayDate
+			)
 		}
 	}
 }
