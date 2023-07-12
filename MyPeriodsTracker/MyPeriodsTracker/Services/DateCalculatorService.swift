@@ -29,6 +29,9 @@ class DateCalculatorService {
 
 	func updateLastPeriodStartDate(_ startDate: Date, cycleLength: Int, now: Date) -> Date {
 		var nextDate = startDate
+
+		guard cycleLength != 0 else { return nextDate }
+
 		if nextDate > now {
 			return nextDate
 		}

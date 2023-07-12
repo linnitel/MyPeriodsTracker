@@ -252,7 +252,8 @@ struct OvulationView: View {
 			HStack {
 				Text("Ovulation")
 				Spacer()
-				Text("in \(value) days")
+				let localizedText = String(format: NSLocalizedString("in %lld days", comment: ""), value)
+				Text(LocalizedStringKey(localizedText))
 			}
 			.padding([.top, .bottom], 16)
 			DividerLineView()

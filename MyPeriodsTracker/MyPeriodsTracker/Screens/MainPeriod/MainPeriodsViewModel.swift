@@ -51,8 +51,12 @@ class MainPeriodViewModel: ObservableObject {
 			partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle, now: Date().midnight)
 		} else {
 			periodLength = 5
+			UserDefaults.standard.set(periodLength, forKey: "PeriodLength")
 			cycleLength = 28
+			UserDefaults.standard.set(cycleLength, forKey: "CycleLength")
 			periodStartDate = Date().midnight
+			UserDefaults.standard.set(periodStartDate.timeIntervalSince1970, forKey: "PeriodStartDate")
+
 		}
 
 		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength)
