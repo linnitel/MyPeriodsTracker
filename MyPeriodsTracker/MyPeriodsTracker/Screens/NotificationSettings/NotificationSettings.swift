@@ -44,16 +44,16 @@ struct NotificationSettings: View {
 							self.viewModel.notifications.notificationRequest() { (success, error) in
 								DispatchQueue.main.async {
 									if success {
-										print("All set!")
+										self.viewModel.logger.log("The notifications for the app are allowed on the iPhone settings")
 										self.viewModel.oneDayBefore = true
 										self.viewModel.ovulation = true
 										self.viewModel.startOfPeriod = true
 										self.viewModel.schaduleNotifications()
 									} else if let error = error {
-										print(error.localizedDescription)
+										self.viewModel.logger.error("Error. The notifications for the app allowence met a problem: \(error.localizedDescription)")
 										self.showingErrorAlert = true
 									} else {
-										print("User didn't allow notifications")
+										self.viewModel.logger.log("User didn't allow notifications")
 										self.showingNotAllowAlert = true
 										self.viewModel.notificationsActive = false
 									}
@@ -65,6 +65,7 @@ struct NotificationSettings: View {
 
 						guard self.viewModel.notificationsActive else {
 							self.viewModel.notifications.cancelAllNotifications()
+							self.viewModel.logger.log("Notifications were disabled localy in the app")
 							return
 						}
 

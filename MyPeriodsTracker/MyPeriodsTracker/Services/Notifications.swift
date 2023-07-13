@@ -8,26 +8,19 @@
 import Foundation
 import UserNotifications
 import SwiftUI
+import os
 
 class Notifications: NSObject {
 	let notificationCenter = UNUserNotificationCenter.current()
 	let calendar = Calendar.current
 	let dateCalculator = DateCalculatorService.shared
+	let logger = Logger (subsystem: "Reddy", category: "NotificationsService")
 
 	func notificationRequest(completion: @escaping (Bool, Error?) -> Void) {
 
 		let options: UNAuthorizationOptions = [.alert, .sound, .badge]
 
 		self.notificationCenter.requestAuthorization(options: options, completionHandler: completion)
-//		{ success, error in
-//			if success {
-//				print("All set!")
-//			} else if let error = error {
-//				print(error.localizedDescription)
-//			} else {
-//				print("User didn't allow notifications")
-//			}
-//		}
 	}
 
 	func scheduleOneDayBeforePeriodNotification(for date: Date, at time: Date) {
@@ -64,8 +57,10 @@ class Notifications: NSObject {
 		if ovulation {
 			let date = self.dateCalculator.getOvulationDate(now: Date().midnight, startDate: startDate, cycle: cycle)
 			self.scheduleOvulationDayNotification(for: date, at: time)
+			self.logger.log("Ovulation notification was schaduled")
 		} else {
 			self.cancelNotification(with: "LocalOneDayBeforePeriodNotification")
+			self.logger.log("Ovulation notification was canceled")
 		}
 	}
 
@@ -73,8 +68,10 @@ class Notifications: NSObject {
 		if oneDayBefore {
 			let date = self.dateCalculator.calculateOneDayBeforePeriod(now: now, date: startDate, cycle: cycle)
 			self.scheduleOneDayBeforePeriodNotification(for: date, at: time)
+			self.logger.log("First Period day notification was schaduled")
 		} else {
 			self.cancelNotification(with: "LocalFirstPeriodDayNotification")
+			self.logger.log("First Period day notification was canceled")
 		}
 	}
 
@@ -82,13 +79,14 @@ class Notifications: NSObject {
 		if startOfPeriod {
 			let date = self.dateCalculator.nextPeriodStartDate(now: now, date: startDate, cycle: cycle)
 			self.scheduleFirstPeriodDayNotification(for: date, at: time)
+			self.logger.log("Start of Period notification was schaduled")
 		} else {
 			self.cancelNotification(with: "LocalOvulationNotification")
+			self.logger.log("Start of Period notification was canceled")
 		}
 	}
 
 	func schaduleNotifications(now: Date, startDate: Date, cycle: Int, time: Date, ovulation: Bool, oneDayBefore: Bool, startOfPeriod: Bool) {
-		print("\(ovulation),  \(oneDayBefore), \(startOfPeriod)")
 		self.schaduleOneDayBeforeNotification(now: now, startDate: startDate, cycle: cycle, time: time, oneDayBefore: oneDayBefore)
 		self.schadulePeriodFirstDayNotification(now: now, startDate: startDate, cycle: cycle, time: time, startOfPeriod: startOfPeriod)
 		self.schaduleOvulationNotification(now: now, startDate: startDate, cycle: cycle, time: time, ovulation: ovulation)
@@ -109,7 +107,7 @@ class Notifications: NSObject {
 
 		self.notificationCenter.add(request) { (error) in
 			if let error = error {
-				print("Error \(error.localizedDescription)")
+				self.logger.error("Error \(error.localizedDescription)")
 			}
 		}
 	}

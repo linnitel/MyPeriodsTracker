@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import os
 
 class MainPeriodViewModel: ObservableObject {
+
+	let logger = Logger (subsystem: "Reddy", category: "mainScreen")
 
 	@AppStorage("NotificationsActive") var notificationsActive: Bool = false
 	@AppStorage("NotificationsTime") var notificationTime: Double = 0.0
@@ -56,11 +59,10 @@ class MainPeriodViewModel: ObservableObject {
 			UserDefaults.standard.set(cycleLength, forKey: "CycleLength")
 			periodStartDate = Date().midnight
 			UserDefaults.standard.set(periodStartDate.timeIntervalSince1970, forKey: "PeriodStartDate")
-
 		}
 
+		self.logger.log("Main period view model initialized with: \nPeriod Start Date: \(periodStartDate), \nPeriod Length: \(periodLength), \nCycle length: \(cycleLength), \nPart of cycle: \(partOfCycle.stringValue)")
 		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength)
-
 		self.partOfCycle = partOfCycle
 		self.model = model
 
@@ -105,15 +107,21 @@ class MainPeriodViewModel: ObservableObject {
 
 	@objc
 	func dayDidChange() {
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
+			self.logger.log("Day did change")
 			self.todayDate = Date().midnight
-			self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
-				periodStartDate: self.model.periodStartDate,
-				periods: self.model.periodLength,
-				cycle: self.model.cycleLength,
-				partOfCycle: self.partOfCycle,
-				now: self.todayDate
-			)
+			let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
+			if notFirstLaunch {
+				self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+					periodStartDate: self.model.periodStartDate,
+					periods: self.model.periodLength,
+					cycle: self.model.cycleLength,
+					partOfCycle: self.partOfCycle,
+					now: self.todayDate
+				)
+				self.logger.log(level: .default, "Part of cycle updated to: \(self.partOfCycle.stringValue)")
+			}
 		}
 	}
 }

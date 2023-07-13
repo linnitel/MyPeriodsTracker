@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BackgroundTasks
+import os
 
 struct MainPeriodsView: View {
 	@StateObject var viewModel: MainPeriodViewModel
@@ -95,6 +96,7 @@ struct OffPeriodView: View {
 					UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
 					self.viewModel.model.periodStartDate = Date().midnight
 					self.partOfCycle = .period
+					self.viewModel.logger.log("The button \"Period start early\" was pushed")
 				})
 				Spacer()
 			}
@@ -120,6 +122,7 @@ struct PeriodView: View {
 			Spacer()
 			UpperButton(text: "Period didn't start", action: {
 				self.partOfCycle = .delay
+				self.viewModel.logger.log("The button \"Period didn't start\" was pushed")
 			})
 			Spacer()
 		}
@@ -146,6 +149,7 @@ struct DelayView: View {
 				UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
 				self.viewModel.model.periodStartDate = Date().midnight
 				self.partOfCycle = .period
+				self.viewModel.logger.log("The button \"Period started\" was pushed")
 			})
 			Spacer()
 		}

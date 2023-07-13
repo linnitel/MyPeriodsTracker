@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import os
 
 class NotificationSettingsViewModel: ObservableObject {
 
 	var notifications = Notifications()
 	let dateCalculator = DateCalculatorService.shared
+	let logger = Logger (subsystem: "Reddy", category: "NotificationsView")
 
 	let periodStartDate: Date
 	let cycle: Int
@@ -43,13 +45,18 @@ class NotificationSettingsViewModel: ObservableObject {
 			self.notificationTime = Calendar.current.date(from: components)!
 			UserDefaults.standard.set(self.notificationTime.timeIntervalSince1970, forKey: "NotificationsTime")
 			UserDefaults.standard.set(true, forKey: "NotificationTimeDidSet")
+			self.logger.log("The defalt value of notification time was set up")
 		}
+
+		self.logger.log("Notifications were initialized with: \nPeriod start date: \(periodStartDate),\nCycle length: \(cycle),\nPeriod: \(period)")
+		self.logger.log("Notifications are active = \(self.notificationsActive)")
 
 		NotificationCenter.default.addObserver(self, selector: #selector(dayDidChange), name: .NSCalendarDayChanged, object: nil)
 	}
 
 	func getGlobalNotification(completion: (() -> Void)?) {
 		UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+			self.logger.log("Global notifications were requested, settings status is \(settings.authorizationStatus.rawValue)")
 			DispatchQueue.main.async {
 				switch settings.authorizationStatus {
 					case .notDetermined, .denied, .provisional, .ephemeral:
@@ -96,7 +103,7 @@ class NotificationSettingsViewModel: ObservableObject {
 		var	firstDay = true
 
 		center.getPendingNotificationRequests { (notifications) in
-			print("Count: \(notifications.count)")
+			self.logger.log("Active notifications Count: \(notifications.count)")
 			for item in notifications {
 				if item.identifier == "LocalOneDayBeforePeriodNotification" {
 					oneDayBefore = false
@@ -115,6 +122,7 @@ class NotificationSettingsViewModel: ObservableObject {
 				oneDayBefore: oneDayBefore && self.oneDayBefore,
 				startOfPeriod: firstDay && self.startOfPeriod
 			)
+			self.logger.log("Notifications were reschaduled for future cycle")
 		}
 
 	}

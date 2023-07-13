@@ -7,28 +7,47 @@
 
 import Foundation
 import SwiftUI
+import os
 
 struct MainPeriodModel {
 	let ovulationDays: Int = 14
 	let ovulationPeriod: Int = 4
 	let calendar = Calendar.current
 
+	let logger = Logger (subsystem: "Reddy", category: "mainScreenModel")
+
 	var periodStartDate: Date
 	var periodLength: Int
 	var cycleLength: Int
 
 	func endOfPeriodDate(now: Date) -> Date {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+			self.periodStartDate,
+			cycleLength: self.cycleLength,
+			now: now
+		)
 		return calendar.date(byAdding: .day, value: self.periodLength, to: lastPeriodStartDate)!
 	}
 
 	func dayOfPeriod(from startDate: Date, now: Date) -> Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+			self.periodStartDate,
+			cycleLength: self.cycleLength,
+			now: now
+		)
+		let days = calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0
+		if days < 0 || days > 7 {
+			logger.error("Something wrong! The cycle length is calculated badly: \(days). From \(lastPeriodStartDate) to: \(now)")
+		}
+		return days
 	}
 
 	func daysToPeriod(from now: Date) -> Int {
-		calendar.dateComponents([.day], from: now, to: DateCalculatorService.shared.nextPeriodStartDate(now: now, date: self.periodStartDate, cycle: self.cycleLength)).day ?? 0
+		let days = calendar.dateComponents([.day], from: now, to: DateCalculatorService.shared.nextPeriodStartDate(now: now, date: self.periodStartDate, cycle: self.cycleLength)).day ?? 0
+		if days < 0 || days > 35 {
+			logger.error("Something wrong! The cycle length is calculated badly: \(days). From \(periodStartDate) to: \(now) with \(cycleLength)")
+		}
+		return days
 	}
 
 	func getOvulation(_ now: Date) -> Int {
@@ -63,6 +82,19 @@ struct MainPeriodModel {
 		case offPeriod = 1
 		case period = 2
 		case delay = 3
+
+		var stringValue: String {
+			switch self {
+				case .notSet:
+					return "Not set"
+				case .delay:
+					return "Delay"
+				case .offPeriod:
+					return "Off period"
+				case .period:
+					return "Period"
+			}
+		}
 	}
 
 	enum FertilityLevel: String {

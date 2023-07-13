@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import os
 
 class DateCalculatorService {
 
 	static let shared = DateCalculatorService()
 
 	let calendar = Calendar.current
+	let logger = Logger (subsystem: "Reddy", category: "DateCalculationService")
 
 	private init() {}
 
@@ -67,7 +69,11 @@ class DateCalculatorService {
 
 	func delay(periodStartDate: Date, cycleLength: Int, now: Date) -> Int {
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength, now: now)
-		return (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
+		let delay = (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
+		if delay < 0 || delay > 15 {
+			self.logger.error("Error! The delay = \(delay), incoming data: period start date: \(lastPeriodStartDate), cycle: \(cycleLength), now: \(now)")
+		}
+		return delay
 	}
 
 	func getOvulationDate(now: Date, startDate: Date, cycle: Int) -> Date {
