@@ -20,3 +20,17 @@ struct BaseTextModifier: ViewModifier {
 			.font(.custom("SFProText-Regular", size: 15))
 	}
 }
+
+struct HeartTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Regular", size: 21))
+	}
+}
+
+struct BoldTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Bold", size: 15))
+	}
+}

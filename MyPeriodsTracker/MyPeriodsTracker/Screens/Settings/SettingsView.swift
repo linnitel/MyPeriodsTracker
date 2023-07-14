@@ -68,7 +68,8 @@ struct SettingsView: View {
 					}
 					.padding([.leading, .trailing], 24)
 					Spacer()
-					// TODO: add storekit items for donation
+					DonnationView()
+						.padding([.leading, .trailing], 20)
 					LowerButton(text: "Rate the app in AppStore", action: {
 //						if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
 //							SKStoreReviewController.requestReview(in: scene)
@@ -189,3 +190,30 @@ struct NotificationsItem: View {
 	}
 }
 
+struct DonnationView: View {
+	var body: some View {
+		ZStack(alignment: .topLeading) {
+			Button(action: {}) {
+				ButtonBackgroundView {
+					HStack(alignment: .top) {
+						Image(systemName: "heart")
+							.foregroundColor(.accentColor)
+							.frame(width: 24, height: 24)
+							.modifier(HeartTextModifier())
+						VStack(alignment: .leading) {
+							Text("Donate to developer")
+								.foregroundColor(.accentColor)
+								.modifier(BoldTextModifier())
+							Text("Thanks to your support, I will be able to create more free simple and useful applications. Thank you!")
+								.multilineTextAlignment(.leading)
+								.foregroundColor(.black)
+						}
+					}
+					.padding([.leading, .trailing], 16)
+					.padding([.bottom, .top, .trailing])
+				}
+				.frame(height: 128)
+			}
+		}
+	}
+}

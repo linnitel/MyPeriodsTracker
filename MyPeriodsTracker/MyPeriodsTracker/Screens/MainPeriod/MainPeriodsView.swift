@@ -153,7 +153,10 @@ struct NotSetView: View {
 				.padding([.top], 16)
 			Spacer()
 			NavigationLink(destination: SettingsView(viewModel: self.viewModel)) {
-				ButtonBackgroundView(text: "Open settings")
+				ButtonBackgroundView {
+					Text(LocalizedStringKey("Open settings"))
+				}
+				.frame(height: 56)
 			}
 			Spacer()
 		}
@@ -259,41 +262,16 @@ struct FertilityView: View {
 	}
 }
 
-struct ButtonBackgroundView: View {
-	let text: String
-
-	var body: some View {
-		ZStack {
-			RoundedRectangle(cornerRadius: 16)
-				.foregroundColor(.white)
-				.frame(height: 56)
-				.padding([.top, .leading], -2)
-				.shadow(color: Color(UIColor(named: "buttonShadow") ?? .gray),radius: 16, x: 8, y: 16)
-				.shadow(color: .white,radius: 16, x: -8, y: -16)
-			RoundedRectangle(cornerRadius: 16)
-				.fill(
-					LinearGradient(gradient: Gradient(
-						colors: [
-							Color(UIColor(named: "buttonBottom") ?? .white),
-							Color(UIColor(named: "buttonTop") ?? .gray)
-						]),
-								   startPoint: .top,
-								   endPoint: .bottom
-					)
-				)
-				.frame(height: 56)
-			Text(LocalizedStringKey(self.text))
-		}
-	}
-}
-
 struct UpperButton: View {
 	let text: String
 	let action: () -> Void
 
 	var body: some View {
 		Button(action: self.action) {
-			ButtonBackgroundView(text: text)
+			ButtonBackgroundView {
+				Text(LocalizedStringKey(self.text))
+			}
+			.frame(height: 56)
 		}
 	}
 }

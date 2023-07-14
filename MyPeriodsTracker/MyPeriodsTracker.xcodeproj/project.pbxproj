@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A2533D12A53043C00CDDE72 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2533D02A53043C00CDDE72 /* Notifications.swift */; };
+		4A2533D52A61909900CDDE72 /* ButtonBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */; };
+		4A2533D72A61953B00CDDE72 /* SFPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2533D62A61953B00CDDE72 /* SFPro-Bold.otf */; };
 		4A294E192A4B2886006CF524 /* DateCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E182A4B2886006CF524 /* DateCalculatorService.swift */; };
 		4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */; };
 		4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F39B2A41C10D00C51F82 /* SettingsView.swift */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		4A2533D02A53043C00CDDE72 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBackgroundView.swift; sourceTree = "<group>"; };
+		4A2533D62A61953B00CDDE72 /* SFPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFPro-Bold.otf"; sourceTree = "<group>"; };
 		4A294E182A4B2886006CF524 /* DateCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatorService.swift; sourceTree = "<group>"; };
 		4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extention.swift"; sourceTree = "<group>"; };
 		4A59F39B2A41C10D00C51F82 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			children = (
 				4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */,
 				4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */,
+				4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */,
 			);
 			path = GeneralViews;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 		4AFECFC72A338B01004880A9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4A2533D62A61953B00CDDE72 /* SFPro-Bold.otf */,
 				4AFECFC82A338B12004880A9 /* SFPro-Regular.otf */,
 				4AFECFC92A338B12004880A9 /* SFPro-Ultralight.otf */,
 			);
@@ -279,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AFECFAF2A3365D8004880A9 /* Preview Assets.xcassets in Resources */,
+				4A2533D72A61953B00CDDE72 /* SFPro-Bold.otf in Resources */,
 				4AFECFC22A33846C004880A9 /* Localizable.strings in Resources */,
 				4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */,
 				4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */,
@@ -310,6 +317,7 @@
 				4A2533D12A53043C00CDDE72 /* Notifications.swift in Sources */,
 				4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */,
 				4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */,
+				4A2533D52A61909900CDDE72 /* ButtonBackgroundView.swift in Sources */,
 				4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

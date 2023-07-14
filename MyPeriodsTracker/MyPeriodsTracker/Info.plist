@@ -12,6 +12,7 @@
 	<array>
 		<string>SFPro-Regular.otf</string>
 		<string>SFPro-Ultralight.otf</string>
+		<string>SFPro-Bold.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
