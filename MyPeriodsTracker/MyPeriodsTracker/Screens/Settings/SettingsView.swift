@@ -16,10 +16,7 @@ struct SettingsView: View {
 
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-	@Binding var periodStartDate: Date
-	@Binding var cycle: Int
-	@Binding var period: Int
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+	@StateObject var viewModel: MainPeriodViewModel
 
 	@State private var cycleIsShown = false
 	@State private var periodIsShown = false
@@ -33,14 +30,13 @@ struct SettingsView: View {
 					ZStack(alignment: .center) {
 						HStack(alignment: .center) {
 							Button(action: {
-								self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
-									periodStartDate: self.periodStartDate,
-									periods: self.period,
-									cycle: self.cycle,
-									partOfCycle: self.partOfCycle,
-									now: Date().midnight
+								self.viewModel.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+									periodStartDate: self.viewModel.model.periodStartDate,
+									periods: self.viewModel.model.periodLength,
+									cycle: self.viewModel.model.cycleLength,
+									partOfCycle: self.viewModel.partOfCycle,
+									now: self.viewModel.todayDate
 								)
-								// TODO: One source of truth for today date?
 								self.presentationMode.wrappedValue.dismiss()
 							}) {
 								Image(systemName: "arrow.left")
@@ -53,28 +49,27 @@ struct SettingsView: View {
 					}
 					.padding(.bottom, 16)
 					Group {
-						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: $cycle, key: "CycleLength") {
+						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: self.$viewModel.model.cycleLength, key: "CycleLength") {
 							self.cycleIsShown.toggle()
 							self.periodIsShown = false
 							self.startDateIsShown = false
 						}
-						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: $period, key: "PeriodLength") {
+						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: self.$viewModel.model.periodLength, key: "PeriodLength") {
 							self.periodIsShown.toggle()
 							self.cycleIsShown = false
 							self.startDateIsShown = false
 						}
-						LastDateItemView(date: self.$periodStartDate, isShown: $startDateIsShown) {
+						LastDateItemView(date: self.$viewModel.model.periodStartDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
 							self.periodIsShown = false
 							self.cycleIsShown = false
 						}
-						NotificationsItem(periodStartDate: self.periodStartDate, cycle: self.cycle, period: self.period)
+						NotificationsItem(periodStartDate: self.viewModel.model.periodStartDate, cycle: self.viewModel.model.cycleLength, period: self.viewModel.model.periodLength)
 					}
 					.padding([.leading, .trailing], 24)
 					Spacer()
 					// TODO: add storekit items for donation
 					LowerButton(text: "Rate the app in AppStore", action: {
-//						// TODO: add link to the appstore to rate the app
 //						if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
 //							SKStoreReviewController.requestReview(in: scene)
 //						}
@@ -100,7 +95,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-		SettingsView(periodStartDate: .constant(Date().midnight), cycle: .constant(30), period: .constant(5), partOfCycle: .constant(.delay))
+		SettingsView(viewModel: MainPeriodViewModel())
     }
 }
 

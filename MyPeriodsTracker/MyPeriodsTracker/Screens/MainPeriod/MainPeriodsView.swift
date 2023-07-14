@@ -17,13 +17,7 @@ struct MainPeriodsView: View {
 			ZStack(alignment: .top) {
 				BackgroundView()
 				VStack {
-					HeaderView(
-						todayDate: self.viewModel.todayDate,
-						startDate: $viewModel.model.periodStartDate,
-						cycle: $viewModel.model.cycleLength,
-						period: self.$viewModel.model.periodLength,
-						partOfCycle: self.$viewModel.partOfCycle
-					)
+					HeaderView(viewModel: self.viewModel)
 					switch self.viewModel.partOfCycle {
 						case .offPeriod:
 							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
@@ -32,13 +26,7 @@ struct MainPeriodsView: View {
 						case .delay:
 							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
 						case .notSet:
-							NotSetView(
-								viewModel: self.viewModel,
-								partOfCycle: self.$viewModel.partOfCycle,
-								startDate: self.$viewModel.model.periodStartDate,
-								cycle: self.$viewModel.model.cycleLength,
-								period: self.$viewModel.model.periodLength
-							)
+							NotSetView(viewModel: self.viewModel)
 					}
 				}
 				.padding([.leading, .trailing], 20)
@@ -55,18 +43,14 @@ struct MainPeriodsView_Previews: PreviewProvider {
 }
 
 struct HeaderView: View {
-	let todayDate: Date
-	@Binding var startDate: Date
-	@Binding var cycle: Int
-	@Binding var period: Int
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
+	@StateObject var viewModel: MainPeriodViewModel
 
 	var body: some View {
 		ZStack {
-			Text(DateToStringService.shared.dateMonthAndWeekString(from: todayDate))
+			Text(DateToStringService.shared.dateMonthAndWeekString(from: self.viewModel.todayDate))
 			HStack {
 				Spacer()
-				NavigationLink(destination: SettingsView(periodStartDate: $startDate, cycle: $cycle, period: $period, partOfCycle: $partOfCycle)) {
+				NavigationLink(destination: SettingsView(viewModel: self.viewModel)) {
 					Image("settings")
 						.frame(width: 40, height: 40)
 				}
@@ -157,11 +141,7 @@ struct DelayView: View {
 }
 
 struct NotSetView: View {
-	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
-	@Binding var startDate: Date
-	@Binding var cycle: Int
-	@Binding var period: Int
+	@StateObject var viewModel: MainPeriodViewModel
 
 	var body: some View {
 		VStack {
@@ -172,12 +152,7 @@ struct NotSetView: View {
 				.padding([.leading, .trailing], 40)
 				.padding([.top], 16)
 			Spacer()
-			NavigationLink(destination: SettingsView(
-				periodStartDate: $startDate,
-				cycle: $cycle,
-				period: $period,
-				partOfCycle: $partOfCycle
-			)) {
+			NavigationLink(destination: SettingsView(viewModel: self.viewModel)) {
 				ButtonBackgroundView(text: "Open settings")
 			}
 			Spacer()

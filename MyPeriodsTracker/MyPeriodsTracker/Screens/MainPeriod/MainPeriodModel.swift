@@ -35,8 +35,8 @@ struct MainPeriodModel {
 			cycleLength: self.cycleLength,
 			now: now
 		)
-		let days = calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0
-		if days < 0 || days > 7 {
+		let days = (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
+		if days < 1 || days > 8 {
 			logger.error("Something wrong! The cycle length is calculated badly: \(days). From \(lastPeriodStartDate) to: \(now)")
 		}
 		return days
