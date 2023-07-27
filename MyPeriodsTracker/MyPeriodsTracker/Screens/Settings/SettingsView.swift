@@ -27,25 +27,15 @@ struct SettingsView: View {
 			ZStack(alignment: .top) {
 				BackgroundView()
 				VStack {
-					ZStack(alignment: .center) {
-						HStack(alignment: .center) {
-							Button(action: {
-								self.viewModel.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
-									periodStartDate: self.viewModel.model.periodStartDate,
-									periods: self.viewModel.model.periodLength,
-									cycle: self.viewModel.model.cycleLength,
-									partOfCycle: self.viewModel.partOfCycle,
-									now: self.viewModel.todayDate
-								)
-								self.presentationMode.wrappedValue.dismiss()
-							}) {
-								Image(systemName: "arrow.left")
-									.padding()
-									.foregroundColor(.black)
-							}
-							Spacer()
-						}
-						Text("Settings")
+					NavigationHeaderView(title: "Settings") {
+						self.viewModel.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+							periodStartDate: self.viewModel.model.pastPeriodStartDate,
+							periods: self.viewModel.model.periodLength,
+							cycle: self.viewModel.model.cycleLength,
+							partOfCycle: self.viewModel.partOfCycle,
+							now: self.viewModel.todayDate
+						)
+						self.presentationMode.wrappedValue.dismiss()
 					}
 					.padding(.bottom, 16)
 					Group {
@@ -59,17 +49,17 @@ struct SettingsView: View {
 							self.cycleIsShown = false
 							self.startDateIsShown = false
 						}
-						LastDateItemView(date: self.$viewModel.model.periodStartDate, isShown: $startDateIsShown) {
+						LastDateItemView(date: self.$viewModel.model.pastPeriodStartDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
 							self.periodIsShown = false
 							self.cycleIsShown = false
 						}
-						NotificationsItem(periodStartDate: self.viewModel.model.periodStartDate, cycle: self.viewModel.model.cycleLength, period: self.viewModel.model.periodLength)
+						NotificationsItem(periodStartDate: self.viewModel.model.pastPeriodStartDate, cycle: self.viewModel.model.cycleLength, period: self.viewModel.model.periodLength)
 					}
 					.padding([.leading, .trailing], 24)
 					Spacer()
-					DonnationView()
-						.padding([.leading, .trailing], 20)
+//					DonnationView()
+//						.padding([.leading, .trailing], 20)
 					LowerButton(text: "Rate the app in AppStore", action: {
 //						if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
 //							SKStoreReviewController.requestReview(in: scene)
@@ -158,7 +148,7 @@ struct LastDateItemView: View {
 				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().midnight.timeIntervalSince1970 - 7889229)...Date().midnight, displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 					.onReceive([self.date].publisher.first()) { (value) in
-						UserDefaults.standard.set(self.date.timeIntervalSince1970, forKey: "PeriodStartDate")
+						UserDefaults.standard.set(self.date.midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
 					}
 			}
 			DividerLineView()
@@ -193,7 +183,7 @@ struct NotificationsItem: View {
 struct DonnationView: View {
 	var body: some View {
 		ZStack(alignment: .topLeading) {
-			Button(action: {}) {
+			NavigationLink(destination: DonationView(viewModel: DonationViewModel())) {
 				ButtonBackgroundView {
 					HStack(alignment: .top) {
 						Image(systemName: "heart")

@@ -26,8 +26,9 @@ class MainPeriodViewModel: ObservableObject {
 			if self.notificationsActive {
 				self.notifications.schaduleNotifications(
 					now: Date().midnight,
-					startDate: self.model.periodStartDate,
+					startDate: self.model.pastPeriodStartDate,
 					cycle: self.model.cycleLength,
+					period: self.model.periodLength,
 					time: Date(timeIntervalSince1970: self.notificationTime),
 					ovulation: self.ovulationNotif,
 					oneDayBefore: self.oneDayBefore,
@@ -62,7 +63,8 @@ class MainPeriodViewModel: ObservableObject {
 		}
 
 		self.logger.log("Main period view model initialized with: \nPeriod Start Date: \(periodStartDate), \nPeriod Length: \(periodLength), \nCycle length: \(cycleLength), \nPart of cycle: \(partOfCycle.stringValue)")
-		let model = MainPeriodModel(periodStartDate: periodStartDate, periodLength: periodLength, cycleLength: cycleLength)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength, periodLength: periodLength, now: Date().midnight)
+		let model = MainPeriodModel(pastPeriodStartDate: periodStartDate, lastPeriodStartDate: lastPeriodStartDate, periodLength: periodLength, cycleLength: cycleLength)
 		self.partOfCycle = partOfCycle
 		self.model = model
 
@@ -82,7 +84,7 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func nextPeriodDate() -> String {
-		DateToStringService.shared.dateAndWeekString(from: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.periodStartDate, cycle: self.model.cycleLength))
+		DateToStringService.shared.dateAndWeekString(from: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.pastPeriodStartDate, cycle: self.model.cycleLength, period: self.model.periodLength))
 	}
 
 	func endOfPeriodDate() -> String {
@@ -90,15 +92,15 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func dayOfPeriod() -> Int {
-		self.model.dayOfPeriod(from: self.model.periodStartDate, now: self.todayDate)
+		self.model.dayOfPeriod(from: self.model.pastPeriodStartDate, now: self.todayDate)
 	}
 
 	func delay() -> Int {
-		DateCalculatorService.shared.delay(periodStartDate: self.model.periodStartDate, cycleLength: self.model.cycleLength, now: self.todayDate)
+		DateCalculatorService.shared.delay(periodStartDate: self.model.pastPeriodStartDate, cycleLength: self.model.cycleLength, period: self.model.periodLength, now: self.todayDate)
 	}
 
 	func showOffPeriodButton() -> Bool {
-		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.periodStartDate, cycle: self.model.cycleLength))!
+		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.pastPeriodStartDate, cycle: self.model.cycleLength, period: self.model.periodLength))!
 		if todayDate < showEarlyStartButtonDay {
 			return false
 		}
@@ -114,7 +116,7 @@ class MainPeriodViewModel: ObservableObject {
 			let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
 			if notFirstLaunch {
 				self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
-					periodStartDate: self.model.periodStartDate,
+					periodStartDate: self.model.pastPeriodStartDate,
 					periods: self.model.periodLength,
 					cycle: self.model.cycleLength,
 					partOfCycle: self.partOfCycle,

@@ -13,6 +13,8 @@ class DateToStringService {
 
 	private init() {}
 
+	// TODO: convert to date extentions
+
 	func dateMonthAndWeekString(from date: Date) -> String {
 		let formatter = DateFormatter(dateFormat: "d MMMM, E", calendar: Calendar.current)
 		return formatter.string(from: date)

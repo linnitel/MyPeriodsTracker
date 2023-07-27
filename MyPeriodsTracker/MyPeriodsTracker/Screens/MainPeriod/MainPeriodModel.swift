@@ -16,23 +16,42 @@ struct MainPeriodModel {
 
 	let logger = Logger (subsystem: "Reddy", category: "mainScreenModel")
 
-	var periodStartDate: Date
+	var pastPeriodStartDate: Date {
+		didSet {
+			let pastPeiodStartDateMidnight = pastPeriodStartDate.midnight
+			lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(pastPeiodStartDateMidnight, cycleLength: cycleLength, periodLength: periodLength, now: Date().midnight)
+		}
+	}
+	var lastPeriodStartDate: Date?
 	var periodLength: Int
 	var cycleLength: Int
 
 	func endOfPeriodDate(now: Date) -> Date {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
-			self.periodStartDate,
-			cycleLength: self.cycleLength,
-			now: now
-		)
-		return calendar.date(byAdding: .day, value: self.periodLength, to: lastPeriodStartDate)!
+//		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+//			self.pastPeriodStartDate,
+//			cycleLength: self.cycleLength,
+//			periodLength: self.periodLength,
+//			now: now
+//		)
+		guard let lastDate = self.lastPeriodStartDate else {
+			logger.error("The lastPeriod date wasn't set up")
+			let pastPeiodStartDateMidnight = pastPeriodStartDate.midnight
+			let lastDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+				pastPeiodStartDateMidnight,
+				cycleLength: cycleLength,
+				periodLength: periodLength,
+				now: now
+			)
+			return lastDate
+		}
+		return calendar.date(byAdding: .day, value: self.periodLength, to: lastDate)!
 	}
 
 	func dayOfPeriod(from startDate: Date, now: Date) -> Int {
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
-			self.periodStartDate,
+			self.pastPeriodStartDate,
 			cycleLength: self.cycleLength,
+			periodLength: self.periodLength,
 			now: now
 		)
 		let days = (calendar.dateComponents([.day], from: lastPeriodStartDate, to: now).day ?? 0) + 1
@@ -43,15 +62,15 @@ struct MainPeriodModel {
 	}
 
 	func daysToPeriod(from now: Date) -> Int {
-		let days = calendar.dateComponents([.day], from: now, to: DateCalculatorService.shared.nextPeriodStartDate(now: now, date: self.periodStartDate, cycle: self.cycleLength)).day ?? 0
-		if days < 0 || days > 35 {
-			logger.error("Something wrong! The cycle length is calculated badly: \(days). From \(periodStartDate) to: \(now) with \(cycleLength)")
+		let days = calendar.dateComponents([.day], from: now, to: DateCalculatorService.shared.nextPeriodStartDate(now: now, date: self.pastPeriodStartDate, cycle: self.cycleLength, period: self.periodLength)).day ?? 0
+		if days <= 0 || days > 35 {
+			logger.error("Something wrong! The cycle length is calculated badly: \(days). From \(pastPeriodStartDate) to: \(now) with \(cycleLength)")
 		}
 		return days
 	}
 
 	func getOvulation(_ now: Date) -> Int {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.pastPeriodStartDate, cycleLength: self.cycleLength, periodLength: self.periodLength,now: now)
 		var ovulationDate = calendar.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
 
 		var days = calendar.dateComponents([.day], from: now, to: ovulationDate).day ?? 0
@@ -64,7 +83,7 @@ struct MainPeriodModel {
 	}
 
 	func getFertility(_ now: Date) -> FertilityLevel {
-		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.periodStartDate, cycleLength: self.cycleLength, now: now)
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(self.pastPeriodStartDate, cycleLength: self.cycleLength, periodLength: self.periodLength, now: now)
 		let ovulation = calendar.date(byAdding: .day, value: self.ovulationDays, to: lastPeriodStartDate)!
 		let fertilityStart = calendar.date(byAdding: .day, value: -self.ovulationPeriod, to: ovulation)!
 		let fertilityEnd = calendar.date(byAdding: .day, value: self.ovulationPeriod, to: ovulation)!

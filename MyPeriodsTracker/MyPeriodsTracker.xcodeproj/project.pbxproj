@@ -18,6 +18,13 @@
 		4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */; };
 		4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */; };
 		4A59F3A92A444BC000C51F82 /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A82A444BC000C51F82 /* NotificationSettingsViewModel.swift */; };
+		4A5FAB862A61BAF7005ECFFF /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB852A61BAF7005ECFFF /* DonationView.swift */; };
+		4A5FAB882A61BFBC005ECFFF /* NavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB872A61BFBC005ECFFF /* NavigationHeaderView.swift */; };
+		4A5FAB8A2A659F22005ECFFF /* Reddy Simple Periods Tracker.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 4A5FAB892A659F22005ECFFF /* Reddy Simple Periods Tracker.storekit */; };
+		4A5FAB8C2A659FA5005ECFFF /* Test Reddy Store.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 4A5FAB8B2A659FA5005ECFFF /* Test Reddy Store.storekit */; };
+		4A5FAB8E2A65B9D3005ECFFF /* DonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB8D2A65B9D3005ECFFF /* DonationViewModel.swift */; };
+		4A5FAB902A65BBBC005ECFFF /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4A5FAB8F2A65BBBC005ECFFF /* StoreKitTestCertificate.cer */; };
+		4A5FAB992A715B83005ECFFF /* MyPeriodsTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB982A715B83005ECFFF /* MyPeriodsTrackerTests.swift */; };
 		4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */; };
 		4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */; };
 		4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAB2A3365D8004880A9 /* Assets.xcassets */; };
@@ -34,6 +41,16 @@
 		4AFECFD92A348671004880A9 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFDB2A348671004880A9 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4A5FAB9A2A715B83005ECFFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AFECF9C2A3365D7004880A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AFECFA32A3365D7004880A9;
+			remoteInfo = MyPeriodsTracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4A2533D02A53043C00CDDE72 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBackgroundView.swift; sourceTree = "<group>"; };
@@ -46,6 +63,14 @@
 		4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLineView.swift; sourceTree = "<group>"; };
 		4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		4A59F3A82A444BC000C51F82 /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
+		4A5FAB852A61BAF7005ECFFF /* DonationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
+		4A5FAB872A61BFBC005ECFFF /* NavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderView.swift; sourceTree = "<group>"; };
+		4A5FAB892A659F22005ECFFF /* Reddy Simple Periods Tracker.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Reddy Simple Periods Tracker.storekit"; sourceTree = "<group>"; };
+		4A5FAB8B2A659FA5005ECFFF /* Test Reddy Store.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Test Reddy Store.storekit"; sourceTree = "<group>"; };
+		4A5FAB8D2A65B9D3005ECFFF /* DonationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewModel.swift; sourceTree = "<group>"; };
+		4A5FAB8F2A65BBBC005ECFFF /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
+		4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPeriodsTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A5FAB982A715B83005ECFFF /* MyPeriodsTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerTests.swift; sourceTree = "<group>"; };
 		4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPeriodsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerApp.swift; sourceTree = "<group>"; };
 		4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodsView.swift; sourceTree = "<group>"; };
@@ -69,6 +94,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4A5FAB932A715B83005ECFFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4AFECFA12A3365D7004880A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,14 +135,33 @@
 				4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */,
 				4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */,
 				4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */,
+				4A5FAB872A61BFBC005ECFFF /* NavigationHeaderView.swift */,
 			);
 			path = GeneralViews;
+			sourceTree = "<group>";
+		};
+		4A5FAB842A61BA9D005ECFFF /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				4A5FAB852A61BAF7005ECFFF /* DonationView.swift */,
+				4A5FAB8D2A65B9D3005ECFFF /* DonationViewModel.swift */,
+			);
+			path = Donation;
+			sourceTree = "<group>";
+		};
+		4A5FAB972A715B83005ECFFF /* MyPeriodsTrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A5FAB982A715B83005ECFFF /* MyPeriodsTrackerTests.swift */,
+			);
+			path = MyPeriodsTrackerTests;
 			sourceTree = "<group>";
 		};
 		4AFECF9B2A3365D7004880A9 = {
 			isa = PBXGroup;
 			children = (
 				4AFECFA62A3365D7004880A9 /* MyPeriodsTracker */,
+				4A5FAB972A715B83005ECFFF /* MyPeriodsTrackerTests */,
 				4AFECFA52A3365D7004880A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */,
+				4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +214,9 @@
 				4AFECFC72A338B01004880A9 /* Fonts */,
 				4AFECFBD2A338055004880A9 /* Localizations */,
 				4AFECFAB2A3365D8004880A9 /* Assets.xcassets */,
+				4A5FAB892A659F22005ECFFF /* Reddy Simple Periods Tracker.storekit */,
+				4A5FAB8B2A659FA5005ECFFF /* Test Reddy Store.storekit */,
+				4A5FAB8F2A65BBBC005ECFFF /* StoreKitTestCertificate.cer */,
 			);
 			path = Resaurces;
 			sourceTree = "<group>";
@@ -188,6 +243,7 @@
 		4AFECFCF2A346819004880A9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4A5FAB842A61BA9D005ECFFF /* Donation */,
 				4A59F39D2A41EF6E00C51F82 /* NotificationSettings */,
 				4A59F39A2A41C0FA00C51F82 /* Settings */,
 				4AFECFD02A34682E004880A9 /* MainPeriod */,
@@ -227,6 +283,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4A5FAB952A715B83005ECFFF /* MyPeriodsTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A5FAB9C2A715B83005ECFFF /* Build configuration list for PBXNativeTarget "MyPeriodsTrackerTests" */;
+			buildPhases = (
+				4A5FAB922A715B83005ECFFF /* Sources */,
+				4A5FAB932A715B83005ECFFF /* Frameworks */,
+				4A5FAB942A715B83005ECFFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4A5FAB9B2A715B83005ECFFF /* PBXTargetDependency */,
+			);
+			name = MyPeriodsTrackerTests;
+			productName = MyPeriodsTrackerTests;
+			productReference = 4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AFECFB22A3365D8004880A9 /* Build configuration list for PBXNativeTarget "MyPeriodsTracker" */;
@@ -254,6 +328,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					4A5FAB952A715B83005ECFFF = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 4AFECFA32A3365D7004880A9;
+					};
 					4AFECFA32A3365D7004880A9 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -275,11 +353,19 @@
 			projectRoot = "";
 			targets = (
 				4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */,
+				4A5FAB952A715B83005ECFFF /* MyPeriodsTrackerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4A5FAB942A715B83005ECFFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4AFECFA22A3365D7004880A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,6 +374,9 @@
 				4A2533D72A61953B00CDDE72 /* SFPro-Bold.otf in Resources */,
 				4AFECFC22A33846C004880A9 /* Localizable.strings in Resources */,
 				4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */,
+				4A5FAB8C2A659FA5005ECFFF /* Test Reddy Store.storekit in Resources */,
+				4A5FAB902A65BBBC005ECFFF /* StoreKitTestCertificate.cer in Resources */,
+				4A5FAB8A2A659F22005ECFFF /* Reddy Simple Periods Tracker.storekit in Resources */,
 				4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */,
 				4AFECFCB2A338B12004880A9 /* SFPro-Ultralight.otf in Resources */,
 				4AFECFD92A348671004880A9 /* Localizable.stringsdict in Resources */,
@@ -297,17 +386,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4A5FAB922A715B83005ECFFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A5FAB992A715B83005ECFFF /* MyPeriodsTrackerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4AFECFA02A3365D7004880A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4A294E192A4B2886006CF524 /* DateCalculatorService.swift in Sources */,
+				4A5FAB882A61BFBC005ECFFF /* NavigationHeaderView.swift in Sources */,
 				4AFECFCE2A33935A004880A9 /* String+Extention.swift in Sources */,
 				4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */,
 				4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */,
 				4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */,
 				4AFECFB82A336B9B004880A9 /* DateToStringService.swift in Sources */,
 				4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */,
+				4A5FAB862A61BAF7005ECFFF /* DonationView.swift in Sources */,
 				4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */,
 				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
 				4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */,
@@ -317,12 +416,21 @@
 				4A2533D12A53043C00CDDE72 /* Notifications.swift in Sources */,
 				4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */,
 				4A59F3A12A42EBE000C51F82 /* NotificationModel.swift in Sources */,
+				4A5FAB8E2A65B9D3005ECFFF /* DonationViewModel.swift in Sources */,
 				4A2533D52A61909900CDDE72 /* ButtonBackgroundView.swift in Sources */,
 				4A59F39F2A41EF8700C51F82 /* NotificationSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A5FAB9B2A715B83005ECFFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */;
+			targetProxy = 4A5FAB9A2A715B83005ECFFF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4AFECFC42A33846C004880A9 /* Localizable.strings */ = {
@@ -349,6 +457,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4A5FAB9D2A715B83005ECFFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyPeriodsTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyPeriodsTracker";
+			};
+			name = Debug;
+		};
+		4A5FAB9E2A715B83005ECFFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyPeriodsTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyPeriodsTracker";
+			};
+			name = Release;
+		};
 		4AFECFB02A3365D8004880A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -534,6 +680,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4A5FAB9C2A715B83005ECFFF /* Build configuration list for PBXNativeTarget "MyPeriodsTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A5FAB9D2A715B83005ECFFF /* Debug */,
+				4A5FAB9E2A715B83005ECFFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4AFECF9F2A3365D7004880A9 /* Build configuration list for PBXProject "MyPeriodsTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

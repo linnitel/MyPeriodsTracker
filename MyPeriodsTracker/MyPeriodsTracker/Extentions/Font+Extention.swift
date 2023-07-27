@@ -34,3 +34,10 @@ struct BoldTextModifier: ViewModifier {
 			.font(.custom("SFProText-Bold", size: 15))
 	}
 }
+
+struct PriceTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Bold", size: 21))
+	}
+}

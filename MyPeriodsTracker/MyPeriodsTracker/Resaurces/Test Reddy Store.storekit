@@ -1,0 +1,93 @@
+{
+  "identifier" : "9B0F4815",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "479242C0",
+      "localizations" : [
+        {
+          "description" : "Eco-friendly, simply washable",
+          "displayName" : "Menstrual cup",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Un produit écologiqe et simplement lavable",
+          "displayName" : "Coupe menstruelle",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Экологичная, легко моется и удобна",
+          "displayName" : "Менструальная чаша",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "donation_cup",
+      "referenceName" : "Cup",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "A52FE7C2",
+      "localizations" : [
+        {
+          "description" : "Very comfortable to skin, reusable",
+          "displayName" : "Menstrual pad",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Très confortable pour la peau, réutilisable",
+          "displayName" : "Serviette menstruelle",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Комфортная к телу, легко стирается",
+          "displayName" : "Многоразоавя прокладка",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "donation_pad",
+      "referenceName" : "Pad",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "6E873BF9",
+      "localizations" : [
+        {
+          "description" : "Comfortablly fit, don't slide",
+          "displayName" : "Menstrual pants",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Ajustement confortable, ne glisse pas",
+          "displayName" : "Pantalon menstruel",
+          "locale" : "fr"
+        },
+        {
+          "description" : "Комфортно сидят и не сползают",
+          "displayName" : "Менструальные трусы",
+          "locale" : "ru"
+        }
+      ],
+      "productID" : "donation_pants",
+      "referenceName" : "Pants",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

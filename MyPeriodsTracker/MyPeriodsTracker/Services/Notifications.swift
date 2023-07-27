@@ -53,9 +53,9 @@ class Notifications: NSObject {
 		)
 	}
 
-	func schaduleOvulationNotification(now: Date, startDate: Date, cycle: Int, time: Date, ovulation: Bool) {
+	func schaduleOvulationNotification(now: Date, startDate: Date, cycle: Int, period: Int, time: Date, ovulation: Bool) {
 		if ovulation {
-			let date = self.dateCalculator.getOvulationDate(now: Date().midnight, startDate: startDate, cycle: cycle)
+			let date = self.dateCalculator.getOvulationDate(now: Date().midnight, startDate: startDate, cycle: cycle, period: period)
 			self.scheduleOvulationDayNotification(for: date, at: time)
 			self.logger.log("Ovulation notification was schaduled")
 		} else {
@@ -64,9 +64,9 @@ class Notifications: NSObject {
 		}
 	}
 
-	func schaduleOneDayBeforeNotification(now: Date, startDate: Date, cycle: Int, time: Date, oneDayBefore: Bool) {
+	func schaduleOneDayBeforeNotification(now: Date, startDate: Date, cycle: Int, period: Int, time: Date, oneDayBefore: Bool) {
 		if oneDayBefore {
-			let date = self.dateCalculator.calculateOneDayBeforePeriod(now: now, date: startDate, cycle: cycle)
+			let date = self.dateCalculator.calculateOneDayBeforePeriod(now: now, date: startDate, cycle: cycle, period: period)
 			self.scheduleOneDayBeforePeriodNotification(for: date, at: time)
 			self.logger.log("First Period day notification was schaduled")
 		} else {
@@ -75,9 +75,9 @@ class Notifications: NSObject {
 		}
 	}
 
-	func schadulePeriodFirstDayNotification(now: Date, startDate: Date, cycle: Int, time: Date, startOfPeriod: Bool) {
+	func schadulePeriodFirstDayNotification(now: Date, startDate: Date, cycle: Int, period: Int, time: Date, startOfPeriod: Bool) {
 		if startOfPeriod {
-			let date = self.dateCalculator.nextPeriodStartDate(now: now, date: startDate, cycle: cycle)
+			let date = self.dateCalculator.nextPeriodStartDate(now: now, date: startDate, cycle: cycle, period: period)
 			self.scheduleFirstPeriodDayNotification(for: date, at: time)
 			self.logger.log("Start of Period notification was schaduled")
 		} else {
@@ -86,10 +86,10 @@ class Notifications: NSObject {
 		}
 	}
 
-	func schaduleNotifications(now: Date, startDate: Date, cycle: Int, time: Date, ovulation: Bool, oneDayBefore: Bool, startOfPeriod: Bool) {
-		self.schaduleOneDayBeforeNotification(now: now, startDate: startDate, cycle: cycle, time: time, oneDayBefore: oneDayBefore)
-		self.schadulePeriodFirstDayNotification(now: now, startDate: startDate, cycle: cycle, time: time, startOfPeriod: startOfPeriod)
-		self.schaduleOvulationNotification(now: now, startDate: startDate, cycle: cycle, time: time, ovulation: ovulation)
+	func schaduleNotifications(now: Date, startDate: Date, cycle: Int, period: Int, time: Date, ovulation: Bool, oneDayBefore: Bool, startOfPeriod: Bool) {
+		self.schaduleOneDayBeforeNotification(now: now, startDate: startDate, cycle: cycle, period: period, time: time, oneDayBefore: oneDayBefore)
+		self.schadulePeriodFirstDayNotification(now: now, startDate: startDate, cycle: cycle, period: period, time: time, startOfPeriod: startOfPeriod)
+		self.schaduleOvulationNotification(now: now, startDate: startDate, cycle: cycle, period: period, time: time, ovulation: ovulation)
 	}
 
 	private func schaduleNotification(for date: Date, at time: Date, with title: String, body: String, identifier: String) {
