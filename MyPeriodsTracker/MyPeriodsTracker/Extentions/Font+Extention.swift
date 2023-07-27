@@ -14,6 +14,13 @@ struct MainInfoTextModifier: ViewModifier {
 	}
 }
 
+struct EmptyImageTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Ultralight", size: 95))
+	}
+}
+
 struct BaseTextModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content

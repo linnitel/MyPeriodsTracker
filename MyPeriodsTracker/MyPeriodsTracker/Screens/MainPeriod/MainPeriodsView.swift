@@ -38,7 +38,7 @@ struct MainPeriodsView: View {
 
 struct MainPeriodsView_Previews: PreviewProvider {
     static var previews: some View {
-		MainPeriodsView(viewModel: MainPeriodViewModel())
+		MainPeriodsView(viewModel: MainPeriodViewModel(model: MainPeriodModel(pastPeriodStartDate: Date(), periodLength: 5, cycleLength: 30), partOfCycle: .notSet))
     }
 }
 
@@ -145,19 +145,15 @@ struct NotSetView: View {
 
 	var body: some View {
 		VStack {
-			DaysView(daysLeft: 0, text: "day of period")
-				.padding(.bottom, 40)
+			Spacer()
+			Image(systemName: "gear.badge.checkmark")
+				.foregroundColor(Color("deactivatedText"))
+				.modifier(EmptyImageTextModifier())
 			Text("To see your next period date setup information about your cycle in settings")
 				.multilineTextAlignment(.center)
 				.padding([.leading, .trailing], 40)
 				.padding([.top], 16)
-			Spacer()
-			NavigationLink(destination: SettingsView(viewModel: self.viewModel)) {
-				ButtonBackgroundView {
-					Text(LocalizedStringKey("Open settings"))
-				}
-				.frame(height: 56)
-			}
+				.foregroundColor(Color("secondButtonText"))
 			Spacer()
 		}
 	}

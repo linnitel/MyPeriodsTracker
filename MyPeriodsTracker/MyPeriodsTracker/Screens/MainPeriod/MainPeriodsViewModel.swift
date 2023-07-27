@@ -40,8 +40,13 @@ class MainPeriodViewModel: ObservableObject {
 
 	@Published var todayDate: Date = Date().midnight
 
-	init() {
+	// Init for the image testing
+	init(model: MainPeriodModel, partOfCycle: MainPeriodModel.PartOfCycle) {
+		self.model = model
+		self.partOfCycle = partOfCycle
+	}
 
+	init() {
 		var periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
 		var cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
 		var periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
