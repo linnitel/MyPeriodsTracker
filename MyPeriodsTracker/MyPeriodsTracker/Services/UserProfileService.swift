@@ -74,5 +74,21 @@ struct UserProfileService {
 	func setNotFirstLaunch(to notFirstLaunch: Bool) {
 		defaults.set(notFirstLaunch, forKey: "NotFirstLaunch")
 	}
+
+	func getNotificationsTime() -> Date {
+		Date(timeIntervalSince1970: defaults.double(forKey: "NotificationsTime"))
+	}
+
+	func setNotificationsTime(_ time: Date) {
+		defaults.set(time.timeIntervalSince1970, forKey: "NotificationsTime")
+	}
+
+	func getNotificationTimeDidSet() -> Bool {
+		defaults.bool(forKey: "NotificationTimeDidSet")
+	}
+
+	func setNotificationTimeDidSet(_ timeDidSet: Bool) {
+		defaults.set(timeDidSet, forKey: "NotificationTimeDidSet")
+	}
 	
 }

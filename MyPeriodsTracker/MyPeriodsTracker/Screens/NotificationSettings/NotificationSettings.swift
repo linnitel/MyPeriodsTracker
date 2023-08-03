@@ -187,7 +187,7 @@ struct NotificationsTimeItem: View {
 				DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
 					.datePickerStyle(WheelDatePickerStyle())
 					.onReceive([self.time].publisher.first()) { (value) in
-						UserDefaults.standard.set(self.time.timeIntervalSince1970, forKey: "NotificationsTime")
+						UserProfileService.shared.setNotificationsTime(self.time)
 						self.action?()
 					}
 			}

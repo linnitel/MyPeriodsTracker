@@ -39,15 +39,19 @@ struct SettingsView: View {
 					}
 					.padding(.bottom, 16)
 					Group {
-						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: self.$viewModel.model.cycleLength, key: "CycleLength") {
+						SettingsItemView(text: "Cycle length", selectionArray: cycleArray, isShown: $cycleIsShown, value: self.$viewModel.model.cycleLength) {
 							self.cycleIsShown.toggle()
 							self.periodIsShown = false
 							self.startDateIsShown = false
+						} recieve: { value in
+							UserProfileService.shared.setCycle(value)
 						}
-						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: self.$viewModel.model.periodLength, key: "PeriodLength") {
+						SettingsItemView(text: "Period length", selectionArray: periodArray, isShown: $periodIsShown, value: self.$viewModel.model.periodLength) {
 							self.periodIsShown.toggle()
 							self.cycleIsShown = false
 							self.startDateIsShown = false
+						} recieve: { value in
+							UserProfileService.shared.setPeriod(value)
 						}
 						LastDateItemView(date: self.$viewModel.model.pastPeriodStartDate, isShown: $startDateIsShown) {
 							self.startDateIsShown.toggle()
@@ -96,8 +100,8 @@ struct SettingsItemView: View {
 	let selectionArray: [Int]
 	@Binding var isShown: Bool
 	@Binding var value: Int
-	let key: String
 	let action: () -> Void
+	let recieve: (Int) -> Void
 
 	var body: some View {
 		VStack {
@@ -118,9 +122,7 @@ struct SettingsItemView: View {
 						}
 				}
 				.pickerStyle(.wheel)
-				.onReceive([self.value].publisher.first()) { (value) in
-					UserDefaults.standard.set(self.value, forKey: self.key)
-				}
+				.onReceive([self.value].publisher.first(), perform: recieve)
 			}
 			DividerLineView()
 		}
@@ -149,7 +151,7 @@ struct LastDateItemView: View {
 				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().midnight.timeIntervalSince1970 - 7889229)...Date().midnight, displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 					.onReceive([self.date].publisher.first()) { (value) in
-						UserDefaults.standard.set(self.date.midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
+						UserProfileService.shared.setPastPeriodStartDate(self.date.midnight)
 					}
 			}
 			DividerLineView()

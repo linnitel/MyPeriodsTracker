@@ -35,16 +35,16 @@ class NotificationSettingsViewModel: ObservableObject {
 		self.cycle = cycle
 		self.period = period
 
-		self.notificationTime = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "NotificationsTime"))
+		self.notificationTime = UserProfileService.shared.getNotificationsTime()
 
-		let timeDidSet = UserDefaults.standard.bool(forKey: "NotificationTimeDidSet")
+		let timeDidSet = UserProfileService.shared.getNotificationTimeDidSet()
 		if !timeDidSet {
 			var components = DateComponents()
 			components.hour = 12
 			components.minute = 0
 			self.notificationTime = Calendar.current.date(from: components)!
-			UserDefaults.standard.set(self.notificationTime.timeIntervalSince1970, forKey: "NotificationsTime")
-			UserDefaults.standard.set(true, forKey: "NotificationTimeDidSet")
+			UserProfileService.shared.setNotificationsTime(self.notificationTime)
+			UserProfileService.shared.setNotificationTimeDidSet(true)
 			self.logger.log("The defalt value of notification time was set up")
 		}
 

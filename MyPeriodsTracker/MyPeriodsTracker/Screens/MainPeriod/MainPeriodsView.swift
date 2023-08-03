@@ -76,8 +76,7 @@ struct OffPeriodView: View {
 			Spacer()
 			if viewModel.showOffPeriodButton() {
 				UpperButton(text: "Period start early", action: {
-					UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
-					self.viewModel.model.pastPeriodStartDate = Date().midnight
+					self.viewModel.setPastPeriodStartDate(to: Date().midnight)
 					self.viewModel.setStatus(to: .period)
 					self.viewModel.logger.log("The button \"Period start early\" was pushed")
 				})
@@ -127,8 +126,7 @@ struct DelayView: View {
 			.padding([.top], 16)
 			Spacer()
 			UpperButton(text: "Period started", action:{
-				UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
-				self.viewModel.model.pastPeriodStartDate = Date().midnight
+				self.viewModel.setPastPeriodStartDate(to: Date().midnight)
 				self.viewModel.setStatus(to: .period)
 				self.viewModel.logger.log("The button \"Period started\" was pushed")
 			})

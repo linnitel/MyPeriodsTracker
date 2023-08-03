@@ -105,6 +105,11 @@ class MainPeriodViewModel: ObservableObject {
 		UserProfileService.shared.setStatus(status)
 	}
 
+	func setPastPeriodStartDate(to date: Date) {
+		self.model.pastPeriodStartDate = date
+		UserProfileService.shared.setPastPeriodStartDate(date)
+	}
+
 	func showOffPeriodButton() -> Bool {
 		let showEarlyStartButtonDay = Calendar.current.date(byAdding: .day, value: -8, to: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.pastPeriodStartDate, cycle: self.model.cycleLength, period: self.model.periodLength))!
 		if todayDate < showEarlyStartButtonDay {
