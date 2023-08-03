@@ -18,13 +18,13 @@ struct MainPeriodsView: View {
 				BackgroundView()
 				VStack {
 					HeaderView(viewModel: self.viewModel)
-					switch self.viewModel.partOfCycle {
+					switch self.viewModel.model.status {
 						case .offPeriod:
-							OffPeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
+							OffPeriodView(viewModel: self.viewModel)
 						case .period:
-							PeriodView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
+							PeriodView(viewModel: self.viewModel)
 						case .delay:
-							DelayView(viewModel: self.viewModel, partOfCycle: self.$viewModel.partOfCycle)
+							DelayView(viewModel: self.viewModel)
 						case .notSet:
 							NotSetView(viewModel: self.viewModel)
 					}
@@ -38,7 +38,7 @@ struct MainPeriodsView: View {
 
 struct MainPeriodsView_Previews: PreviewProvider {
     static var previews: some View {
-		MainPeriodsView(viewModel: MainPeriodViewModel(model: MainPeriodModel(pastPeriodStartDate: Date(), periodLength: 5, cycleLength: 30), partOfCycle: .notSet))
+		MainPeriodsView(viewModel: MainPeriodViewModel(model: MainPeriodModel(pastPeriodStartDate: Date(), periodLength: 5, cycleLength: 30, status: .notSet)))
     }
 }
 
@@ -47,7 +47,7 @@ struct HeaderView: View {
 
 	var body: some View {
 		ZStack {
-			Text(DateToStringService.shared.dateMonthAndWeekString(from: self.viewModel.todayDate))
+			Text(self.viewModel.todayDate.dateMonthAndWeekString)
 			HStack {
 				Spacer()
 				NavigationLink(destination: SettingsView(viewModel: self.viewModel)) {
@@ -61,7 +61,6 @@ struct HeaderView: View {
 
 struct OffPeriodView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -79,7 +78,7 @@ struct OffPeriodView: View {
 				UpperButton(text: "Period start early", action: {
 					UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
 					self.viewModel.model.pastPeriodStartDate = Date().midnight
-					self.partOfCycle = .period
+					self.viewModel.setStatus(to: .period)
 					self.viewModel.logger.log("The button \"Period start early\" was pushed")
 				})
 				Spacer()
@@ -90,7 +89,6 @@ struct OffPeriodView: View {
 
 struct PeriodView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -105,7 +103,7 @@ struct PeriodView: View {
 			.padding([.top], 16)
 			Spacer()
 			UpperButton(text: "Period didn't start", action: {
-				self.partOfCycle = .delay
+				self.viewModel.setStatus(to: .delay)
 				self.viewModel.logger.log("The button \"Period didn't start\" was pushed")
 			})
 			Spacer()
@@ -115,7 +113,6 @@ struct PeriodView: View {
 
 struct DelayView: View {
 	@ObservedObject var viewModel: MainPeriodViewModel
-	@Binding var partOfCycle: MainPeriodModel.PartOfCycle
 
 	var body: some View {
 		VStack {
@@ -132,7 +129,7 @@ struct DelayView: View {
 			UpperButton(text: "Period started", action:{
 				UserDefaults.standard.set(Date().midnight.timeIntervalSince1970, forKey: "PeriodStartDate")
 				self.viewModel.model.pastPeriodStartDate = Date().midnight
-				self.partOfCycle = .period
+				self.viewModel.setStatus(to: .period)
 				self.viewModel.logger.log("The button \"Period started\" was pushed")
 			})
 			Spacer()

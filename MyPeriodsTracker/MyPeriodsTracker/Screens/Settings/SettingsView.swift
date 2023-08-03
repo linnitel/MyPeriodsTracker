@@ -28,13 +28,13 @@ struct SettingsView: View {
 				BackgroundView()
 				VStack {
 					NavigationHeaderView(title: "Settings") {
-						self.viewModel.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+						self.viewModel.setStatus(to: DateCalculatorService.shared.partOfCycleUpdate(
 							periodStartDate: self.viewModel.model.pastPeriodStartDate,
 							periods: self.viewModel.model.periodLength,
 							cycle: self.viewModel.model.cycleLength,
-							partOfCycle: self.viewModel.partOfCycle,
+							partOfCycle: self.viewModel.model.status,
 							now: self.viewModel.todayDate
-						)
+						))
 						self.presentationMode.wrappedValue.dismiss()
 					}
 					.padding(.bottom, 16)
@@ -61,7 +61,7 @@ struct SettingsView: View {
 //					DonnationView()
 //						.padding([.leading, .trailing], 20)
 					LowerButton(text: "Rate the app in AppStore", action: {
-						// Alternative variant of the marking the application. 
+						// Alternative variant of the marking the application.
 //						if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
 //							SKStoreReviewController.requestReview(in: scene)
 //						}
@@ -73,7 +73,7 @@ struct SettingsView: View {
 		}
 		.navigationBarHidden(true)
 		.onAppear() {
-			UserDefaults.standard.set(true, forKey: "NotFirstLaunch")
+			UserProfileService.shared.setNotFirstLaunch(to: true)
 		}
     }
 

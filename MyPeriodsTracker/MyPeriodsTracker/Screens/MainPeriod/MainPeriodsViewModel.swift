@@ -36,41 +36,37 @@ class MainPeriodViewModel: ObservableObject {
 			}
 		}
 	}
-	@AppStorage("PartOfCycle") var partOfCycle: MainPeriodModel.PartOfCycle = .notSet
+//	@AppStorage("PartOfCycle") var partOfCycle: MainPeriodModel.PartOfCycle = .notSet
 
 	@Published var todayDate: Date = Date().midnight
 
 	// Init for the image testing
-	init(model: MainPeriodModel, partOfCycle: MainPeriodModel.PartOfCycle) {
+	init(model: MainPeriodModel) {
 		self.model = model
-		self.partOfCycle = partOfCycle
 	}
 
 	init() {
-		var periodLength = UserDefaults.standard.integer(forKey: "PeriodLength")
-		var cycleLength = UserDefaults.standard.integer(forKey: "CycleLength")
-		var periodStartDate = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "PeriodStartDate"))
+		var periodLength = UserProfileService.shared.getPeriod()
+		var cycleLength = UserProfileService.shared.getCycle()
+		var periodStartDate = UserProfileService.shared.getPastPeriodStartDate()
+		var partOfCycle = UserProfileService.shared.getStatus()
 
-		var partOfCycle = MainPeriodModel.PartOfCycle(rawValue: UserDefaults.standard.integer(forKey: "PartOfCycle")) ?? .notSet
-
-
-		let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
+		let notFirstLaunch = UserProfileService.shared.getNotFirstLaunch()
 
 		if notFirstLaunch {
 			partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(periodStartDate: periodStartDate, periods: periodLength, cycle: cycleLength, partOfCycle: partOfCycle, now: Date().midnight)
 		} else {
 			periodLength = 5
-			UserDefaults.standard.set(periodLength, forKey: "PeriodLength")
+			UserProfileService.shared.setPeriod(periodLength)
 			cycleLength = 28
-			UserDefaults.standard.set(cycleLength, forKey: "CycleLength")
+			UserProfileService.shared.setCycle(cycleLength)
 			periodStartDate = Date().midnight
-			UserDefaults.standard.set(periodStartDate.timeIntervalSince1970, forKey: "PeriodStartDate")
+			UserProfileService.shared.setPastPeriodStartDate(periodStartDate)
 		}
 
 		self.logger.log("Main period view model initialized with: \nPeriod Start Date: \(periodStartDate), \nPeriod Length: \(periodLength), \nCycle length: \(cycleLength), \nPart of cycle: \(partOfCycle.stringValue)")
 		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(periodStartDate, cycleLength: cycleLength, periodLength: periodLength, now: Date().midnight)
-		let model = MainPeriodModel(pastPeriodStartDate: periodStartDate, lastPeriodStartDate: lastPeriodStartDate, periodLength: periodLength, cycleLength: cycleLength)
-		self.partOfCycle = partOfCycle
+		let model = MainPeriodModel(pastPeriodStartDate: periodStartDate, lastPeriodStartDate: lastPeriodStartDate, periodLength: periodLength, cycleLength: cycleLength, status: partOfCycle)
 		self.model = model
 
 		NotificationCenter.default.addObserver(self, selector: #selector(dayDidChange), name: .NSCalendarDayChanged, object: nil)
@@ -89,11 +85,11 @@ class MainPeriodViewModel: ObservableObject {
 	}
 
 	func nextPeriodDate() -> String {
-		DateToStringService.shared.dateAndWeekString(from: DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.pastPeriodStartDate, cycle: self.model.cycleLength, period: self.model.periodLength))
+		DateCalculatorService.shared.nextPeriodStartDate(now: self.todayDate, date: self.model.pastPeriodStartDate, cycle: self.model.cycleLength, period: self.model.periodLength).dateAndWeekString
 	}
 
 	func endOfPeriodDate() -> String {
-		DateToStringService.shared.dateAndWeekString(from: self.model.endOfPeriodDate(now: self.todayDate))
+		self.model.endOfPeriodDate(now: self.todayDate).dateAndWeekString
 	}
 
 	func dayOfPeriod() -> Int {
@@ -102,6 +98,11 @@ class MainPeriodViewModel: ObservableObject {
 
 	func delay() -> Int {
 		DateCalculatorService.shared.delay(periodStartDate: self.model.pastPeriodStartDate, cycleLength: self.model.cycleLength, period: self.model.periodLength, now: self.todayDate)
+	}
+
+	func setStatus(to status: MainPeriodModel.PartOfCycle) {
+		self.model.status = status
+		UserProfileService.shared.setStatus(status)
 	}
 
 	func showOffPeriodButton() -> Bool {
@@ -118,16 +119,16 @@ class MainPeriodViewModel: ObservableObject {
 			guard let self = self else { return }
 			self.logger.log("Day did change")
 			self.todayDate = Date().midnight
-			let notFirstLaunch = UserDefaults.standard.bool(forKey: "NotFirstLaunch")
+			let notFirstLaunch = UserProfileService.shared.getNotFirstLaunch()
 			if notFirstLaunch {
-				self.partOfCycle = DateCalculatorService.shared.partOfCycleUpdate(
+				self.setStatus(to: DateCalculatorService.shared.partOfCycleUpdate(
 					periodStartDate: self.model.pastPeriodStartDate,
 					periods: self.model.periodLength,
 					cycle: self.model.cycleLength,
-					partOfCycle: self.partOfCycle,
+					partOfCycle: model.status,
 					now: self.todayDate
-				)
-				self.logger.log(level: .default, "Part of cycle updated to: \(self.partOfCycle.stringValue)")
+				))
+				self.logger.log(level: .default, "Part of cycle updated to: \(self.model.status.stringValue)")
 			}
 		}
 	}

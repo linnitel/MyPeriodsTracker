@@ -5,7 +5,6 @@
 //  Created by Julia Martcenko on 10/06/2023.
 //
 
-import Foundation
 import SwiftUI
 import os
 
@@ -25,6 +24,7 @@ struct MainPeriodModel {
 	var lastPeriodStartDate: Date?
 	var periodLength: Int
 	var cycleLength: Int
+	var status: PartOfCycle
 
 	func endOfPeriodDate(now: Date) -> Date {
 //		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(

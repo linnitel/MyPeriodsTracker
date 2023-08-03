@@ -25,12 +25,24 @@
 		4A5FAB8E2A65B9D3005ECFFF /* DonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB8D2A65B9D3005ECFFF /* DonationViewModel.swift */; };
 		4A5FAB902A65BBBC005ECFFF /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4A5FAB8F2A65BBBC005ECFFF /* StoreKitTestCertificate.cer */; };
 		4A5FAB992A715B83005ECFFF /* MyPeriodsTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FAB982A715B83005ECFFF /* MyPeriodsTrackerTests.swift */; };
+		4A5FABA62A77D7CB005ECFFF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5FABA52A77D7CB005ECFFF /* WidgetKit.framework */; };
+		4A5FABA82A77D7CB005ECFFF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5FABA72A77D7CB005ECFFF /* SwiftUI.framework */; };
+		4A5FABAB2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABAA2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift */; };
+		4A5FABAD2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABAC2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift */; };
+		4A5FABAF2A77D7CD005ECFFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5FABAE2A77D7CD005ECFFF /* Assets.xcassets */; };
+		4A5FABB32A77D7CD005ECFFF /* MyPeriodTrackerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4A5FABA32A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4A5FABB92A77D820005ECFFF /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */; };
+		4A5FABBA2A77D824005ECFFF /* Font+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */; };
+		4A5FABBB2A77D828005ECFFF /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFCD2A33935A004880A9 /* String+Extention.swift */; };
+		4A5FABBC2A77D82C005ECFFF /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E1A2A4C7E5F006CF524 /* Date+Extention.swift */; };
+		4A5FABBD2A77DB6F005ECFFF /* MainPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFD32A346881004880A9 /* MainPeriodModel.swift */; };
+		4A5FABBE2A77DB74005ECFFF /* DateCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E182A4B2886006CF524 /* DateCalculatorService.swift */; };
+		4A5FABC02A7C16B5005ECFFF /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */; };
 		4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */; };
 		4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */; };
 		4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAB2A3365D8004880A9 /* Assets.xcassets */; };
 		4AFECFAF2A3365D8004880A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAE2A3365D8004880A9 /* Preview Assets.xcassets */; };
 		4AFECFB62A336ACD004880A9 /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */; };
-		4AFECFB82A336B9B004880A9 /* DateToStringService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFB72A336B9B004880A9 /* DateToStringService.swift */; };
 		4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */; };
 		4AFECFC22A33846C004880A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC42A33846C004880A9 /* Localizable.strings */; };
 		4AFECFCA2A338B12004880A9 /* SFPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC82A338B12004880A9 /* SFPro-Regular.otf */; };
@@ -49,7 +61,28 @@
 			remoteGlobalIDString = 4AFECFA32A3365D7004880A9;
 			remoteInfo = MyPeriodsTracker;
 		};
+		4A5FABB12A77D7CD005ECFFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AFECF9C2A3365D7004880A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A5FABA22A77D7CB005ECFFF;
+			remoteInfo = MyPeriodTrackerWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A5FABB72A77D7CD005ECFFF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4A5FABB32A77D7CD005ECFFF /* MyPeriodTrackerWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4A2533D02A53043C00CDDE72 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -71,13 +104,20 @@
 		4A5FAB8F2A65BBBC005ECFFF /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
 		4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPeriodsTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5FAB982A715B83005ECFFF /* MyPeriodsTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerTests.swift; sourceTree = "<group>"; };
+		4A5FABA32A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyPeriodTrackerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A5FABA52A77D7CB005ECFFF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4A5FABA72A77D7CB005ECFFF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4A5FABAA2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodTrackerWidgetBundle.swift; sourceTree = "<group>"; };
+		4A5FABAC2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodTrackerWidget.swift; sourceTree = "<group>"; };
+		4A5FABAE2A77D7CD005ECFFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A5FABB02A77D7CD005ECFFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPeriodsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerApp.swift; sourceTree = "<group>"; };
 		4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodsView.swift; sourceTree = "<group>"; };
 		4AFECFAB2A3365D8004880A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AFECFAE2A3365D8004880A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AFECFB52A336ACD004880A9 /* DateFormatter+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extention.swift"; sourceTree = "<group>"; };
-		4AFECFB72A336B9B004880A9 /* DateToStringService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateToStringService.swift; sourceTree = "<group>"; };
 		4AFECFBA2A3371FE004880A9 /* Font+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extention.swift"; sourceTree = "<group>"; };
 		4AFECFC32A33846C004880A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4AFECFC52A338486004880A9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -98,6 +138,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A5FABA02A77D7CB005ECFFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A5FABA82A77D7CB005ECFFF /* SwiftUI.framework in Frameworks */,
+				4A5FABA62A77D7CB005ECFFF /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,11 +206,33 @@
 			path = MyPeriodsTrackerTests;
 			sourceTree = "<group>";
 		};
+		4A5FABA42A77D7CB005ECFFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A5FABA52A77D7CB005ECFFF /* WidgetKit.framework */,
+				4A5FABA72A77D7CB005ECFFF /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A5FABA92A77D7CB005ECFFF /* MyPeriodTrackerWidget */ = {
+			isa = PBXGroup;
+			children = (
+				4A5FABAA2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift */,
+				4A5FABAC2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift */,
+				4A5FABAE2A77D7CD005ECFFF /* Assets.xcassets */,
+				4A5FABB02A77D7CD005ECFFF /* Info.plist */,
+			);
+			path = MyPeriodTrackerWidget;
+			sourceTree = "<group>";
+		};
 		4AFECF9B2A3365D7004880A9 = {
 			isa = PBXGroup;
 			children = (
 				4AFECFA62A3365D7004880A9 /* MyPeriodsTracker */,
 				4A5FAB972A715B83005ECFFF /* MyPeriodsTrackerTests */,
+				4A5FABA92A77D7CB005ECFFF /* MyPeriodTrackerWidget */,
+				4A5FABA42A77D7CB005ECFFF /* Frameworks */,
 				4AFECFA52A3365D7004880A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -171,6 +242,7 @@
 			children = (
 				4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */,
 				4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */,
+				4A5FABA32A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,9 +345,9 @@
 		4AFECFD22A346859004880A9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4AFECFB72A336B9B004880A9 /* DateToStringService.swift */,
 				4A294E182A4B2886006CF524 /* DateCalculatorService.swift */,
 				4A2533D02A53043C00CDDE72 /* Notifications.swift */,
+				4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -301,6 +373,23 @@
 			productReference = 4A5FAB962A715B83005ECFFF /* MyPeriodsTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4A5FABA22A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A5FABB42A77D7CD005ECFFF /* Build configuration list for PBXNativeTarget "MyPeriodTrackerWidgetExtension" */;
+			buildPhases = (
+				4A5FAB9F2A77D7CB005ECFFF /* Sources */,
+				4A5FABA02A77D7CB005ECFFF /* Frameworks */,
+				4A5FABA12A77D7CB005ECFFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyPeriodTrackerWidgetExtension;
+			productName = MyPeriodTrackerWidgetExtension;
+			productReference = 4A5FABA32A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AFECFB22A3365D8004880A9 /* Build configuration list for PBXNativeTarget "MyPeriodsTracker" */;
@@ -308,10 +397,12 @@
 				4AFECFA02A3365D7004880A9 /* Sources */,
 				4AFECFA12A3365D7004880A9 /* Frameworks */,
 				4AFECFA22A3365D7004880A9 /* Resources */,
+				4A5FABB72A77D7CD005ECFFF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4A5FABB22A77D7CD005ECFFF /* PBXTargetDependency */,
 			);
 			name = MyPeriodsTracker;
 			productName = MyPeriodsTracker;
@@ -331,6 +422,9 @@
 					4A5FAB952A715B83005ECFFF = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 4AFECFA32A3365D7004880A9;
+					};
+					4A5FABA22A77D7CB005ECFFF = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 					4AFECFA32A3365D7004880A9 = {
 						CreatedOnToolsVersion = 14.3;
@@ -354,6 +448,7 @@
 			targets = (
 				4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */,
 				4A5FAB952A715B83005ECFFF /* MyPeriodsTrackerTests */,
+				4A5FABA22A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -363,6 +458,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A5FABA12A77D7CB005ECFFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A5FABAF2A77D7CD005ECFFF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +497,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4A5FAB9F2A77D7CB005ECFFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A5FABAB2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift in Sources */,
+				4A5FABBB2A77D828005ECFFF /* String+Extention.swift in Sources */,
+				4A5FABBC2A77D82C005ECFFF /* Date+Extention.swift in Sources */,
+				4A5FABBD2A77DB6F005ECFFF /* MainPeriodModel.swift in Sources */,
+				4A5FABAD2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift in Sources */,
+				4A5FABBA2A77D824005ECFFF /* Font+Extention.swift in Sources */,
+				4A5FABB92A77D820005ECFFF /* DateFormatter+Extention.swift in Sources */,
+				4A5FABBE2A77DB74005ECFFF /* DateCalculatorService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4AFECFA02A3365D7004880A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,12 +522,12 @@
 				4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */,
 				4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */,
 				4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */,
-				4AFECFB82A336B9B004880A9 /* DateToStringService.swift in Sources */,
 				4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */,
 				4A5FAB862A61BAF7005ECFFF /* DonationView.swift in Sources */,
 				4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */,
 				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
 				4AFECFD62A347754004880A9 /* MainPeriodsViewModel.swift in Sources */,
+				4A5FABC02A7C16B5005ECFFF /* UserProfileService.swift in Sources */,
 				4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */,
 				4AFECFBB2A3371FE004880A9 /* Font+Extention.swift in Sources */,
 				4A59F3A92A444BC000C51F82 /* NotificationSettingsViewModel.swift in Sources */,
@@ -429,6 +547,11 @@
 			isa = PBXTargetDependency;
 			target = 4AFECFA32A3365D7004880A9 /* MyPeriodsTracker */;
 			targetProxy = 4A5FAB9A2A715B83005ECFFF /* PBXContainerItemProxy */;
+		};
+		4A5FABB22A77D7CD005ECFFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A5FABA22A77D7CB005ECFFF /* MyPeriodTrackerWidgetExtension */;
+			targetProxy = 4A5FABB12A77D7CD005ECFFF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -466,7 +589,7 @@
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -485,13 +608,69 @@
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyPeriodsTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyPeriodsTracker";
+			};
+			name = Release;
+		};
+		4A5FABB52A77D7CD005ECFFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyPeriodTrackerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyPeriodTrackerWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTracker.MyPeriodTrackerWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4A5FABB62A77D7CD005ECFFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyPeriodTrackerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyPeriodTrackerWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTracker.MyPeriodTrackerWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -612,10 +791,11 @@
 		4AFECFB32A3365D8004880A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyPeriodsTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				ENABLE_PREVIEWS = YES;
@@ -631,7 +811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -646,10 +826,11 @@
 		4AFECFB42A3365D8004880A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyPeriodsTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				ENABLE_PREVIEWS = YES;
@@ -665,7 +846,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = linnitel.MyPeriodsTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -685,6 +866,15 @@
 			buildConfigurations = (
 				4A5FAB9D2A715B83005ECFFF /* Debug */,
 				4A5FAB9E2A715B83005ECFFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A5FABB42A77D7CD005ECFFF /* Build configuration list for PBXNativeTarget "MyPeriodTrackerWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A5FABB52A77D7CD005ECFFF /* Debug */,
+				4A5FABB62A77D7CD005ECFFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
