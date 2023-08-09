@@ -64,7 +64,7 @@ struct OffPeriodView: View {
 
 	var body: some View {
 		VStack {
-			DaysView(daysLeft: self.viewModel.daysLeft(), text: "days until period")
+			DaysView(daysLeft: self.viewModel.daysLeft(), text: "days until period", isWidget: false)
 				.padding(.bottom, 40)
 			Group {
 				DateItemView(value: self.viewModel.nextPeriodDate(), text: "Next period")
@@ -91,7 +91,7 @@ struct PeriodView: View {
 
 	var body: some View {
 		VStack {
-			DaysView(daysLeft: self.viewModel.dayOfPeriod(), text: "day of period")
+			DaysView(daysLeft: self.viewModel.dayOfPeriod(), text: "day of period", isWidget: false)
 				.padding(.bottom, 40)
 			Group {
 				DateItemView(value: self.viewModel.endOfPeriodDate(), text: "End of period")
@@ -115,7 +115,7 @@ struct DelayView: View {
 
 	var body: some View {
 		VStack {
-			DaysView(daysLeft: self.viewModel.delay(), text: "day of delay")
+			DaysView(daysLeft: self.viewModel.delay(), text: "day of delay", isWidget: false)
 				.padding(.bottom, 40)
 			Group {
 				DateDelayView(value: self.viewModel.delay(), isDelay: true)
@@ -152,25 +152,6 @@ struct NotSetView: View {
 			Spacer()
 		}
 	}
-}
-
-struct DaysView: View {
-	let daysLeft: Int
-	let text: String
-
-	var body: some View {
-		VStack {
-			let localizedText = String(format: NSLocalizedString("%lld \(text)", comment: ""), daysLeft)
-			let splittedStringsArray = localizedText.split(separator: " ", maxSplits: 1)
-			Text(splittedStringsArray[0])
-				.foregroundColor(Color.accentColor)
-				.modifier(MainInfoTextModifier())
-				.padding([.bottom], -30)
-			Text(splittedStringsArray[1])
-		}
-	}
-
-
 }
 
 struct DateItemView: View {

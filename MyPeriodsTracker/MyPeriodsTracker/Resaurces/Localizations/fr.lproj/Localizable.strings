@@ -35,3 +35,6 @@
 "You will not be able to recieve notifications about your next period" = "Vous ne pourrez pas recevoir de notifications concernant vos prochaines règles";
 "Donate to developer" = "Faire un don au développeur";
 "Thanks to your support, I will be able to create more free simple and useful applications. Thank you!" = "Grâce à votre soutien, je pourrai créer plus d'applications gratuites simples et utiles. Merci!";
+"low" = "faible";
+"high" = "élevé";
+"very high" = "très élevée";

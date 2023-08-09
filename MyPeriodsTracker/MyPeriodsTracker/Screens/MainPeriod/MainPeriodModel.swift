@@ -27,24 +27,24 @@ struct MainPeriodModel {
 	var status: PartOfCycle
 
 	func endOfPeriodDate(now: Date) -> Date {
-//		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
-//			self.pastPeriodStartDate,
-//			cycleLength: self.cycleLength,
-//			periodLength: self.periodLength,
-//			now: now
-//		)
-		guard let lastDate = self.lastPeriodStartDate else {
-			logger.error("The lastPeriod date wasn't set up")
-			let pastPeiodStartDateMidnight = pastPeriodStartDate.midnight
-			let lastDate = DateCalculatorService.shared.updateLastPeriodStartDate(
-				pastPeiodStartDateMidnight,
-				cycleLength: cycleLength,
-				periodLength: periodLength,
-				now: now
-			)
-			return lastDate
-		}
-		return calendar.date(byAdding: .day, value: self.periodLength, to: lastDate)!
+		let lastPeriodStartDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+			self.pastPeriodStartDate,
+			cycleLength: self.cycleLength,
+			periodLength: self.periodLength,
+			now: now
+		)
+//		guard let lastDate = self.lastPeriodStartDate else {
+//			logger.error("The lastPeriod date wasn't set up")
+//			let pastPeiodStartDateMidnight = pastPeriodStartDate.midnight
+//			let lastDate = DateCalculatorService.shared.updateLastPeriodStartDate(
+//				pastPeiodStartDateMidnight,
+//				cycleLength: cycleLength,
+//				periodLength: periodLength,
+//				now: now
+//			)
+//			return calendar.date(byAdding: .day, value: self.periodLength, to: lastDate)!
+//		}
+		return calendar.date(byAdding: .day, value: self.periodLength, to: lastPeriodStartDate)!
 	}
 
 	func dayOfPeriod(from startDate: Date, now: Date) -> Int {
@@ -132,12 +132,23 @@ struct MainPeriodModel {
 			}
 		}
 
+		var lowercaseLevel: String {
+			switch self {
+				case .low:
+					return "low"
+				case .high:
+					return "high"
+				case .veryHigh:
+					return "very high"
+			}
+		}
+
 		var color: Color {
 			switch self {
 				case .low:
 					return .black
 				case .high, .veryHigh:
-					return .accentColor
+					return Color(UIColor(named: "AccentColor") ?? .red)
 			}
 		}
 	}

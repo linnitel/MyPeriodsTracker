@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BackgroundTasks
+import WidgetKit
 
 @main
 struct MyPeriodsTrackerApp: App {
@@ -19,6 +20,8 @@ struct MyPeriodsTrackerApp: App {
 				.onChange(of: scenePhase) { newPhase in
 					if newPhase == .active {
 						UIApplication.shared.applicationIconBadgeNumber = 0
+					} else if newPhase == .background {
+						WidgetCenter.shared.reloadAllTimelines()
 					}
 				}
         }

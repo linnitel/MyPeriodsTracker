@@ -35,3 +35,6 @@
 "You will not be able to recieve notifications about your next period" = "Вы не сможете получать уведомления о ваших месячных";
 "Donate to developer" = "Поддержать разработчика";
 "Thanks to your support, I will be able to create more free simple and useful applications. Thank you!" = "Благодаря вашей поддержке я смогу создать больше бесплатных простых и полезных приложений. Спасибо!";
+"low" = "низкая";
+"high" = "высокая";
+"very high" = "очень высокая";

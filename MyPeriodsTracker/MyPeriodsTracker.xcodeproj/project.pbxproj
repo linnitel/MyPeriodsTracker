@@ -38,6 +38,18 @@
 		4A5FABBD2A77DB6F005ECFFF /* MainPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFD32A346881004880A9 /* MainPeriodModel.swift */; };
 		4A5FABBE2A77DB74005ECFFF /* DateCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A294E182A4B2886006CF524 /* DateCalculatorService.swift */; };
 		4A5FABC02A7C16B5005ECFFF /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */; };
+		4A5FABC22A7D3778005ECFFF /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */; };
+		4A5FABC62A81329E005ECFFF /* MyPeriodTrackerWidgetMediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABC42A81329B005ECFFF /* MyPeriodTrackerWidgetMediumView.swift */; };
+		4A5FABC82A8132C7005ECFFF /* MyPeriodTrackerWidgetSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABC72A8132C7005ECFFF /* MyPeriodTrackerWidgetSmallView.swift */; };
+		4A5FABCA2A814B14005ECFFF /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABC92A814B14005ECFFF /* DaysView.swift */; };
+		4A5FABCB2A814B14005ECFFF /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5FABC92A814B14005ECFFF /* DaysView.swift */; };
+		4A5FABCC2A8150A2005ECFFF /* SFPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2533D62A61953B00CDDE72 /* SFPro-Bold.otf */; };
+		4A5FABCD2A8150A5005ECFFF /* SFPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC82A338B12004880A9 /* SFPro-Regular.otf */; };
+		4A5FABCE2A8150A8005ECFFF /* SFPro-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC92A338B12004880A9 /* SFPro-Ultralight.otf */; };
+		4A5FABCF2A8150AE005ECFFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFC42A33846C004880A9 /* Localizable.strings */; };
+		4A5FABD02A8150B1005ECFFF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFDB2A348671004880A9 /* Localizable.stringsdict */; };
+		4A5FABD12A81512F005ECFFF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */; };
+		4A5FABD22A815DC5005ECFFF /* DividerLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59F3A32A431CAD00C51F82 /* DividerLineView.swift */; };
 		4AFECFA82A3365D7004880A9 /* MyPeriodsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */; };
 		4AFECFAA2A3365D7004880A9 /* MainPeriodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */; };
 		4AFECFAC2A3365D8004880A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFECFAB2A3365D8004880A9 /* Assets.xcassets */; };
@@ -112,6 +124,11 @@
 		4A5FABAE2A77D7CD005ECFFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5FABB02A77D7CD005ECFFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A5FABBF2A7C16B5005ECFFF /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
+		4A5FABC12A7D21E9005ECFFF /* MyPeriodsTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyPeriodsTracker.entitlements; sourceTree = "<group>"; };
+		4A5FABC42A81329B005ECFFF /* MyPeriodTrackerWidgetMediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodTrackerWidgetMediumView.swift; sourceTree = "<group>"; };
+		4A5FABC72A8132C7005ECFFF /* MyPeriodTrackerWidgetSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodTrackerWidgetSmallView.swift; sourceTree = "<group>"; };
+		4A5FABC92A814B14005ECFFF /* DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
+		4A5FABD32A819DCF005ECFFF /* MyPeriodTrackerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyPeriodTrackerWidgetExtension.entitlements; sourceTree = "<group>"; };
 		4AFECFA42A3365D7004880A9 /* MyPeriodsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPeriodsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFECFA72A3365D7004880A9 /* MyPeriodsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeriodsTrackerApp.swift; sourceTree = "<group>"; };
 		4AFECFA92A3365D7004880A9 /* MainPeriodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPeriodsView.swift; sourceTree = "<group>"; };
@@ -185,6 +202,7 @@
 				4A59F3A62A431CCE00C51F82 /* BackgroundView.swift */,
 				4A2533D42A61909900CDDE72 /* ButtonBackgroundView.swift */,
 				4A5FAB872A61BFBC005ECFFF /* NavigationHeaderView.swift */,
+				4A5FABC92A814B14005ECFFF /* DaysView.swift */,
 			);
 			path = GeneralViews;
 			sourceTree = "<group>";
@@ -218,6 +236,7 @@
 		4A5FABA92A77D7CB005ECFFF /* MyPeriodTrackerWidget */ = {
 			isa = PBXGroup;
 			children = (
+				4A5FABC32A813284005ECFFF /* Views */,
 				4A5FABAA2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift */,
 				4A5FABAC2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift */,
 				4A5FABAE2A77D7CD005ECFFF /* Assets.xcassets */,
@@ -226,9 +245,19 @@
 			path = MyPeriodTrackerWidget;
 			sourceTree = "<group>";
 		};
+		4A5FABC32A813284005ECFFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A5FABC42A81329B005ECFFF /* MyPeriodTrackerWidgetMediumView.swift */,
+				4A5FABC72A8132C7005ECFFF /* MyPeriodTrackerWidgetSmallView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		4AFECF9B2A3365D7004880A9 = {
 			isa = PBXGroup;
 			children = (
+				4A5FABD32A819DCF005ECFFF /* MyPeriodTrackerWidgetExtension.entitlements */,
 				4AFECFA62A3365D7004880A9 /* MyPeriodsTracker */,
 				4A5FAB972A715B83005ECFFF /* MyPeriodsTrackerTests */,
 				4A5FABA92A77D7CB005ECFFF /* MyPeriodTrackerWidget */,
@@ -250,6 +279,7 @@
 		4AFECFA62A3365D7004880A9 /* MyPeriodsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				4A5FABC12A7D21E9005ECFFF /* MyPeriodsTracker.entitlements */,
 				4AFECFD22A346859004880A9 /* Services */,
 				4AFECFD12A34684B004880A9 /* Main */,
 				4AFECFCF2A346819004880A9 /* Screens */,
@@ -465,7 +495,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A5FABCF2A8150AE005ECFFF /* Localizable.strings in Resources */,
 				4A5FABAF2A77D7CD005ECFFF /* Assets.xcassets in Resources */,
+				4A5FABCD2A8150A5005ECFFF /* SFPro-Regular.otf in Resources */,
+				4A5FABCE2A8150A8005ECFFF /* SFPro-Ultralight.otf in Resources */,
+				4A5FABCC2A8150A2005ECFFF /* SFPro-Bold.otf in Resources */,
+				4A5FABD02A8150B1005ECFFF /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,10 +537,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A5FABAB2A77D7CB005ECFFF /* MyPeriodTrackerWidgetBundle.swift in Sources */,
+				4A5FABC62A81329E005ECFFF /* MyPeriodTrackerWidgetMediumView.swift in Sources */,
+				4A5FABD22A815DC5005ECFFF /* DividerLineView.swift in Sources */,
+				4A5FABD12A81512F005ECFFF /* BackgroundView.swift in Sources */,
 				4A5FABBB2A77D828005ECFFF /* String+Extention.swift in Sources */,
 				4A5FABBC2A77D82C005ECFFF /* Date+Extention.swift in Sources */,
 				4A5FABBD2A77DB6F005ECFFF /* MainPeriodModel.swift in Sources */,
+				4A5FABCB2A814B14005ECFFF /* DaysView.swift in Sources */,
 				4A5FABAD2A77D7CB005ECFFF /* MyPeriodTrackerWidget.swift in Sources */,
+				4A5FABC22A7D3778005ECFFF /* UserProfileService.swift in Sources */,
+				4A5FABC82A8132C7005ECFFF /* MyPeriodTrackerWidgetSmallView.swift in Sources */,
 				4A5FABBA2A77D824005ECFFF /* Font+Extention.swift in Sources */,
 				4A5FABB92A77D820005ECFFF /* DateFormatter+Extention.swift in Sources */,
 				4A5FABBE2A77DB74005ECFFF /* DateCalculatorService.swift in Sources */,
@@ -523,6 +564,7 @@
 				4A59F3A72A431CCE00C51F82 /* BackgroundView.swift in Sources */,
 				4A59F3A42A431CAD00C51F82 /* DividerLineView.swift in Sources */,
 				4A294E1B2A4C7E5F006CF524 /* Date+Extention.swift in Sources */,
+				4A5FABCA2A814B14005ECFFF /* DaysView.swift in Sources */,
 				4A5FAB862A61BAF7005ECFFF /* DonationView.swift in Sources */,
 				4A59F39C2A41C10D00C51F82 /* SettingsView.swift in Sources */,
 				4AFECFD42A346881004880A9 /* MainPeriodModel.swift in Sources */,
@@ -623,6 +665,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyPeriodTrackerWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;
@@ -651,6 +694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyPeriodTrackerWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;
@@ -794,6 +838,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyPeriodsTracker/MyPeriodsTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyPeriodsTracker/Preview Content\"";
@@ -829,6 +874,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyPeriodsTracker/MyPeriodsTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyPeriodsTracker/Preview Content\"";

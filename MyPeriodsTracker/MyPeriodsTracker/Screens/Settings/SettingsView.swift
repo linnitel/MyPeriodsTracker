@@ -151,7 +151,7 @@ struct LastDateItemView: View {
 				DatePicker("", selection: $date, in: Date(timeIntervalSince1970: Date().midnight.timeIntervalSince1970 - 7889229)...Date().midnight, displayedComponents: .date)
 					.datePickerStyle(WheelDatePickerStyle())
 					.onReceive([self.date].publisher.first()) { (value) in
-						UserProfileService.shared.setPastPeriodStartDate(self.date.midnight)
+						UserProfileService.shared.setPastPeriodStartDate(value.midnight)
 					}
 			}
 			DividerLineView()

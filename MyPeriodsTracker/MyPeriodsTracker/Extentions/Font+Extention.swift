@@ -14,6 +14,13 @@ struct MainInfoTextModifier: ViewModifier {
 	}
 }
 
+struct MainWidgetInfoTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Ultralight", size: 80))
+	}
+}
+
 struct EmptyImageTextModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
@@ -21,10 +28,31 @@ struct EmptyImageTextModifier: ViewModifier {
 	}
 }
 
+struct EmptyImageWidgetTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Ultralight", size: 75))
+	}
+}
+
+struct EmptyImageSmallWidgetTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Ultralight", size: 65))
+	}
+}
+
 struct BaseTextModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
 			.font(.custom("SFProText-Regular", size: 15))
+	}
+}
+
+struct BaseWidgetTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Regular", size: 12))
 	}
 }
 
@@ -39,6 +67,13 @@ struct BoldTextModifier: ViewModifier {
 	func body(content: Content) -> some View {
 		content
 			.font(.custom("SFProText-Bold", size: 15))
+	}
+}
+
+struct BoldWidgetTextModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.custom("SFProText-Bold", size: 11))
 	}
 }
 

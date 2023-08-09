@@ -11,8 +11,8 @@ import UIKit
 struct UserProfileService {
 	static let shared = UserProfileService()
 
-	let defaults = UserDefaults.standard
-//	let defaults = UserDefaults(suiteName: "group.myPeriodsTracker")!
+//	let defaults = UserDefaults.standard
+	let defaults = UserDefaults(suiteName: "group.myPeriodsTracker.identifier")!
 
 	private init() {}
 
